@@ -31,5 +31,10 @@ label.content.push(text);
 text.fontFamily = new jszpl.FontFamily(jszpl.FontFamilyName.D);
 text.text = 'Hello World!';
 
-console.log(label.generateZPL());
+var zpl = label.generateZPL();
+//^XA
+//^FO10,10^AD,N,,
+//^FB780,1,0,L,0
+//^FDHello World!^FS
+//^XZ
 ```
