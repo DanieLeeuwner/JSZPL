@@ -499,8 +499,8 @@ Displays an image on the label.
 | invert | Boolean | Invert color values |
 | grid | [GridPosition](#gridposition) | Configure element placement within grid |
 | margin | [Spacing](#spacing) | Configure space around element |
-| width | [Size](#size) | Sets the width of the element, uses parent size if omitted |
-| height | [Size](#size) | Sets the height of the element, uses parent size if omitted |
+| width | [Size](#size) / Number | Sets the width of the element, uses parent size if omitted |
+| height | [Size](#size) / Number | Sets the height of the element, uses parent size if omitted |
 | left | [Size](#size) / Number | Sets the left offset of the element |
 | top | [Size](#size) / Number | Sets the top offset of the element |
 | border | Number | Sets the border thickness around the image |
