@@ -7,6 +7,26 @@ In a browser:
 ```html
 <script src="zpl-fonts.js"></script>
 <script src="jszpl.js"></script>
+
+<script type="text/javascript">
+  var label = new Label();
+  label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+  label.width = 100;
+  label.height = 50;
+  label.padding = new Spacing(10);
+
+  var text = new Text();
+  label.content.push(text);
+  text.fontFamily = new FontFamily(FontFamilyName.D);
+  text.text = 'Hello World!';
+
+  var zpl = label.generateZPL();
+  //^XA
+  //^FO10,10^AD,N,,
+  //^FB780,1,0,L,0
+  //^FDHello World!^FS
+  //^XZ
+</script>
 ```
 
 Using npm:
