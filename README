@@ -1,6 +1,6 @@
 # jszpl
 
-Installation
+## Installation
 
 In a browser:
 
@@ -12,7 +12,7 @@ In a browser:
 Using npm:
 
 ```sh
-npm install jszpl
+npm i jszpl
 ```
 
 In Node.js:
