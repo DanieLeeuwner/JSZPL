@@ -1,0 +1,22 @@
+{
+  "name": "jszpl",
+  "version": "1.0.0",
+  "description": "ZPL II generation from JavaScript",
+  "main": "jszpl.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanieLeeuwner/JSZPL.git"
+  },
+  "keywords": [
+    "zpl"
+  ],
+  "author": "Danie Leeuwner",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DanieLeeuwner/JSZPL/issues"
+  },
+  "homepage": "https://github.com/DanieLeeuwner/JSZPL#readme"
+}
