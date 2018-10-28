@@ -21,6 +21,7 @@ var zpl = label.generateZPL();
 ![Label Preview](./Images/simple_label.png)
 
 ## Table of Contents
+- [Installation](#installation)
 - Property Types
   - [Size](#size)
   - [PrintDensity](#printdensity)
@@ -41,6 +42,65 @@ var zpl = label.generateZPL();
   - [Graphic](#graphic)
 - [Known Issues](#known-issues)
 - [Roadmap](#roadmap)
+
+## Installation
+
+In a browser:
+
+```html
+<script src="zpl-fonts.js"></script>
+<script src="jszpl.js"></script>
+
+<script type="text/javascript">
+  var label = new Label();
+  label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+  label.width = 100;
+  label.height = 50;
+  label.padding = new Spacing(10);
+
+  var text = new Text();
+  label.content.push(text);
+  text.fontFamily = new FontFamily(FontFamilyName.D);
+  text.text = 'Hello World!';
+
+  var zpl = label.generateZPL();
+  //^XA
+  //^FO10,10^AD,N,,
+  //^FB780,1,0,L,0
+  //^FDHello World!^FS
+  //^XZ
+</script>
+```
+
+Using npm:
+
+```sh
+$ npm i jszpl
+```
+
+In Node.js:
+
+```js
+var jszpl = require('jszpl');
+
+var label = new jszpl.Label();
+label.printDensity = new jszpl.PrintDensity(jszpl.PrintDensityName['8dpmm']);
+label.width = 100;
+label.height = 50;
+label.padding = new jszpl.Spacing(10);
+
+var text = new jszpl.Text();
+label.content.push(text);
+text.fontFamily = new jszpl.FontFamily(jszpl.FontFamilyName.D);
+text.text = 'Hello World!';
+
+var zpl = label.generateZPL();
+//^XA
+//^FO10,10^AD,N,,
+//^FB780,1,0,L,0
+//^FDHello World!^FS
+//^XZ
+```
 
 ## Property Types
 
@@ -122,7 +182,7 @@ var FontFamilyName = {
 }
 ```
 
-Font names G to V are not implemented when generating a binary image. Usage will result in an error.
+Font names G to V are not implemented. Usage will result in an error.
 
 Usage example:
 

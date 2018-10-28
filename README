@@ -32,7 +32,7 @@ In a browser:
 Using npm:
 
 ```sh
-npm i jszpl
+$ npm i jszpl
 ```
 
 In Node.js:
