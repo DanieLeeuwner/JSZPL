@@ -413,7 +413,7 @@ Label is the base container element within which other elements can be placed.
 | padding | [Spacing](#spacing) | Sets the padding of the label element, makes child elements consume less space |
 | content | Array | Child elements |
 
-##### Usage example:
+Usage example:
 
 The example creates a 100mm x 50mm label with a print density of 8 dpmm.
 The label has a padding of 10 dots and contains a text field.
@@ -461,6 +461,24 @@ Text displays characters on the label.
 | top | [Size](#size) / Number | Sets the top offset of the element |
 | text | String | Sets the text of the element |
 
+Usage example:
+
+```js
+var text = new Text();
+label.content.push(text);
+text.fontFamily = new FontFamily(FontFamilyName.D);
+text.text = 'Hello World!';
+
+var zpl = label.generateZPL();
+//^XA
+//^FB780,1,0,L,0
+//^FDHello World!^FS
+//^XZ
+```
+
+![Label Usage Example](./Images/example_label.png)
+
+
 #### Box
 
 Displays a rectangular shape.
@@ -483,6 +501,23 @@ Displays a rectangular shape.
 | border | Number | Sets the border thickness of the element, ignored if fill is set |
 | content | Array | Child elements |
 
+Usage example:
+
+```js
+var box = new Box();
+label.content.push(box);
+box.fill = true;
+box.width = 150;
+box.height = 150;
+
+var zpl = label.generateZPL();
+//^XA
+//^FO0,0^GB150,150,150,,0^FS
+//^XZ
+```
+
+![Box example](./Images/example_box.png)
+
 #### Circle
 
 Displays a circular shape.
@@ -503,6 +538,25 @@ Displays a circular shape.
 | top | [Size](#size) / Number | Sets the top offset of the element |
 | border | Number | Sets the border thickness of the element, ignored if fill is set |
 | content | Array | Child elements |
+
+Using a different width and height values, will result in an ellipse.
+
+Usage example:
+
+```js
+var circle = new Circle();
+label.content.push(circle);
+circle.fill = true;
+circle.width = 150;
+circle.height = 150;
+
+var zpl = label.generateZPL();
+//^XA
+//^FO10,10^GC150,150,B^FS
+//^XZ
+```
+
+![Circle Example](./Images/example_circle.png)
 
 #### Grid
 
@@ -527,6 +581,31 @@ Displays a grid.
 | columns | Array<[Size](#size)> | Element column definitions |
 | rows | Array<[Size](#size)> | Element row definitions |
 | content | Array | Child elements |
+
+Usage example:
+
+```js
+var grid = new Grid();
+label.content.push(grid);
+grid.columns.push(new Size(150, SizeType.Absolute));
+grid.columns.push(new Size(1, SizeType.Relative));
+grid.rows.push(new Size(150, SizeType.Absolute));
+grid.rows.push(new Size(1, SizeType.Relative));
+grid.border = 2;
+grid.columnSpacing = 2;
+grid.rowSpacing = 2;
+
+var zpl = label.generateZPL();
+//^XA
+//^FO10,10^GB780,380,2,,0^FS
+//^FO14,14^GB152,152,2,,0^FS
+//^FO168,14^GB618,152,2,,0^FS
+//^FO14,168^GB152,218,2,,0^FS
+//^FO168,168^GB618,218,2,,0^FS
+//^XZ
+```
+
+![Grid Example](./Images/example_grid.png)
 
 #### Barcode
 
@@ -568,7 +647,7 @@ Displays an image on the label.
 
 Example of image:
 
-![Graphic Image](./Images/image.png)
+![Graphic Image](./Images/example_image.png)
 
 ## Known Issues
 
