@@ -2,7 +2,7 @@
 
 var require = require || function() {};
 
-var FontFamilyDefinition = require('./zpl-fonts');
+var FontFamilyDefinition = FontFamilyDefinition || require('./zpl-fonts');
 
 /* Properties */
 
