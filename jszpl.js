@@ -838,15 +838,15 @@ class Graphic extends BaseVisualElment {
     super();
 
     this.data = new GraphicData();
-
     this.border = 0;
-
   }
 
   generateContainer() {
     var container = new Box();
     container.border = this.border;
     container.margin = this.margin;
+    container.top = this.top;
+    container.left = this.left;
     return container;
   }
 
@@ -891,8 +891,8 @@ class Graphic extends BaseVisualElment {
     for (var y = 0; y < position.height; y++) {
       for (var x = 0; x < position.width; x++) {
 
-        var yIndex = y + offsetTop;
-        var xIndex = x + offsetLeft;
+        var yIndex = y + position.top;
+        var xIndex = x + position.left;
 
         var index = y * position.width + x;
 
