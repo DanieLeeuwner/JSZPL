@@ -1068,6 +1068,8 @@ class Grid extends BaseContainerElement {
     var contentBox = new Box();
     contentBox.content = contentCells;
     contentBox.fixed = this.fixed;
+    contentBox.width = this.width;
+    contentBox.height = this.height;
     contentBox.border = this.border;
     contentBox.invert = this.invert;
     contentBox.padding = new Spacing();
