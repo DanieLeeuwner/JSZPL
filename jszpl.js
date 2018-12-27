@@ -208,8 +208,10 @@ class GridPosition {
 }
 
 class FontFamily {
-  constructor(value) {
+  constructor(value, width, height) {
     this.value = value;
+    this.width = width;
+    this.height = height;
   }
 
   get definition() {
@@ -567,7 +569,7 @@ class Text extends BaseVisualElment {
     }
 
     zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
-    zpl += '^A' + this.fontFamily.value + ',' + 'N' + ',,' + '\n';
+    zpl += '^A' + this.fontFamily.value + ',' + 'N' + ',' + this.fontFamily.height + ',' + this.fontFamily.width + '\n';
     zpl += '^FB' + Math.round(position.width) + ',1,0,' + horizontalAlignment + ',0\n';
     zpl += '^FD' + this.text + '^FS\n';
 
