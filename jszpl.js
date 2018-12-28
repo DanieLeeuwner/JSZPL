@@ -32,12 +32,17 @@ var FontFamilyName = {
   D : 'D',
   E : 'E',
   F : 'F',  
-  /*G : 'G',
-  H : 'H',
-  P : 'P',
-  Q : 'Q',
-  U : 'U',
-  V : 'V',*/
+  // G : 'G',
+  // H : 'H',
+  // 0 : '0',
+  // GS : 'GS',
+  // P : 'P',
+  // Q : 'Q',
+  // R : 'R',
+  // S : 'S',
+  // T : 'T',
+  // U : 'U',
+  // V : 'V'
 }
 
 var BarcodeTypeName = {
@@ -291,7 +296,7 @@ class BaseElement {
   }
 }
 
-class BaseVisualElment extends BaseElement {
+class BaseVisualElement extends BaseElement {
   constructor() {
     super(); 
 
@@ -381,7 +386,7 @@ class BaseVisualElment extends BaseElement {
   }
 }
 
-class BaseContainerElement extends BaseVisualElment {
+class BaseContainerElement extends BaseVisualElement {
   constructor() {
     super();
 
@@ -430,7 +435,6 @@ class BaseContainerElement extends BaseVisualElment {
         left = this.getSize(element.left);
         top = this.getSize(element.top);
       }
-
       zpl += element.generateZPL(left, top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits);
     }
 
@@ -495,7 +499,7 @@ class Label extends BaseContainerElement {
   }
 }
 
-class Text extends BaseVisualElment {
+class Text extends BaseVisualElement {
   constructor() {
     super();
 
@@ -835,7 +839,7 @@ class Circle extends BaseGraphic {
   }
 }
 
-class Graphic extends BaseVisualElment {
+class Graphic extends BaseVisualElement {
   constructor() {
     super();
 
@@ -1096,7 +1100,7 @@ class Grid extends BaseContainerElement {
   }
 }
 
-class Barcode extends BaseVisualElment {
+class Barcode extends BaseVisualElement {
   constructor() {
     super();
 
@@ -1128,8 +1132,6 @@ class Barcode extends BaseVisualElment {
     {
       zpl += "^FR";
     }
-
-    console.log('rendering barcode: ' + this.type.value);
 
     switch (this.type.value) {
       case BarcodeTypeName.Code11:
@@ -1364,7 +1366,7 @@ module.exports = {
   GraphicData: GraphicData,
   BarcodeType: BarcodeType,
   BaseElement: BaseElement,
-  BaseVisualElment: BaseVisualElment,
+  BaseVisualElement: BaseVisualElement,
   BaseContainerElement: BaseContainerElement,
   Label: Label,
   Text: Text,

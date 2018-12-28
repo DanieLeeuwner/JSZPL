@@ -1,5 +1,5 @@
 {
-  "name": "jszpl",
+  "name": "@blackfisk/jszpl",
   "version": "1.0.4",
   "description": "ZPL II generation from JavaScript",
   "main": "jszpl.js",
@@ -11,7 +11,9 @@
     "url": "git+https://github.com/DanieLeeuwner/JSZPL.git"
   },
   "keywords": [
-    "zpl", "zebra", "zebra programming language"
+    "zpl",
+    "zebra",
+    "zebra programming language"
   ],
   "author": "Danie Leeuwner",
   "license": "GPL-3.0",
