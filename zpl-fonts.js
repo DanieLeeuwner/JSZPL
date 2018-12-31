@@ -3,8 +3,10 @@ var module = module || {};
 var FontFamilyDefinition = module.exports = {
   'A' : {
     name: 'FONT_A',
+    height: 9,
+    width: 5,
     spacing: {
-      right: 2,
+      right: 1,
       left: 0,
       top: 0,
       bottom: 0
@@ -1274,8 +1276,10 @@ var FontFamilyDefinition = module.exports = {
   },
   'B' : {
     name: 'FONT_B',
+    height: 11,
+    width: 7,
     spacing: {
-      right: 0,
+      right: 2,
       left: 0,
       top: 0,
       bottom: 0
@@ -2995,8 +2999,10 @@ var FontFamilyDefinition = module.exports = {
   },
   'D' : {
     name: 'FONT_D',
+    height: 18,
+    width: 10,
     spacing: {
-      right: 0,
+      right: 2,
       left: 0,
       top: 0,
       bottom: 0
@@ -5076,8 +5082,10 @@ var FontFamilyDefinition = module.exports = {
   },
   'E' : {
     name: 'FONT_E',
+    height: 28,
+    width: 15,
     spacing: {
-      right: 0,
+      right: 5,
       left: 0,
       top: 0,
       bottom: 0
@@ -8687,8 +8695,10 @@ var FontFamilyDefinition = module.exports = {
   },
   'F' : {
     name: 'FONT_F',
+    height: 26,
+    width: 13,
     spacing: {
-      right: 0,
+      right: 3,
       left: 0,
       top: 0,
       bottom: 0

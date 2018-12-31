@@ -511,6 +511,10 @@ class Text extends BaseVisualElement {
     this.horizontalAlignment = new Alignment(AlignmentValue.Start);
   }
 
+  calculateWidth (scale) {
+    return (((this.fontFamily.definition.width * scale) + (this.fontFamily.definition.spacing.right * scale)) * this.text.length) * 2
+  }
+
   characterMap() {
     var characters = [];
     for (var c_id in this.text) {
@@ -1170,7 +1174,6 @@ class Barcode extends BaseVisualElement {
 
       case BarcodeTypeName.Code93:
         zpl += '^BAN,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N,N';
-        console.log('Code 93: ', zpl)
         break;
 
       case BarcodeTypeName.Code128:
