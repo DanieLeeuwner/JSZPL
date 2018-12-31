@@ -1107,6 +1107,7 @@ class Barcode extends BaseVisualElement {
     this.data = '';
     this.maxLength = 32;
     this.type = new BarcodeType(BarcodeTypeName.CODE_11);
+    this.interpretation = true
 
     this.notImplemented = ['invert']
   }
@@ -1135,19 +1136,19 @@ class Barcode extends BaseVisualElement {
 
     switch (this.type.value) {
       case BarcodeTypeName.Code11:
-        zpl += '^B1N,N,' + position.height + ',Y,N';
+        zpl += '^B1N,N,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
         break;
 
       case BarcodeTypeName.Interleaved25:
-        zpl += '^B2N,' + position.height + ',Y,N,N';
+        zpl += '^B2N,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N,N';
         break;
 
       case BarcodeTypeName.Code39:
-        zpl += '^B3N,N,' + position.height + ',Y,N';
+        zpl += '^B3N,N,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
         break;
 
       case BarcodeTypeName.PlanetCode:
-        zpl += '^B5N,' + position.height + ',Y,N';
+        zpl += '^B5N,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
         break;
 
       case BarcodeTypeName.PDF417:
@@ -1160,35 +1161,36 @@ class Barcode extends BaseVisualElement {
         break;
 
       case BarcodeTypeName.EAN8:
-        zpl += '^B8N,' + position.height + ',Y,N';
+        zpl += '^B8N,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
         break;
 
       case BarcodeTypeName.UPCE:
-        zpl += '^B9N,' + position.height + ',Y,N,Y';
+        zpl += '^B9N,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N,Y';
         break;
 
       case BarcodeTypeName.Code93:
-        zpl += '^BAN,' + position.height + ',Y,N,N';
+        zpl += '^BAN,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N,N';
+        console.log('Code 93: ', zpl)
         break;
 
       case BarcodeTypeName.Code128:
-        zpl += '^BCN,' + position.height + ',Y,N,N,N';
+        zpl += '^BCN,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N,N,N';
         break;
 
       case BarcodeTypeName.EAN13:
-        zpl += '^BEN,' + position.height + ',Y,N';
+        zpl += '^BEN,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
         break;
 
       case BarcodeTypeName.Industrial25:
-        zpl += '^BIN,' + position.height + ',Y,N';
+        zpl += '^BIN,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
         break;
 
       case BarcodeTypeName.Standard25:
-        zpl += '^BJN,' + position.height + ',Y,N';
+        zpl += '^BJN,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
         break;
 
       case BarcodeTypeName.ANSICodabar:
-        zpl += '^BKN,N,' + position.height + ',Y,N,A,A';
+        zpl += '^BKN,N,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N,A,A';
         break;
 
       case BarcodeTypeName.Logmars:
@@ -1196,11 +1198,11 @@ class Barcode extends BaseVisualElement {
         break;
 
       case BarcodeTypeName.MSI:
-        zpl += '^BMN,B,' + position.height + ',Y,N,N';
+        zpl += '^BMN,B,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N,N';
         break;
 
       case BarcodeTypeName.Plessey:
-        zpl += '^BPN,N,' + position.height + ',Y,N';
+        zpl += '^BPN,N,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
         break;
 
       case BarcodeTypeName.QRCode:      
@@ -1218,7 +1220,7 @@ class Barcode extends BaseVisualElement {
         break;
 
       case BarcodeTypeName.PostNet:
-        zpl += '^BZN,' + position.height + ',Y,N';
+        zpl += '^BZN,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
         break;
     }
 
