@@ -512,7 +512,7 @@ class Text extends BaseVisualElement {
   }
 
   calculateWidth (scale) {
-    return (((this.fontFamily.definition.width * scale) + (this.fontFamily.definition.spacing.right * scale)) * this.text.length) * 2
+    return ((this.fontFamily.definition.width + this.fontFamily.definition.spacing.right) * scale * this.text.length)
   }
 
   characterMap() {
