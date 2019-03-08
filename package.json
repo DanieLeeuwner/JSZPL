@@ -4,7 +4,8 @@
   "description": "ZPL II generation from JavaScript",
   "main": "./src/jszpl.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "font-packer": "node ./font-packer/font-packer.js"
   },
   "repository": {
     "type": "git",

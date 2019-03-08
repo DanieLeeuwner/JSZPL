@@ -1,6 +1,7 @@
 "use strict";
 
-var FontFamilyDefinition = require('./zpl-fonts');
+var FontFamilyDefinition = require('./b64-fonts');
+FontFamilyDefinition.initialize();
 
 /* Properties */
 
