@@ -2,7 +2,7 @@
   "name": "jszpl",
   "version": "1.0.4",
   "description": "ZPL II generation from JavaScript",
-  "main": "jszpl.js",
+  "main": "./src/jszpl.js",
   "scripts": {
     "test": "node test.js"
   },

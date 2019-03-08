@@ -1,4 +1,4 @@
-var jszpl = require('./jszpl');
+var jszpl = require('./src/jszpl');
 
 var label = new jszpl.Label();
 label.printDensity = new jszpl.PrintDensity(jszpl.PrintDensityName['8dpmm']);
