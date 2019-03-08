@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--title>ZPL Designer</title-->
+  <link type="text/css" rel="stylesheet" href="designer.css"/>
+</head>
+<body>
+
+<div id="zplDesigner"></div>
+
+<script type="text/javascript" src="jszpl.web.js"></script>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="octicons.js"></script>
+<script type="text/javascript" src="designer.js"></script>
+
+<script type="text/javascript">
+  var designer = new ZPLDesigner(zplDesigner);
+
+  designer.initialize();  
+
+  var label = new Label();
+  label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+  label.padding = new Spacing(15);
+  label.width = 100;
+  label.height = 50;
+
+  var grid = new Grid();
+  grid.border = 2;
+  grid.padding = new Spacing(15);
+  label.content.push(grid);
+
+  var title = new Text();
+  title.fontFamily = new FontFamily(FontFamilyName.F);
+  title.text = 'JSZPL!';
+  grid.content.push(title);
+
+  designer.label = label;
+  designer.update();
+  designer.resetCanvasPosition();
+
+  designer.focus = label;
+  designer.initializeView();
+
+</script>
+
+</body>
+</html>

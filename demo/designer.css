@@ -1,0 +1,528 @@
+.zpl * {
+  margin: 0px;
+  padding: 0px;
+  border: 0;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.allselect {
+  -webkit-touch-callout: all; /* iOS Safari */
+    -webkit-user-select: all; /* Safari */
+     -khtml-user-select: all; /* Konqueror HTML */
+       -moz-user-select: all; /* Firefox */
+        -ms-user-select: all; /* Internet Explorer/Edge */
+            user-select: all; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.zpl {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  min-width: 600px;
+  min-height: 500px;
+  font-family: Arial;
+}
+
+.zpl .header {
+  z-index: 150;
+  position: absolute;
+  height: 35px;
+  width: 100%;
+  line-height: 35px;
+  font-size: 16px;
+  left: 0px;
+  top: 0px;
+  border-bottom: 1px solid #777;
+}
+
+.zpl .header .tab {
+  float: left;
+  margin: 5px 5px 0 0;
+  padding: 0 20px;
+  height: 30px;
+  min-width: 75px;
+  line-height: 30px;
+  background-color: #EEE;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+  color: #777;
+  cursor: pointer;
+}
+
+.zpl .header .tab:hover,
+.zpl .header .tab.active {
+  background-color: #CCC;
+  color: black;
+}
+
+.zpl .sidebar .header div {
+  display: inline-block;
+}
+
+.zpl .sidebar .header .left {
+  float: left;
+  margin-left: 5px;
+}
+
+.zpl .sidebar .header .right {
+  float: right;
+  margin-right: 5px;
+}
+
+.zpl .sidebar .header .title {
+  float: left;
+  margin-left: 5px;
+}
+
+.zpl .sidebar .header svg {
+  width: 20px;
+  height: 15px;
+}
+
+.zpl .sidebar .header .left > div,
+.zpl .sidebar .header .right > div {
+  opacity: 0.4;
+  padding: 0 5px 0 5px;
+}
+
+.zpl .sidebar .header .left > div:hover,
+.zpl .sidebar .header .right > div:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.zpl .container {
+  position: absolute;
+  overflow: hidden;
+  width: calc(100% - 2px);
+  top : 35px;
+  left: 0px;
+  height: calc(100% - 37px);
+}
+
+.zpl .code {
+  font-size: 15px;
+  font-family: 'courier new';
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.zpl .content {
+  height: 100%;
+  overflow: scroll;
+  cursor: crosshair;
+}
+
+.zpl .content .crosshair {
+  position: absolute;
+  display: none;
+  background-color: #333;
+  z-index: 90;
+}
+
+.zpl .content .crosshair.vertical {
+  width: 1px;
+  height: 100%;
+}
+
+.zpl .content .crosshair.horizontal {
+  width: 100%;
+  height: 1px;
+}
+
+.zpl .content .info-bar {
+  position: absolute;
+  background-color: white;
+  z-index: 200;
+  font-family: 'courier new';
+  font-size: 12px;
+  line-height: 20px;
+  cursor: default;
+}
+
+.zpl .content .info-bar .icon-container {
+  width: 20px;
+  margin: 0;
+  position: relative;
+}
+
+.zpl .content .info-bar svg {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 2px;
+}
+
+.zpl .content .info-bar a {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.zpl .content .info-bar div.active {
+  background-color: #AAA;
+}
+
+.zpl .content .info-bar div.clickable:hover {
+  background-color: #EEE;
+  cursor: pointer;
+}
+
+.zpl .content .info-bar div.clickable.active:hover {
+  background-color: #AAA;
+  cursor: pointer;
+}
+
+.zpl .content .info-bar.top {
+  left: 0;
+  top: 0;
+  height: 15px;
+  width: 100%;
+  border-bottom: 1px solid #777;
+}
+
+.zpl .content .info-bar.bottom {
+  left: 0;
+  top: calc(100% - 20px);
+  height: 20px;
+  width: 100%;
+  border-top: 1px solid #777;
+}
+
+.zpl .content .info-bar.left {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 15px;
+  border-right: 1px solid #777;
+}
+
+.zpl .content .info-bar.right {
+  left: calc(100% - 15px);
+  top: 0;
+  height: 100%;
+  width: 15px;
+  border-left: 1px solid #777;
+}
+
+.zpl .content .info-bar.left div {
+}
+
+.zpl .content .info-bar.left .fill {
+  height: 100%;
+}
+
+.zpl .content .info-bar.left .top {
+  border-bottom: 1px solid #777;
+  width: 100%;
+}
+
+.zpl .content .info-bar.left .bottom {
+
+}
+
+.zpl .content .info-bar.left .box.top {
+  border-bottom: 1px solid #777;
+  width: 100%;
+  height: 15px;
+  background-color: white;
+  z-index: 200;
+}
+
+.zpl .content .info-bar.bottom div {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+}
+
+.zpl .content .info-bar.bottom .right {
+  float: right;
+  border-left: 1px solid #777;
+  padding-left: 5px;
+}
+
+.zpl .content .info-bar.bottom .left {
+  float: left;
+  border-right: 1px solid #777;
+  padding-left: 5px;
+}
+
+.zpl .content .info-bar.bottom .box.left {
+  float: left;
+  border-right: 1px solid #777;
+  width: 15px;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+.zpl .content .info-bar.bottom .button {
+  width: 15px;
+  padding: 0;
+}
+
+.zpl .sidebar {
+  height: 100%;
+  width: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.zpl .sidebar .container {
+  overflow-y: scroll;
+  z-index: 100;
+}
+
+.zpl .sidebar.left {
+  float: left;
+  border-right: 1px solid #777;
+}
+
+.zpl .sidebar.right {
+  float: right;
+  border-left: 1px solid #777;
+}
+
+.zpl .sidebar.right .container {
+  padding-left: 2px;
+}
+
+.zpl .drag-vertical {
+  position: absolute;
+  cursor: col-resize;
+  height: 100%;
+  width: 2px;
+  background-color: white;
+  top: 0;
+  z-index: 1000;
+}
+
+.zpl .sidebar.left .drag-vertical {
+  right: 0;
+  border-left: 1px solid #777;
+}
+
+.zpl .sidebar.right .drag-vertical {
+  left: 0;
+  border-right: 1px solid #777;
+}
+
+.zpl .popup {
+  background-color: rgba(50, 50, 50, 0.3);
+  line-height: 30px;
+  color: white;
+  border-radius: 5px;
+  position: fixed;
+}
+
+.hidden {
+  display: none;
+}
+
+.bordered {
+  border: 1px solid #777;
+}
+
+.properties {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+  font-size: 12px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.properties tr {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 20px;
+}
+
+.properties td {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid #CCC;
+  padding: 3px;
+}
+
+.properties td:first-child {
+  font-weight: bold;
+  position: relative;
+}
+
+.properties .dragger {
+  cursor: ew-resize;
+  width: 2px;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  height: 100%;
+}
+
+.properties td:first-child {
+  min-width: 100px;
+}
+
+.properties td:last-child {
+  border-left: 1px solid #CCC;
+  width: 100%;
+}
+
+.properties td div {
+  background-color: transparent;
+}
+
+.properties textarea {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  border: none;
+  border-width: 0;
+  box-shadow: none;
+  outline-color: transparent;
+  font-size: 12px;
+  line-height: 20px;
+  padding-left: 3px;
+  font-family: arial;
+}
+
+.zpl .sidebar .container > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: white;
+}
+
+.zpl .sidebar .container ul {
+  list-style: none;
+}
+
+.zpl .sidebar .container li {
+  line-height: 25px;
+}
+
+.zpl .sidebar .container li:hover {
+  background-color: #EEE;
+  cursor: pointer;
+}
+
+.zpl .sidebar .container li.focus {
+  font-weight: bold;
+}
+
+.octicon {
+  display: inline-block;
+  vertical-align: text-center;
+  fill: currentColor;
+}
+
+.zpl div.button {
+  background-color: #EFEFEF;
+  margin: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.zpl div.hoverVisible {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.zpl div.hoverVisible div {
+  display: none;
+}
+
+.zpl div.hoverVisible:hover div {
+  display: block; 
+}
+
+.zpl div.button:hover {
+  background-color: #CCC;
+  cursor: pointer;
+}
+
+.zpl .fixed {
+  position: absolute;
+  top: 0px;
+  height: 100%;
+}
+
+.zpl .fixed.right {
+  right: 0px;
+}
+
+.hierarchy {
+  overflow: hidden !important;
+  height: 100%;
+  background-color: red;
+}
+
+.hierarchy .hover {
+  background-color: #CCC;
+}
+
+.hierarchy-container {
+  margin: 2px;
+  padding: 1px; 
+  border-radius: 2px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.hierarchy-container-outline {
+  margin: 1px;
+  border-radius: 2px;
+  background-color: white;
+  border: 2px dashed #DDD;
+}
+
+.hierarchy-title {
+  padding: 2px;
+}
+
+.draggable {
+  cursor: move; /* fallback: no `url()` support or images disabled */
+  cursor: url(images/grab.cur); /* fallback: Internet Explorer */
+  cursor: -webkit-grab; /* Chrome 1-21, Safari 4+ */
+  cursor:    -moz-grab; /* Firefox 1.5-26 */
+  cursor:         grab; /* W3C standards syntax, should come least */
+}
+
+.draggable:active {
+  cursor: url(images/grabbing.cur);
+  cursor: -webkit-grabbing;
+  cursor:    -moz-grabbing;
+  cursor:         grabbing;
+}
