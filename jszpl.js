@@ -1,8 +1,6 @@
 "use strict";
 
-var require = require || function() {};
-
-var FontFamilyDefinition = FontFamilyDefinition || require('./zpl-fonts');
+var FontFamilyDefinition = require('./zpl-fonts');
 
 /* Properties */
 

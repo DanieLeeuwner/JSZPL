@@ -1,5 +1,3 @@
-var module = module || {};
-
 var FontFamilyDefinition = module.exports = {
   'A' : {
     name: 'FONT_A',
