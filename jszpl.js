@@ -1112,6 +1112,7 @@ class Barcode extends BaseVisualElement {
     this.maxLength = 32;
     this.type = new BarcodeType(BarcodeTypeName.CODE_11);
     this.interpretation = true
+    this.resetBarcodeFieldDefaults = false
 
     this.notImplemented = ['invert']
   }
@@ -1137,7 +1138,10 @@ class Barcode extends BaseVisualElement {
     {
       zpl += "^FR";
     }
-
+    // Bar Code Field Defaults
+    if (this.resetBarcodeFieldDefaults) {
+      zpl += '^BY2,3,10';
+    }
     switch (this.type.value) {
       case BarcodeTypeName.Code11:
         zpl += '^B1N,N,' + position.height + ',' + (this.interpretation ? 'Y' : 'N') + ',N';
