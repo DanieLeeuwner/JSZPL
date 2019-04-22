@@ -48,8 +48,7 @@ var zpl = label.generateZPL();
 In a browser:
 
 ```html
-<script src="zpl-fonts.js"></script>
-<script src="jszpl.js"></script>
+<script src="dist/jszpl.web.js"></script>
 
 <script type="text/javascript">
   var label = new Label();
