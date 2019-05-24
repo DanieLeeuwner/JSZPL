@@ -618,7 +618,7 @@ var FontFamilyName = {
   B : 'B',
   D : 'D',
   E : 'E',
-  F : 'F',  
+  F : 'F',
   /*G : 'G',
   H : 'H',
   P : 'P',
@@ -677,7 +677,7 @@ class ImageProcessor {
 }
 
 class ImageResizer {
-  constructor() {    
+  constructor() {
   }
 
   resize(targetWidth, targetHeight, width, height, data) {
@@ -838,7 +838,7 @@ class GraphicData {
 
   toString() {
     return this.width + ' x ' + this.height;
-  }  
+  }
 }
 
 class BarcodeType {
@@ -878,7 +878,7 @@ class BaseElement {
 
 class BaseVisualElment extends BaseElement {
   constructor() {
-    super(); 
+    super();
 
     this.width = new Size();
     this.height = new Size();
@@ -1095,12 +1095,14 @@ class Text extends BaseVisualElment {
   characterMap() {
     var characters = [];
     for (var c_id in this.text) {
-      var character = this.text[c_id];
-      var charset = this.fontFamily.definition.characters.empty;
-      if (this.fontFamily.definition.characters[character] != undefined) {
-        charset = this.fontFamily.definition.characters[character];
+      let character = this.text[c_id];
+      let charset = this.fontFamily.definition.characters;
+
+      if (charset[character] === undefined) {
+        character = ' ';
       }
-      characters.push(charset);
+
+      characters.push(charset[character]);
     }
     return characters;
   }
@@ -1193,7 +1195,7 @@ class Text extends BaseVisualElment {
       position.left += character[0].length + this.fontFamily.definition.spacing.left + this.fontFamily.definition.spacing.right;
 
       for (var y = 0; y < character.length; y++) {
-        for (var x = 0; x < character[0].length; x++) {          
+        for (var x = 0; x < character[0].length; x++) {
           var value = character[y][x] == 1;
 
           var yIndex = Math.round(y + top);
@@ -1241,7 +1243,7 @@ class Box extends BaseGraphic {
     }
 
     var thickness = this.border;
- 
+
     if (this.fill) {
       thickness = Math.min(position.width, position.height);
     }
@@ -1444,7 +1446,7 @@ class Graphic extends BaseVisualElment {
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var container = this.generateContainer();    
+    var container = this.generateContainer();
     var zpl = container.generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
     var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
@@ -1627,7 +1629,7 @@ class Grid extends BaseContainerElement {
         if (x == this.columns.length - 1) {
           width = unusedWidth;
         }
-        
+
         unusedWidth -= width;
 
         cell.width = width;
@@ -1786,7 +1788,7 @@ class Barcode extends BaseVisualElment {
         zpl += '^BPN,N,' + position.height + ',Y,N';
         break;
 
-      case BarcodeTypeName.QRCode:      
+      case BarcodeTypeName.QRCode:
         var magnification = Math.floor(position.height / 10) - 2;
         zpl += '^BQN,2,' + magnification + ',Q,7';
         break;
@@ -1860,7 +1862,7 @@ var ZPLImageTools = {
   },
 
   encodeHexAscii: function(data) {
-    var mapCode = { 1: "G", 2: "H", 3: "I", 4: "J", 5: "K", 6: "L", 7: "M", 8: "N", 9: "O", 10: "P", 11: "Q", 12: "R", 13: "S", 14: "T", 15: "U", 16: "V", 17: "W", 18: "X", 19: "Y", 20: "g", 40: "h", 60: "i", 80: "j", 100: "k", 120: "l", 140: "m", 160: "n", 180: "o", 200: "p", 220: "q", 240: "r", 260: "s", 280: "t", 300: "u", 320: "v", 340: "w", 360: "x", 380: "y", 400: "z" }  
+    var mapCode = { 1: "G", 2: "H", 3: "I", 4: "J", 5: "K", 6: "L", 7: "M", 8: "N", 9: "O", 10: "P", 11: "Q", 12: "R", 13: "S", 14: "T", 15: "U", 16: "V", 17: "W", 18: "X", 19: "Y", 20: "g", 40: "h", 60: "i", 80: "j", 100: "k", 120: "l", 140: "m", 160: "n", 180: "o", 200: "p", 220: "q", 240: "r", 260: "s", 280: "t", 300: "u", 320: "v", 340: "w", 360: "x", 380: "y", 400: "z" }
 
     var outputCode = '';
     var currentLine = '';
@@ -1882,13 +1884,13 @@ var ZPLImageTools = {
         if (currentChar == '0') {
           currentLine += ',';
         } else if (currentChar == 'F') {
-          currentLine += '!';          
+          currentLine += '!';
         } else if (counter > 20) {
           var value = Math.floor(counter / 20) * 20;
           currentLine += mapCode[value];
 
           var counterMod = counter % 20;
-          if (counterMod != 0) {            
+          if (counterMod != 0) {
             currentLine += mapCode[counterMod];
           }
 
@@ -1924,7 +1926,7 @@ var ZPLImageTools = {
         currentChar = data[i];
         counter = 1;
       }
-    } 
+    }
     return outputCode;
   }
 };
