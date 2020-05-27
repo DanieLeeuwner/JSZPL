@@ -118,11 +118,11 @@ class BarcodeRenderer {
 
   }
 
-  render(width, height, type, data) {
+  render(width, height, border, type, data) {
     var box = new Box();
     box.width = width;
     box.height = height;
-    box.border = 2;
+    box.border = border;
 
     var text = new Text();
     box.content.push(text);
@@ -1233,7 +1233,7 @@ class Barcode extends BaseVisualElment {
   generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
     var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var barcodeData = LabelTools.BarcodeRenderer.render(position.width, position.height, this.type, this.data);
+    var barcodeData = LabelTools.BarcodeRenderer.render(position.width, position.height, 3, this.type, this.data);
 
     for (var y = 0; y < position.height; y++) {
       for (var x = 0; x < position.width; x++) {
