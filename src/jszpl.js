@@ -61,6 +61,12 @@ var BarcodeTypeName = {
   PostNet: 'PostNet'
 }
 
+var Code128Subset = {
+  A: 'A',
+  B: 'B',
+  C: 'C'
+}
+
 var AlignmentValue = {
   Start: 'Start',
   Center: 'Center',
@@ -256,12 +262,13 @@ class GraphicData {
 }
 
 class BarcodeType {
-  constructor(type) {
+  constructor(type, subset) {
     this.value = type;
+    this.subset = subset || null;
   }
 
   toString() {
-    return this.value;
+    return this.value + ' - ' + this.subset;
   }
 }
 
@@ -1133,8 +1140,6 @@ class Barcode extends BaseVisualElment {
       zpl += "^FR";
     }
 
-    console.log('rendering barcode: ' + this.type.value);
-
     switch (this.type.value) {
       case BarcodeTypeName.Code11:
         zpl += '^B1N,N,' + position.height + ',Y,N';
@@ -1224,7 +1229,23 @@ class Barcode extends BaseVisualElment {
         break;
     }
 
-    zpl += '^FD' + this.data;
+    zpl += '^FD'
+
+    if (this.type.value === BarcodeTypeName.Code128 && this.type.subset) {
+      switch (this.type.subset) {
+        case Code128Subset.A:
+          zpl += '>9';
+          break;
+        case Code128Subset.B:
+          zpl += '>:';
+          break;
+        case Code128Subset.C:
+          zpl += '>;';
+          break;
+      }
+    }
+
+    zpl += this.data;
     zpl += '^FS\n';
 
     return zpl;
@@ -1354,6 +1375,7 @@ module.exports = {
   PrintDensityName: PrintDensityName,
   FontFamilyName: FontFamilyName,
   BarcodeTypeName: BarcodeTypeName,
+  Code128Subset: Code128Subset,
   AlignmentValue: AlignmentValue,
   LabelTools: LabelTools,
   ImageProcessor: ImageProcessor,
