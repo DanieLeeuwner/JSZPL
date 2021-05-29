@@ -12,12 +12,17 @@
     "url": "git+https://github.com/DanieLeeuwner/JSZPL.git"
   },
   "keywords": [
-    "zpl", "zebra", "zebra programming language"
+    "zpl",
+    "zebra",
+    "zebra programming language"
   ],
   "author": "Danie Leeuwner",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/DanieLeeuwner/JSZPL/issues"
   },
-  "homepage": "https://github.com/DanieLeeuwner/JSZPL#readme"
+  "homepage": "https://github.com/DanieLeeuwner/JSZPL#readme",
+  "devDependencies": {
+    "webpack": "^5.38.1"
+  }
 }

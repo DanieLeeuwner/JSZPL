@@ -5,7 +5,7 @@
 // it should rather be rewritten
 
 class Sidebar {
-  
+
   constructor(container) {
     this.container = container;
     this.startIconArea = undefined;
@@ -273,7 +273,7 @@ var HtmlHelper = {
     var upperCase = value.toUpperCase();
     var spaceless = lowerCase.replace(' ', '');
     switch (type) {
-      case DataType.Boolean:      
+      case DataType.Boolean:
         if (spaceless == 'true') return true;
         if (spaceless == '1') return true;
         if (spaceless == 'yes') return true;
@@ -306,7 +306,7 @@ var HtmlHelper = {
         if (spaceless.endsWith('*')) {
           spaceless = spaceless.substring(0, spaceless.length - 1);
           sizeType = SizeType.Relative;
-        } 
+        }
 
         var parse = Number(spaceless);
 
@@ -606,7 +606,7 @@ class ZPLDesigner {
 
     this.ruler.vertical.g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     this.ruler.vertical.ruler.appendChild(this.ruler.vertical.g);
-    
+
     this.ruler.vertical.pointer = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     this.ruler.vertical.ruler.appendChild(this.ruler.vertical.pointer);
     this.ruler.vertical.pointer.style.fill = '#000';
@@ -623,7 +623,7 @@ class ZPLDesigner {
 
     this.ruler.horizontal.g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     this.ruler.horizontal.ruler.appendChild(this.ruler.horizontal.g);
-    
+
     this.ruler.horizontal.pointer = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     this.ruler.horizontal.ruler.appendChild(this.ruler.horizontal.pointer);
     this.ruler.horizontal.pointer.style.fill = '#000';
@@ -677,7 +677,7 @@ class ZPLDesigner {
       thisDesigner.movingCanvas = true;
       thisDesigner.initialX = e.screenX;
       thisDesigner.initialY = e.screenY;
-      thisDesigner.cachedPositionX = thisDesigner.positionX;      
+      thisDesigner.cachedPositionX = thisDesigner.positionX;
       thisDesigner.cachedPositionY = thisDesigner.positionY;
     });
 
@@ -766,7 +766,7 @@ class ZPLDesigner {
 
     this.crosshairView = HtmlHelper.generateElement('div', 'right icon-container clickable', {}, {}, bottomControls);
     var crosshairImage = HtmlHelper.generateSvg(octicons['plus-small'].path);
-    this.crosshairView.appendChild(crosshairImage);    
+    this.crosshairView.appendChild(crosshairImage);
 
     this.resetView = HtmlHelper.generateElement('div', 'right icon-container clickable', {}, {}, bottomControls);
     var resetImage = HtmlHelper.generateSvg(octicons['screen-full'].path);
@@ -775,11 +775,11 @@ class ZPLDesigner {
     this.cursorTextY = HtmlHelper.generateElement('div', 'right', {
     }, {
       'style': 'width: 60px;',
-    }, bottomControls);    
+    }, bottomControls);
     this.cursorTextX = HtmlHelper.generateElement('div', 'right', {
     }, {
       'style': 'width: 60px;',
-    }, bottomControls);    
+    }, bottomControls);
 
     exportLink.addEventListener('click', function() {
       exportLink.href = thisDesigner.canvas.toDataURL();
@@ -830,7 +830,7 @@ class ZPLDesigner {
     ], 'active', 'hidden');
   }
 
-  initializeView() {  
+  initializeView() {
     this.sidebar.left.pushView(this, this.updateOptions);
   }
 
@@ -857,28 +857,28 @@ class ZPLDesigner {
     var startIcons = [];
 
     if (this.focus.constructor.name == 'Grid') {
-      endIcons.push(new ImageButton(octicons['link'].path, function() { 
+      endIcons.push(new ImageButton(octicons['link'].path, function() {
         thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.showGridDefinitions);
       }));
     }
 
     if (this.focus.content != undefined && this.focus.notImplemented.indexOf('content') == -1) {
-      endIcons.push(new ImageButton(octicons['plus'].path, function() { 
-        thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.showElements); 
+      endIcons.push(new ImageButton(octicons['plus'].path, function() {
+        thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.showElements);
       }));
     }
 
     if (this.focus.constructor.name != 'Label') {
-      endIcons.push(new ImageButton(octicons['trashcan'].path, function() { 
-        thisDesigner.deleteFocus(); 
+      endIcons.push(new ImageButton(octicons['trashcan'].path, function() {
+        thisDesigner.deleteFocus();
         thisDesigner.sidebar.left.refreshView();
         thisDesigner.update();
       }));
     }
 
     startIcons.push(
-      new ImageButton(octicons['three-bars'].path, function() { 
-        thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.updateHierarchy); 
+      new ImageButton(octicons['three-bars'].path, function() {
+        thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.updateHierarchy);
       })
     );
 
@@ -942,7 +942,7 @@ class ZPLDesigner {
             displayValue.style.display = 'block';
             editValue.style.display = 'none';
 
-            editValue.update();  
+            editValue.update();
           });
 
           editValue.addEventListener('keydown', function(e) {
@@ -1066,7 +1066,7 @@ class ZPLDesigner {
             editValue.style.display = 'block';
 
             editValue.focus();
-            editValue.select(); 
+            editValue.select();
           });
 
           editValue.update = function() {
@@ -1085,7 +1085,7 @@ class ZPLDesigner {
 
               if (updateFunction) updateFunction(property.name, newValue);
 
-              designer.update();          
+              designer.update();
             }
           }
 
@@ -1127,7 +1127,7 @@ class ZPLDesigner {
 
                   if (updateFunction) updateFunction(property.name, graphicData);
 
-                  designer.update();                  
+                  designer.update();
                 });
               });
               reader.readAsDataURL(files[0]);
@@ -1159,7 +1159,7 @@ class ZPLDesigner {
       var childItem = this.generateListHierarchy(children[c_id]);
       childItem.supportsChildren = data.content != undefined;
       childItem.supportsMovement = true;
-      childItem.supportsSiblings = true;      
+      childItem.supportsSiblings = true;
       item.children.push(childItem);
     }
     return item;
@@ -1178,15 +1178,15 @@ class ZPLDesigner {
       indent = 0;
 
       this.sidebar.left.setStartIcons([
-        new ImageButton(octicons['triangle-left'].path, function() { 
+        new ImageButton(octicons['triangle-left'].path, function() {
           thisDesigner.sidebar.left.popView();
         })
       ]);
 
       if (this.focus.constructor.name != 'Label') {
         this.sidebar.left.setEndIcons([
-          new ImageButton(octicons['unfold'].path, function() { 
-            thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.changeElementParent); 
+          new ImageButton(octicons['unfold'].path, function() {
+            thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.changeElementParent);
           })
         ]);
       }
@@ -1207,7 +1207,7 @@ class ZPLDesigner {
     item.parent = parent;
     item.hierarchyItem = true;
 
-    item.addEventListener('click', function(e) {      
+    item.addEventListener('click', function(e) {
       var item = e.target;
 
       thisDesigner.focus = item.element;
@@ -1237,12 +1237,12 @@ class ZPLDesigner {
       this.sidebar.left.setContent(hierarchyList);
 
       this.sidebar.left.setStartIcons([
-        new ImageButton(octicons['triangle-left'].path, function() { 
+        new ImageButton(octicons['triangle-left'].path, function() {
           thisDesigner.sidebar.left.popView();
         })
       ]);
     }
-      
+
     var className = '';
     if (element == this.focus) {
       className = 'focus';
@@ -1286,7 +1286,7 @@ class ZPLDesigner {
     this.sidebar.left.setContent(elementList);
 
     this.sidebar.left.setStartIcons([
-      new ImageButton(octicons['triangle-left'].path, function() { 
+      new ImageButton(octicons['triangle-left'].path, function() {
         thisDesigner.sidebar.left.popView();
       })
     ]);
@@ -1296,11 +1296,11 @@ class ZPLDesigner {
       var item = HtmlHelper.generateElement('li', '', {}, {
         innerHTML: element.name
       }, elementList);
-      
+
       item.style.padding = '0 0 0 5px';
       item.element = element;
 
-      item.addEventListener('click', function(e) {        
+      item.addEventListener('click', function(e) {
         var newElement = new e.target.element();
         thisDesigner.focus.content.push(newElement);
         thisDesigner.focus = newElement;
@@ -1341,14 +1341,14 @@ class ZPLDesigner {
     this.sidebar.left.setContent(elementList);
 
     this.sidebar.left.setStartIcons([
-      new ImageButton(octicons['triangle-left'].path, function() { 
+      new ImageButton(octicons['triangle-left'].path, function() {
         thisDesigner.sidebar.left.popView();
       })
     ]);
 
     this.sidebar.left.setEndIcons([
-      new ImageButton(octicons['plus'].path, function() { 
-        thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.showGridElements); 
+      new ImageButton(octicons['plus'].path, function() {
+        thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.showGridElements);
       })
     ]);
 
@@ -1356,7 +1356,7 @@ class ZPLDesigner {
       var item = HtmlHelper.generateElement('li', '', {}, {
         innerHTML: 'Column ' + e_id
       }, elementList);
-      
+
       item.style.padding = '0 0 0 5px';
       item.elementId = e_id;
 
@@ -1385,7 +1385,7 @@ class ZPLDesigner {
       var item = HtmlHelper.generateElement('li', '', {}, {
         innerHTML: 'Row ' + e_id
       }, elementList);
-      
+
       item.style.padding = '0 0 0 5px';
       item.elementId = e_id;
 
@@ -1417,7 +1417,7 @@ class ZPLDesigner {
     this.sidebar.left.setTitle(title);
 
     this.sidebar.left.setStartIcons([
-      new ImageButton(octicons['triangle-left'].path, function() { 
+      new ImageButton(octicons['triangle-left'].path, function() {
         thisDesigner.sidebar.left.popView();
       })
     ]);
@@ -1435,7 +1435,7 @@ class ZPLDesigner {
     this.sidebar.left.setContent(elementList);
 
     this.sidebar.left.setStartIcons([
-      new ImageButton(octicons['triangle-left'].path, function() { 
+      new ImageButton(octicons['triangle-left'].path, function() {
         thisDesigner.sidebar.left.popView();
       })
     ]);
@@ -1450,11 +1450,11 @@ class ZPLDesigner {
       var item = HtmlHelper.generateElement('li', '', {}, {
         innerHTML: element
       }, elementList);
-      
+
       item.style.padding = '0 0 0 5px';
       item.element = element;
 
-      item.addEventListener('click', function(e) {        
+      item.addEventListener('click', function(e) {
         var newElement = new Size();
         newElement.value = 1;
         newElement.sizeType = SizeType.Relative;

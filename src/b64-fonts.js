@@ -1,4 +1,4 @@
-var base64 = require('./base64');
+const base64 = require('./base64.js');
 
 function initialize() {
   for (var f_id in self) {
@@ -9,14 +9,14 @@ function initialize() {
     }
 
     character.characters = {};
-    for (var c_id in character.base64) {
-      var blocks = base64.decode(character.base64[c_id]);
+    for (let c_id in character.base64) {
+      const blocks = base64.decode(character.base64[c_id]);
       character.characters[c_id] = [];
 
-      for (var y = 0; y < character.size.height; y++) {
+      for (let y = 0; y < character.size.height; y++) {
         character.characters[c_id][y] = [];
-        for (var x = 0; x < character.size.width; x++) {
-          var index = (y * character.size.width) + x;
+        for (let x = 0; x < character.size.width; x++) {
+          const index = (y * character.size.width) + x;
           character.characters[c_id][y].push(blocks[index]);
         }
       }
@@ -24,7 +24,7 @@ function initialize() {
   }
 }
 
-var self = module.exports = {
+const self = module.exports = {
   initialize: initialize,
   'A': {
     name: 'FONT_A',

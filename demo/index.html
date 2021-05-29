@@ -8,7 +8,7 @@
 
 <div id="zplDesigner"></div>
 
-<script type="text/javascript" src="jszpl.web.js"></script>
+<script type="text/javascript" src="../dist/jszpl.bundle.js"></script>
 
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="octicons.js"></script>
@@ -17,7 +17,7 @@
 <script type="text/javascript">
   var designer = new ZPLDesigner(zplDesigner);
 
-  designer.initialize();  
+  designer.initialize();
 
   var label = new Label();
   label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
