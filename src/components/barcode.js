@@ -4,7 +4,7 @@ module.exports = class Barcode extends BaseVisualComponent {
   constructor() {
     super();
 
-    this.typeName = 'Circle';
+    this.typeName = 'Barcode';
 
     this.data = '';
     this.maxLength = 32;
@@ -36,6 +36,8 @@ module.exports = class Barcode extends BaseVisualComponent {
     }
 
     console.log('rendering barcode: ' + this.type.value);
+
+    let dataPrepend = '';
 
     switch (this.type.value) {
       case BarcodeTypeName.Code11:
@@ -108,8 +110,9 @@ module.exports = class Barcode extends BaseVisualComponent {
         break;
 
       case BarcodeTypeName.QRCode:
-        var magnification = Math.floor(position.height / 10) - 2;
-        zpl += '^BQN,2,' + magnification + ',Q,7';
+        var magnification = Math.min(Math.floor(position.height / 25), 10);
+        zpl += '^BQ,2,' + magnification + ',Q,7';
+        dataPrepend = 'QA';
         break;
 
       case BarcodeTypeName.DataMatrix:
@@ -126,7 +129,7 @@ module.exports = class Barcode extends BaseVisualComponent {
         break;
     }
 
-    zpl += '^FD' + this.data;
+    zpl += '^FD' + dataPrepend + this.data;
     zpl += '^FS\n';
 
     return zpl;
