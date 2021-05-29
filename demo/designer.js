@@ -919,8 +919,6 @@ class ZPLDesigner {
       }, value);
       var editValue = {};
 
-    console.log(property);
-
       switch (property.type) {
         case DataType.Boolean:
         case DataType.Number:

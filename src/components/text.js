@@ -8,6 +8,7 @@ module.exports = class Text extends BaseVisualComponent {
 
     this.text = '';
     this.fontFamily = new FontFamily(FontFamilyName.A);
+    this.lineSpacing = 0;
 
     // this.rotation = Rotation.Normal;
     this.verticalAlignment = new Alignment(AlignmentValue.Start);
@@ -15,30 +16,45 @@ module.exports = class Text extends BaseVisualComponent {
   }
 
   characterMap() {
-    var characters = [];
-    for (var c_id in this.text) {
-      let character = this.text[c_id];
-      let charset = this.fontFamily.definition.characters;
+    const lineCharacters = [];
+    const charset = this.fontFamily.definition.characters;
 
-      if (charset[character] === undefined) {
-        character = ' ';
+    const textLines = this.text
+      .replaceAll('\\r', '')
+      .replaceAll('\\n', '\n')
+      .split('\n');
+
+    for (let textLine of textLines) {
+      const currentLineCharacters = [];
+      lineCharacters.push(currentLineCharacters);
+
+      for (let character of textLine) {
+        if (charset[character] === undefined) {
+          character = ' ';
+        }
+
+        currentLineCharacters.push(charset[character]);
       }
-
-      characters.push(charset[character]);
     }
-    return characters;
+
+    return lineCharacters;
   }
 
   calculateSize() {
-    var characters = this.characterMap();
-    var height = characters[0].length + this.fontFamily.definition.spacing.top + this.fontFamily.definition.spacing.bottom;
-    var width = 0;
+    const characters = this.characterMap();
+    const height = (characters[0][0].length + this.fontFamily.definition.spacing.top + this.fontFamily.definition.spacing.bottom) * characters[0].length;
+    let width = 0;
 
-    for (var c_id in characters)
-    {
-      var character = characters[c_id];
-      width += character[0].length;
-      width += this.fontFamily.definition.spacing.left + this.fontFamily.definition.spacing.right;
+    for (let line of characters) {
+      let lineWidth = 0;
+
+      for (let character of line)
+      {
+        lineWidth += character[0].length;
+        lineWidth += this.fontFamily.definition.spacing.left + this.fontFamily.definition.spacing.right;
+      }
+
+      width = Math.max(lineWidth, width);
     }
 
     return {
@@ -77,10 +93,21 @@ module.exports = class Text extends BaseVisualComponent {
         break;
     }
 
-    zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
-    zpl += '^A' + this.fontFamily.value + ',,,' + '\n';
-    zpl += '^FB' + Math.round(position.width) + ',1,0,' + horizontalAlignment + ',0\n';
-    zpl += '^FD' + this.text + '^FS\n';
+    const lines = this.text
+      .replaceAll('\\r', '')
+      .replaceAll('\\n', '\n')
+      .split('\n');
+
+    let textOffsetTop = 0;
+
+    for (let line of lines) {
+      zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top + textOffsetTop);
+      zpl += '^A' + this.fontFamily.value + ',,,' + '\n';
+      zpl += '^FB' + Math.round(position.width) + ',1,0,' + horizontalAlignment + ',0\n';
+      zpl += '^FD' + line + '^FS\n';
+
+      textOffsetTop += this.fontFamily.definition.size.height + this.lineSpacing;
+    }
 
     if (this.invert) {
       zpl += '^LRN\n';
@@ -108,32 +135,38 @@ module.exports = class Text extends BaseVisualComponent {
       position.top = position.top + ((position.height) / 2) - (size.height / 2);
     }
 
-    for (var c_id in characters) {
-      var character = characters[c_id];
+    let textOffsetTop = 0;
 
-      var top = position.top;
-      var left = position.left;
+    for (let line of characters) {
+      let textOffsetLeft = 0;
 
-      position.left += character[0].length + this.fontFamily.definition.spacing.left + this.fontFamily.definition.spacing.right;
+      for (let character of line) {
+        var top = position.top + textOffsetTop;
+        var left = position.left + textOffsetLeft;
 
-      for (var y = 0; y < character.length; y++) {
-        for (var x = 0; x < character[0].length; x++) {
-          var value = character[y][x] == 1;
+        textOffsetLeft += character[0].length + this.fontFamily.definition.spacing.left + this.fontFamily.definition.spacing.right;
 
-          var yIndex = Math.round(y + top);
-          var xIndex = Math.round(x + left);
+        for (var y = 0; y < character.length; y++) {
+          for (var x = 0; x < character[0].length; x++) {
+            var value = character[y][x] == 1;
 
-          if ((yIndex > 0 && yIndex < binaryBase.length && xIndex > 0 && xIndex < binaryBase[yIndex].length) == false) continue;
+            var yIndex = Math.round(y + top);
+            var xIndex = Math.round(x + left);
 
-          if (value) {
-            if (this.invert) {
-              binaryBase[yIndex][xIndex] = !binaryBase[yIndex][xIndex];
-            } else {
-              binaryBase[yIndex][xIndex] = value;
+            if ((yIndex > 0 && yIndex < binaryBase.length && xIndex > 0 && xIndex < binaryBase[yIndex].length) == false) continue;
+
+            if (value) {
+              if (this.invert) {
+                binaryBase[yIndex][xIndex] = !binaryBase[yIndex][xIndex];
+              } else {
+                binaryBase[yIndex][xIndex] = value;
+              }
             }
           }
         }
       }
+
+      textOffsetTop += this.fontFamily.definition.size.height + this.lineSpacing;
     }
   }
 }
