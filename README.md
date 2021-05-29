@@ -48,7 +48,7 @@ var zpl = label.generateZPL();
 In a browser:
 
 ```html
-<script src="dist/jszpl.web.js"></script>
+<script src="dist/jszpl.bundle.js"></script>
 
 <script type="text/javascript">
   var label = new Label();
@@ -80,17 +80,17 @@ $ npm i jszpl
 In Node.js:
 
 ```js
-var jszpl = require('jszpl');
+const { Label, PrintDensity, PrintDensityName, Spacing, Text, FontFamily, FontFamilyName } = require('jszpl');
 
-var label = new jszpl.Label();
-label.printDensity = new jszpl.PrintDensity(jszpl.PrintDensityName['8dpmm']);
+var label = new Label();
+label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
 label.width = 100;
 label.height = 50;
-label.padding = new jszpl.Spacing(10);
+label.padding = new Spacing(10);
 
-var text = new jszpl.Text();
+var text = new Text();
 label.content.push(text);
-text.fontFamily = new jszpl.FontFamily(jszpl.FontFamilyName.D);
+text.fontFamily = new FontFamily(FontFamilyName.D);
 text.text = 'Hello World!';
 
 var zpl = label.generateZPL();
@@ -125,7 +125,7 @@ grid.columns.push(new SizeType(1, SizeType.Relative));
 ```
 
 Alternatively, if only a number is applied to the width or height properties,
-or a single value supplied to the constructor, the value is interpreted as being an absolute value. 
+or a single value supplied to the constructor, the value is interpreted as being an absolute value.
 
 The lines in the example below have the same effect:
 
@@ -150,7 +150,7 @@ var PrintDensityName = {
   '12dpmm' : 12,
   '24dpmm' : 24,
 }
-``` 
+```
 
 Usage example:
 
@@ -223,15 +223,15 @@ Usage examples:
 ```js
 // 0 parameters
 // default values of 0 for all sides
-label.padding = new Spacing(); 
+label.padding = new Spacing();
 
 // 1 parameter
 // 10 for all sides
-label.padding = new Spacing(10); 
+label.padding = new Spacing(10);
 
 // 2 parameters
 // 10 for left and right, 20 for top and bottom
-label.padding = new Spacing(10, 20); 
+label.padding = new Spacing(10, 20);
 
 // 4 parameters
 // 10 left, 20 top, 30 right, 40 bottom
@@ -458,6 +458,7 @@ Text displays characters on the label.
 | height | [Size](#size) / Number | Sets the height of the element, uses parent size if omitted |
 | left | [Size](#size) / Number | Sets the left offset of the element |
 | top | [Size](#size) / Number | Sets the top offset of the element |
+| lineSpacing | Number | Sets the vertical space between lines |
 | text | String | Sets the text of the element |
 
 Usage example:
@@ -627,7 +628,7 @@ Displays a barcode.
 
 #### Graphic
 
-Displays an image on the label. 
+Displays an image on the label.
 
 ##### Properties
 
@@ -652,13 +653,12 @@ Example of image:
 
 | Feature | Notes |
 | :-- | :-- |
-| Invert | Not implemented correctly by all controls | 
+| Invert | Not implemented correctly by all controls |
 | Grid Columnspan | Pending implementation |
 | Grid Rowspan | Pending implementation |
 | Rotation | Pending implemented |
 | Fonts | Fonts A-F are implemented, G-V not implemeneted |
 | DataMatrix barcode | Sometimes not displayed, properties result in invalid sizing |
-| Text line breaks | Text element does not support line breaks |
 
 ## Roadmap
 
