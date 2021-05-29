@@ -4,9 +4,11 @@ module.exports = class Label extends BaseContainerComponent {
   constructor() {
     super();
 
+    this.typeName = 'Label';
+
     this.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
 
-    this.notImplemented = ['fixed', 'grid', 'margin', 'left', 'top']
+    this.notImplemented = ['typeName', 'fixed', 'grid', 'margin', 'left', 'top']
   }
 
   generateZPL() {

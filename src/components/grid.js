@@ -4,6 +4,8 @@ module.exports = class Grid extends BaseContainerComponent {
   constructor() {
     super();
 
+    this.typeName = 'Grid';
+
     this.columns = [];
     this.rows = [];
 

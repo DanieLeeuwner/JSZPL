@@ -3,6 +3,15 @@
 const FontFamilyDefinition = require('./b64-fonts.js');
 FontFamilyDefinition.initialize();
 
+const elements = {
+  Text: require('./components/text.js'),
+  Box: require('./components/box.js'),
+  Circle: require('./components/circle.js'),
+  Graphic: require('./components/graphic.js'),
+  Grid: require('./components/grid.js'),
+  Barcode: require('./components/barcode.js'),
+}
+
 module.exports = {
   SizeType: require('./enums/size-type.js'),
   Rotation: require('./enums/rotation.js'),
@@ -28,10 +37,12 @@ module.exports = {
   BarcodeType: require('./properties/barcode-type.js'),
 
   Label: require('./components/label.js'),
-  Text: require('./components/text.js'),
-  Box: require('./components/box.js'),
-  Circle: require('./components/circle.js'),
-  Graphic: require('./components/graphic.js'),
-  Grid: require('./components/grid.js'),
-  Barcode: require('./components/barcode.js'),
+  Text: elements.Text,
+  Grid: elements.Grid,
+  Box: elements.Box,
+  Circle: elements.Circle,
+  Graphic: elements.Graphic,
+  Barcode: elements.Barcode,
+
+  elements: elements,
 }

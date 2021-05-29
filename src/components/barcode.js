@@ -4,11 +4,13 @@ module.exports = class Barcode extends BaseVisualComponent {
   constructor() {
     super();
 
+    this.typeName = 'Circle';
+
     this.data = '';
     this.maxLength = 32;
     this.type = new BarcodeType(BarcodeTypeName.CODE_11);
 
-    this.notImplemented = ['invert']
+    this.notImplemented = ['typeName', 'invert']
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {

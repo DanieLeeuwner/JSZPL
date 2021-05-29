@@ -4,6 +4,8 @@ module.exports = class Text extends BaseVisualComponent {
   constructor() {
     super();
 
+    this.typeName = 'Text';
+
     this.text = '';
     this.fontFamily = new FontFamily(FontFamilyName.A);
 

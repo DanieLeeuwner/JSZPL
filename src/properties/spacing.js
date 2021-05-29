@@ -1,6 +1,8 @@
 module.exports = class Spacing {
 
   constructor(left, top, right, bottom) {
+    this.typeName = 'Spacing';
+
     this.left = left || 0;
     this.top = (top == undefined ? this.left : top);
     this.right = (right == undefined ? this.left : right);

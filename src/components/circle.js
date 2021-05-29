@@ -3,6 +3,8 @@ const BaseGraphicComponent = require('./base-graphic-component.js');
 module.exports = class Circle extends BaseGraphicComponent {
   constructor() {
     super();
+
+    this.typeName = 'Circle';
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {

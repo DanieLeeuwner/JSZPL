@@ -4,6 +4,8 @@ module.exports = class Graphic extends BaseVisualComponent {
   constructor() {
     super();
 
+    this.typeName = 'Graphic';
+
     this.data = new GraphicData();
     this.border = 0;
   }

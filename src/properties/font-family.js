@@ -1,5 +1,7 @@
 module.exports = class FontFamily {
   constructor(value) {
+    this.typeName = 'FontFamily';
+
     this.value = value;
   }
 

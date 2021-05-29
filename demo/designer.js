@@ -242,7 +242,7 @@ var HtmlHelper = {
       if (element[p_id] === undefined) continue;
       properties[p_id] = {
         name: p_id,
-        type: element[p_id].type || element[p_id].constructor.name
+        type: element[p_id].typeName || element[p_id].constructor.name
       };
     }
 
@@ -849,14 +849,14 @@ class ZPLDesigner {
 
   updateOptions() {
 
-    this.sidebar.left.setTitle(this.focus.constructor.name);
+    this.sidebar.left.setTitle(this.focus.typeName);
 
     var thisDesigner = this;
 
     var endIcons = [];
     var startIcons = [];
 
-    if (this.focus.constructor.name == 'Grid') {
+    if (this.focus.typeName == 'Grid') {
       endIcons.push(new ImageButton(octicons['link'].path, function() {
         thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.showGridDefinitions);
       }));
@@ -868,7 +868,7 @@ class ZPLDesigner {
       }));
     }
 
-    if (this.focus.constructor.name != 'Label') {
+    if (this.focus.typeName != 'Label') {
       endIcons.push(new ImageButton(octicons['trashcan'].path, function() {
         thisDesigner.deleteFocus();
         thisDesigner.sidebar.left.refreshView();
@@ -900,8 +900,9 @@ class ZPLDesigner {
     for (var p_id in propertyNames) {
       var index = propertyNames[p_id]
       var property = properties[index];
+
       if (property.type == DataType.Array) continue;
-      if (datasource.notImplemented && datasource.notImplemented.indexOf(property.name) != -1) continue;
+      if (datasource.notImplemented && datasource.notImplemented.indexOf(property.name) !== -1) continue;
 
       var row = HtmlHelper.generateElement('tr', '', {}, {}, propertiesTable);
 
@@ -917,6 +918,8 @@ class ZPLDesigner {
         'innerHTML': datasource[property.name]
       }, value);
       var editValue = {};
+
+    console.log(property);
 
       switch (property.type) {
         case DataType.Boolean:
@@ -1152,7 +1155,7 @@ class ZPLDesigner {
 
   generateListHierarchy(data) {
     var item = new ListItem();
-    item.text = data.constructor.name;
+    item.text = data.typeName;
     item.data = data;
     var children = (data.content || []);
     for (var c_id in children) {
@@ -1183,7 +1186,7 @@ class ZPLDesigner {
         })
       ]);
 
-      if (this.focus.constructor.name != 'Label') {
+      if (this.focus.typeName != 'Label') {
         this.sidebar.left.setEndIcons([
           new ImageButton(octicons['unfold'].path, function() {
             thisDesigner.sidebar.left.pushView(thisDesigner, thisDesigner.changeElementParent);
@@ -1198,7 +1201,7 @@ class ZPLDesigner {
     }
 
     var item = HtmlHelper.generateElement('li', className, {}, {
-      innerHTML: element.constructor.name
+      innerHTML: element.typeName
     }, hierarchyList);
     var padding = (indent * 10) + 5;
     item.style.padding = '0 0 0 ' + padding + 'px';
@@ -1249,7 +1252,7 @@ class ZPLDesigner {
     }
 
     var item = HtmlHelper.generateElement('li', className, {}, {
-      innerHTML: element.constructor.name
+      innerHTML: element.typeName
     }, hierarchyList);
     var padding = (indent * 10) + 5;
     item.style.padding = '0 0 0 ' + padding + 'px';
@@ -1294,7 +1297,7 @@ class ZPLDesigner {
     for (var e_id in elements) {
       var element = elements[e_id];
       var item = HtmlHelper.generateElement('li', '', {}, {
-        innerHTML: element.name
+        innerHTML: e_id
       }, elementList);
 
       item.style.padding = '0 0 0 5px';

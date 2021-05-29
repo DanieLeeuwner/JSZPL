@@ -1,5 +1,7 @@
 module.exports = class Size {
   constructor(value, sizeType) {
+    this.typeName = 'Size';
+
     this.value = value || 0;
     this.sizeType = sizeType || SizeType.Absolute;
   }

@@ -5,7 +5,7 @@ module.exports = class BaseComponent {
 
     this.grid = new GridPosition();
 
-    this.notImplemented = [];
+    this.notImplemented = ['typeName'];
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {

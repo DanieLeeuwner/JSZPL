@@ -4,6 +4,8 @@ module.exports = class Box extends BaseGraphicComponent {
   constructor() {
     super();
 
+    this.typeName = 'Box';
+
     this.cornerRadius = 0;
   }
 
