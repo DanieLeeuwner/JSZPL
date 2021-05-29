@@ -1,5 +1,3 @@
-const SizeType = require('../enums/size-type.js');
-
 module.exports = class Size {
   constructor(value, sizeType) {
     this.typeName = 'Size';

@@ -1,5 +1,4 @@
 const BaseVisualComponent = require('./base-visual-component.js');
-const Spacing = require('../properties/spacing.js');
 
 module.exports = class BaseContainerComponent extends BaseVisualComponent {
   constructor() {

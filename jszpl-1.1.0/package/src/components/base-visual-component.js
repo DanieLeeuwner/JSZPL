@@ -1,7 +1,4 @@
 const BaseComponent = require('./base-component.js');
-const Size = require('../properties/size.js');
-const Spacing = require('../properties/spacing.js');
-const SizeType = require('../enums/size-type.js');
 
 module.exports = class BaseVisualComponent extends BaseComponent {
   constructor() {

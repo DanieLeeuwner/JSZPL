@@ -1,7 +1,4 @@
 const BaseVisualComponent = require('./base-visual-component.js');
-const BarcodeType = require('../properties/barcode-type.js');
-const BarcodeTypeName = require('../enums/barcode-type-name.js');
-const LabelTools = require('../helpers/label-tools.js');
 
 module.exports = class Barcode extends BaseVisualComponent {
   constructor() {

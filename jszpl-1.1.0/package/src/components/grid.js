@@ -1,7 +1,4 @@
 const BaseContainerComponent = require('./base-container-component.js');
-const Box = require('./box.js');
-const Size = require('../properties/size.js');
-const Spacing = require('../properties/spacing.js');
 
 module.exports = class Grid extends BaseContainerComponent {
   constructor() {

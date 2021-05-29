@@ -1,5 +1,4 @@
 const BaseVisualComponent = require('./base-visual-component.js');
-const GraphicData = require('../properties/graphic-data.js');
 
 module.exports = class Graphic extends BaseVisualComponent {
   constructor() {

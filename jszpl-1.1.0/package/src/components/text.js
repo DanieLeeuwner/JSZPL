@@ -1,8 +1,4 @@
 const BaseVisualComponent = require('./base-visual-component.js');
-const FontFamily = require('../properties/font-family.js');
-const Alignment = require('../properties/alignment.js');
-const FontFamilyName = require('../enums/font-family-name.js');
-const AlignmentValue = require('../enums/alignment-value.js');
 
 module.exports = class Text extends BaseVisualComponent {
   constructor() {
@@ -19,16 +15,14 @@ module.exports = class Text extends BaseVisualComponent {
     this.horizontalAlignment = new Alignment(AlignmentValue.Start);
   }
 
-  getTextLines() {
-    const expression = new RegExp('\\\\r\\\\n|\\\\n', 'g');
-    return this.text.replace(expression, '\n').split('\n');
-  }
-
   characterMap() {
     const lineCharacters = [];
     const charset = this.fontFamily.definition.characters;
 
-    const textLines = this.getTextLines();
+    const textLines = this.text
+      .replaceAll('\\r', '')
+      .replaceAll('\\n', '\n')
+      .split('\n');
 
     for (let textLine of textLines) {
       const currentLineCharacters = [];
@@ -99,7 +93,10 @@ module.exports = class Text extends BaseVisualComponent {
         break;
     }
 
-    const lines = this.getTextLines();
+    const lines = this.text
+      .replaceAll('\\r', '')
+      .replaceAll('\\n', '\n')
+      .split('\n');
 
     let textOffsetTop = 0;
 
