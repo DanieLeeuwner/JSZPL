@@ -6,6 +6,7 @@ FontFamilyDefinition.initialize();
 const elements = {
   Text: require('./components/text.js'),
   Box: require('./components/box.js'),
+  Line: require('./components/line.js'),
   Circle: require('./components/circle.js'),
   Graphic: require('./components/graphic.js'),
   Grid: require('./components/grid.js'),
@@ -40,6 +41,7 @@ module.exports = {
   Text: elements.Text,
   Grid: elements.Grid,
   Box: elements.Box,
+  Line: elements.Line,
   Circle: elements.Circle,
   Graphic: elements.Graphic,
   Barcode: elements.Barcode,
