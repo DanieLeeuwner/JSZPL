@@ -504,19 +504,59 @@ Displays a rectangular shape.
 Usage example:
 
 ```js
-var box = new Box();
+const box = new Box();
 label.content.push(box);
 box.fill = true;
 box.width = 150;
 box.height = 150;
 
-var zpl = label.generateZPL();
+const zpl = label.generateZPL();
 //^XA
 //^FO0,0^GB150,150,150,,0^FS
 //^XZ
 ```
 
 ![Box example](./Images/example_box.png)
+
+#### Line
+
+Displays a line.
+
+##### Properties
+
+| Property  | Type                          | Description                                                  |
+| :-------- | :---------------------------- | :----------------------------------------------------------- |
+| fixed     | Boolean                       | If set, positions the element with relation to the label rather than parent |
+| invert    | Boolean                       | Invert color values                                          |
+| grid      | [GridPosition](#gridposition) | Configure element placement within grid                      |
+| margin    | [Spacing](#spacing)           | Configure space around element                               |
+| left      | [Size](#size) / Number        | Sets the left offset of the element                          |
+| top       | [Size](#size) / Number        | Sets the top offset of the element                           |
+| x1        | Number                        | X coordinate of first point in line                          |
+| y1        | Number                        | Y coordinate of first point in line                          |
+| x2        | Number                        | X coordinate of second point in line                         |
+| y2        | Number                        | Y coordinate of second point in line                         |
+| thickness | Number                        | Thickness of the line to draw                                |
+
+Usage example:
+
+```js
+const line = new Line();
+label.content.push(line);
+
+line.x1 = 15;
+line.y1 = 15;
+line.x2 = 100;
+line.y2 = 50;
+line.thickness = 5;
+
+const zpl = label.generateZPL();
+//^XA
+//^FO15,15^GD85,35,5,B,L
+//^XZ
+```
+
+![Line example](./Images/example_line.png)
 
 #### Circle
 
@@ -659,11 +699,12 @@ Example of image:
 | Rotation | Pending implemented |
 | Fonts | Fonts A-F are implemented, G-V not implemeneted |
 | DataMatrix barcode | Sometimes not displayed, properties result in invalid sizing |
+| Multi-line text alignment | Text alignment is not implemented to align text that spans multiple lines |
+| Grid border property | The graphical designer does not display the border property for grid components |
 
 ## Roadmap
 
 | Feature | Notes |
 | :-- | :-- |
-| Line | Implement line element |
 | Stack | Stack elements based on set size or minimum size. Direction horizontal or vertical. |
 | Barcode auto sizing | Automatically size 2D barcodes based on data lentgh to fit available space. |
