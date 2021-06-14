@@ -115,7 +115,7 @@ module.exports = class Barcode extends BaseVisualComponent {
       case BarcodeTypeName.QRCode:
         var magnification = Math.min(Math.floor(position.height / 25), 10);
         zpl += '^BQ,2,' + magnification + ',Q,7';
-        dataPrepend = 'QA';
+        dataPrepend = 'QA,';
         break;
 
       case BarcodeTypeName.DataMatrix:
