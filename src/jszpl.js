@@ -11,6 +11,7 @@ const elements = {
   Graphic: require('./components/graphic.js'),
   Grid: require('./components/grid.js'),
   Barcode: require('./components/barcode.js'),
+  Raw: require('./components/raw.js'),
 }
 
 module.exports = {
@@ -45,6 +46,7 @@ module.exports = {
   Circle: elements.Circle,
   Graphic: elements.Graphic,
   Barcode: elements.Barcode,
+  Raw: elements.Raw,
 
   elements: elements,
 }

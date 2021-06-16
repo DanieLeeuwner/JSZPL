@@ -1,4 +1,5 @@
 const BaseComponent = require('./base-component.js');
+const GridPosition = require('../properties/grid-position.js');
 const Size = require('../properties/size.js');
 const Spacing = require('../properties/spacing.js');
 const SizeType = require('../enums/size-type.js');
@@ -6,6 +7,11 @@ const SizeType = require('../enums/size-type.js');
 module.exports = class BaseVisualComponent extends BaseComponent {
   constructor() {
     super();
+
+    this.invert = false;
+    this.fixed = false;
+
+    this.grid = new GridPosition();
 
     this.width = new Size();
     this.height = new Size();
@@ -61,8 +67,8 @@ module.exports = class BaseVisualComponent extends BaseComponent {
 
     var elements = this.content || [];
 
-    for (var e_id in elements) {
-      var element = elements[e_id];
+    for (let element of elements) {
+      if (!element.margin || !element.border || !element.width || !element.height) continue;
 
       units.absolute.width += element.margin.horizontal + (this.border || 0);
       units.absolute.height += element.margin.vertical + (this.border || 0);

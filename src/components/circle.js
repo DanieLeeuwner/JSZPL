@@ -9,15 +9,15 @@ module.exports = class Circle extends BaseGraphicComponent {
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
 
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var zpl = '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
+    let zpl = '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
 
     if (this.invert) {
       zpl += '^FR';
     }
 
-    var thickness = this.border;
+    const thickness = this.border;
 
     if (this.fill) {
       thickness = Math.min(position.width, position.height);

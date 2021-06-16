@@ -43,16 +43,16 @@ module.exports = class Grid extends BaseContainerComponent {
 
   generateChildren(availableWidth, availableHeight) {
 
-    var columnDefinitions = this.columns;
+    const columnDefinitions = this.columns;
     if (columnDefinitions.length == 0) {
       columnDefinitions.push(new Size(1, SizeType.Relative));
     }
-    var rowDefinitions = this.rows;
+    const rowDefinitions = this.rows;
     if (rowDefinitions.length == 0) {
       rowDefinitions.push(new Size(1, SizeType.Relative));
     }
 
-    var units = {
+    const units = {
       absolute: {
         width: 0,
         height: 0
@@ -63,9 +63,7 @@ module.exports = class Grid extends BaseContainerComponent {
       }
     }
 
-    for (var c_id in columnDefinitions) {
-      var cell = columnDefinitions[c_id];
-
+    for (let cell of columnDefinitions) {
       if (typeof(cell) == 'object') {
         if (cell.sizeType == SizeType.Absolute) {
           units.absolute.width += cell.value;
@@ -77,9 +75,7 @@ module.exports = class Grid extends BaseContainerComponent {
       }
     }
 
-    for (var c_id in rowDefinitions) {
-      var cell = rowDefinitions[c_id];
-
+    for (let cell of rowDefinitions) {
       if (typeof(cell) == 'object') {
         if (cell.sizeType == SizeType.Absolute) {
           units.absolute.height += cell.value;
@@ -91,32 +87,32 @@ module.exports = class Grid extends BaseContainerComponent {
       }
     }
 
-    var borderSpacing = (this.border || 0) * 4;
+    const borderSpacing = (this.border || 0) * 4;
 
     units.absolute.width += borderSpacing;
     units.absolute.height += borderSpacing;
 
-    var absoluteWidth = (availableWidth - borderSpacing - (this.columnSpacing * (columnDefinitions.length + 1)));
-    var absoluteHeight = (availableHeight - borderSpacing - (this.rowSpacing * (rowDefinitions.length + 1)));
+    const absoluteWidth = (availableWidth - borderSpacing - (this.columnSpacing * (columnDefinitions.length + 1)));
+    const absoluteHeight = (availableHeight - borderSpacing - (this.rowSpacing * (rowDefinitions.length + 1)));
 
-    var widthUnits = (absoluteWidth - units.absolute.width) / (units.relative.width || 1);
-    var heightUnits = (absoluteHeight - units.absolute.height) / (units.relative.height || 1);
+    const widthUnits = (absoluteWidth - units.absolute.width) / (units.relative.width || 1);
+    const heightUnits = (absoluteHeight - units.absolute.height) / (units.relative.height || 1);
 
-    var content = [];
-    var contentCells = [];
+    const content = [];
+    const contentCells = [];
 
-    var top = this.rowSpacing;
+    let top = this.rowSpacing;
 
-    var unusedHeight = absoluteHeight + (this.border || 0) * 2;
+    let unusedHeight = absoluteHeight + (this.border || 0) * 2;
 
-    for (var y = 0; y < rowDefinitions.length; y++) {
+    for (let y = 0; y < rowDefinitions.length; y++) {
       content[y] = [];
 
-      var unusedWidth = absoluteWidth + (this.border || 0) * 2;
+      let unusedWidth = absoluteWidth + (this.border || 0) * 2;
 
-      var left = this.columnSpacing;
+      let left = this.columnSpacing;
 
-      var height = Math.ceil(this.getSize(rowDefinitions[y], heightUnits)) + (this.border || 0);
+      let height = Math.ceil(this.getSize(rowDefinitions[y], heightUnits)) + (this.border || 0);
 
       if (y == this.rows.length - 1) {
         height = unusedHeight;
@@ -124,13 +120,13 @@ module.exports = class Grid extends BaseContainerComponent {
 
       unusedHeight -= height;
 
-      for (var x = 0; x < this.columns.length; x++) {
+      for (let x = 0; x < this.columns.length; x++) {
 
-        var cell = new Box();
+        const cell = new Box();
         content[y].push(cell);
         contentCells.push(cell);
 
-        var width = Math.ceil(this.getSize(columnDefinitions[x], widthUnits)) + (this.border || 0);
+        let width = Math.ceil(this.getSize(columnDefinitions[x], widthUnits)) + (this.border || 0);
 
         if (x == this.columns.length - 1) {
           width = unusedWidth;
@@ -151,16 +147,15 @@ module.exports = class Grid extends BaseContainerComponent {
       top += height + this.rowSpacing;
     }
 
-    for (var c_id in this.content) {
-      var element = this.content[c_id];
-
+    for (let element of this.content) {
+      if (!element.grid) continue;
       if (element.grid.row < 0 || element.grid.row >= rowDefinitions.length) continue;
       if (element.grid.column < 0 || element.grid.column >= columnDefinitions.length) continue;
 
       content[element.grid.row][element.grid.column].content.push(element);
     }
 
-    var contentBox = new Box();
+    const contentBox = new Box();
     contentBox.content = contentCells;
     contentBox.fixed = this.fixed;
     contentBox.width = this.width;

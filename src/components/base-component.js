@@ -1,12 +1,5 @@
-const GridPosition = require('../properties/grid-position.js');
-
 module.exports = class BaseComponent {
   constructor() {
-    this.invert = false;
-    this.fixed = false;
-
-    this.grid = new GridPosition();
-
     this.notImplemented = ['typeName'];
   }
 
