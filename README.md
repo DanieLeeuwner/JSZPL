@@ -3,14 +3,14 @@ Generate ZPL II from JavaScript classes.
 `^FX No more Printer Commands!`
 
 ```js
-var text = new Text();
+const text = new Text();
 label.content.push(text);
 text.text = 'Hello World!';
 text.fontFamily = new FontFamily(FontFamilyName.D);
 text.verticalAlignment = new Alignment(AlignmentValue.Center);
 text.horizontalAlignment = new Alignment(AlignmentValue.Center);
 
-var zpl = label.generateZPL();
+const zpl = label.generateZPL();
 //^XA
 //^FO10,205^AD,N,,
 //^FB780,1,0,C,0
@@ -51,18 +51,18 @@ In a browser:
 <script src="dist/jszpl.bundle.js"></script>
 
 <script type="text/javascript">
-  var label = new Label();
+  const label = new Label();
   label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
   label.width = 100;
   label.height = 50;
   label.padding = new Spacing(10);
 
-  var text = new Text();
+  const text = new Text();
   label.content.push(text);
   text.fontFamily = new FontFamily(FontFamilyName.D);
   text.text = 'Hello World!';
 
-  var zpl = label.generateZPL();
+  const zpl = label.generateZPL();
   //^XA
   //^FO10,10^AD,N,,
   //^FB780,1,0,L,0
@@ -82,18 +82,18 @@ In Node.js:
 ```js
 const { Label, PrintDensity, PrintDensityName, Spacing, Text, FontFamily, FontFamilyName } = require('jszpl');
 
-var label = new Label();
+const label = new Label();
 label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
 label.width = 100;
 label.height = 50;
 label.padding = new Spacing(10);
 
-var text = new Text();
+const text = new Text();
 label.content.push(text);
 text.fontFamily = new FontFamily(FontFamilyName.D);
 text.text = 'Hello World!';
 
-var zpl = label.generateZPL();
+const zpl = label.generateZPL();
 //^XA
 //^FO10,10^AD,N,,
 //^FB780,1,0,L,0
@@ -111,7 +111,7 @@ Size is used by width, height, column definition, and row definition properties.
 
 SizeType has the following definition:
 ```js
-var SizeType = {
+const SizeType = {
   Absolute : 0, // exact size
   Fraction : 1, // size as fraction of parent
   Relative : 2, // size together with siblings as part of parent
@@ -144,7 +144,7 @@ PrintDensity is only used by the Label element. It denotes the dot density of th
 PrintDensityName has the following definition:
 
 ```js
-var PrintDensityName = {
+const PrintDensityName = {
   '6dpmm' : 6,
   '8dpmm' : 8,
   '12dpmm' : 12,
@@ -155,7 +155,7 @@ var PrintDensityName = {
 Usage example:
 
 ```js
-var label = new Label();
+const label = new Label();
 label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
 ```
 
@@ -166,7 +166,7 @@ FontFamily is only used by the Text element. It denotes the font matrix to use f
 FontFamilyName has the following definition:
 
 ```js
-var FontFamilyName = {
+const FontFamilyName = {
   A : 'A',
   B : 'B',
   D : 'D',
@@ -186,7 +186,7 @@ Font names G to V are not implemented. Usage will result in an error.
 Usage example:
 
 ```js
-var text = new Text();
+const text = new Text();
 text.fontFamily = new FontFamily(FontFamilyName.D);
 ```
 
@@ -197,7 +197,7 @@ Alignment is only used by the the Text element. It is applied to the horizontalA
 AlignmentValue has the following definition:
 
 ```js
-var AlignmentValue = {
+const AlignmentValue = {
   Start: 'Start',
   Center: 'Center',
   End: 'End',
@@ -207,7 +207,7 @@ var AlignmentValue = {
 Usage example:
 
 ```js
-var text = new Text();
+const text = new Text();
 text.verticalAlignment = new Alignment(AlignmentValue.Center);
 text.horizontalAlignment = new Alignment(AlignmentValue.Center);
 ```
@@ -245,7 +245,7 @@ GridPosition is used by all elements except for the Label. GridPosition has a co
 Usage example:
 
 ```js
-var grid = new Grid();
+const grid = new Grid();
 label.content.push(grid);
 grid.columns.push(new Size(1, SizeType.Relative));
 grid.columns.push(new Size(1, SizeType.Relative));
@@ -256,24 +256,24 @@ grid.rowSpacing = 2;
 grid.border = 2;
 grid.padding = new Spacing(10);
 
-var text00 = new Text();
+const text00 = new Text();
 grid.content.push(text00);
 text00.text = '(0, 0)';
 text00.fontFamily = new FontFamily(FontFamilyName.D);
 
-var text10 = new Text();
+const text10 = new Text();
 grid.content.push(text10);
 text10.text = '(1, 0)';
 text10.fontFamily = new FontFamily(FontFamilyName.D);
 text10.grid.column = 1;
 
-var text01 = new Text();
+const text01 = new Text();
 grid.content.push(text01);
 text01.text = '(0, 1)';
 text01.fontFamily = new FontFamily(FontFamilyName.D);
 text01.grid.row = 1;
 
-var text11 = new Text();
+const text11 = new Text();
 grid.content.push(text11);
 text11.text = '(1, 1)';
 text11.fontFamily = new FontFamily(FontFamilyName.D);
@@ -290,7 +290,7 @@ BarcodeType is only used by the Barcode element. It denotes the barcode type to 
 BarcodeTypeName has the following definition:
 
 ```js
-var BarcodeTypeName = {
+const BarcodeTypeName = {
   Code11: 'Code11',
   Interleaved25: 'Interleaved25',
   Code39: 'Code39',
@@ -316,7 +316,7 @@ var BarcodeTypeName = {
 Usage example:
 
 ```js
-var barcode = new Barcode();
+const barcode = new Barcode();
 barcode.type = new BarcodeType(BarcodeTypeName.Code11);
 ```
 
@@ -333,8 +333,8 @@ Container elements:
 Usage example:
 
 ```js
-var label = new Label();
-var text = new Text();
+const label = new Label();
+const text = new Text();
 label.content.push(text);
 ```
 
@@ -358,21 +358,21 @@ An image processor must be defined for each platform. The purpose of an image pr
 Below is an example of a processor for a web browser:
 
 ```js
-var graphic = new Graphic();
+const graphic = new Graphic();
 
-var image = new Image();
+const image = new Image();
 image.onload = function() {
-  var canvas = document.createElement('canvas');
+  const canvas = document.createElement('canvas');
   canvas.width = image.width;
   canvas.height = image.height;
 
-  var context = canvas.getContext('2d');
+  const context = canvas.getContext('2d');
   context.drawImage(image, 0, 0);
 
-  var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-  var index = 0;
-  var imageBits = [];
+  let index = 0;
+  const imageBits = [];
 
   for (var y = 0; y < imageData.height; y++) {
     for (var x = 0; x < imageData.width; x++) {
@@ -418,18 +418,18 @@ The example creates a 100mm x 50mm label with a print density of 8 dpmm.
 The label has a padding of 10 dots and contains a text field.
 
 ```js
-var label = new Label();
+const label = new Label();
 label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
 label.width = 100;
 label.height = 50;
 label.padding = new Spacing(10);
 
-var text = new Text();
+const text = new Text();
 label.content.push(text);
 text.fontFamily = new FontFamily(FontFamilyName.D);
 text.text = 'Hello World!';
 
-var zpl = label.generateZPL();
+const zpl = label.generateZPL();
 //^XA
 //^FO10,10^AD,N,,
 //^FB780,1,0,L,0
@@ -464,12 +464,12 @@ Text displays characters on the label.
 Usage example:
 
 ```js
-var text = new Text();
+const text = new Text();
 label.content.push(text);
 text.fontFamily = new FontFamily(FontFamilyName.D);
 text.text = 'Hello World!';
 
-var zpl = label.generateZPL();
+const zpl = label.generateZPL();
 //^XA
 //^FB780,1,0,L,0
 //^FDHello World!^FS
@@ -584,13 +584,13 @@ Using a different width and height values, will result in an ellipse.
 Usage example:
 
 ```js
-var circle = new Circle();
+const circle = new Circle();
 label.content.push(circle);
 circle.fill = true;
 circle.width = 150;
 circle.height = 150;
 
-var zpl = label.generateZPL();
+const zpl = label.generateZPL();
 //^XA
 //^FO10,10^GC150,150,B^FS
 //^XZ
@@ -625,7 +625,7 @@ Displays a grid.
 Usage example:
 
 ```js
-var grid = new Grid();
+const grid = new Grid();
 label.content.push(grid);
 grid.columns.push(new Size(150, SizeType.Absolute));
 grid.columns.push(new Size(1, SizeType.Relative));
@@ -635,7 +635,7 @@ grid.border = 2;
 grid.columnSpacing = 2;
 grid.rowSpacing = 2;
 
-var zpl = label.generateZPL();
+const zpl = label.generateZPL();
 //^XA
 //^FO10,10^GB780,380,2,,0^FS
 //^FO14,14^GB152,152,2,,0^FS
@@ -688,6 +688,37 @@ Displays an image on the label.
 Example of image:
 
 ![Graphic Image](./Images/example_image.png)
+
+#### Raw
+
+Adds raw ZPL data to the output. Note that `Raw` inherits from `BaseComponent`, and thus has no layout options available.
+
+##### Properties
+
+| Property | Type   | Description                      |
+| :------- | :----- | :------------------------------- |
+| data     | String | Raw ZPL data to add to the label |
+
+Usage example:
+
+```js
+const raw = new Raw();
+label.content.push(raw);
+raw.data = `
+^FO50,50^GB100,100,100^FS
+^FO75,75^FR^GB100,100,100^FS
+^FO93,93^GB40,40,40^FS
+`;
+
+const zpl = label.generateZpl();
+//^XA
+//^FO50,50^GB100,100,100^FS
+//^FO75,75^FR^GB100,100,100^FS
+//^FO93,93^GB40,40,40^FS
+//^XZ
+```
+
+![Raw Image](./Images/example_raw.png)
 
 ## Known Issues
 
