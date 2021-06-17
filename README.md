@@ -37,6 +37,7 @@ const zpl = label.generateZPL();
   - [Text](#text)
   - [Grid](#grid)
   - [Box](#grid)
+  - [Line](#Line)
   - [Circle](#circle)
   - [Barcode](#barcode)
   - [Graphic](#graphic)
@@ -377,15 +378,15 @@ image.onload = function() {
   let index = 0;
   const imageBits = [];
 
-  for (var y = 0; y < imageData.height; y++) {
-    for (var x = 0; x < imageData.width; x++) {
+  for (let y = 0; y < imageData.height; y++) {
+    for (let x = 0; x < imageData.width; x++) {
 
-      var red = imageData.data[index++];
-      var green = imageData.data[index++];
-      var blue = imageData.data[index++];
-      var opacity = imageData.data[index++];
+      const red = imageData.data[index++];
+      const green = imageData.data[index++];
+      const blue = imageData.data[index++];
+      const opacity = imageData.data[index++];
 
-      var value = 0;
+      let value = 0;
 
       if (opacity != 0) {
         value = (((red + green + blue) / 3) < 180) ? 1 : 0;
@@ -398,6 +399,8 @@ image.onload = function() {
 };
 image.src = data;
 ```
+
+For a usage example within NodeJS, please refer to the unit test labeled 'add image to a label' within the graphic component unit tests ([graphics.test.js](./tests/graphics.test.js)).
 
 ## Elements
 
@@ -544,18 +547,28 @@ Displays a line.
 Usage example:
 
 ```js
-const line = new Line();
-label.content.push(line);
+const line1 = new Line();
+label.content.push(line1);
 
-line.x1 = 15;
-line.y1 = 15;
-line.x2 = 100;
-line.y2 = 50;
-line.thickness = 5;
+line1.x1 = 50;
+line1.y1 = 50;
+line1.x2 = 150;
+line1.y2 = 150;
+line1.thickness = 5;
+
+const line2 = new Line();
+label.content.push(line2);
+
+line2.x1 = 50;
+line2.y1 = 150;
+line2.x2 = 150;
+line2.y2 = 50;
+line2.thickness = 5;
 
 const zpl = label.generateZPL();
 //^XA
-//^FO15,15^GD85,35,5,B,L
+//^FO50,50^GD100,100,5,B,L^FS
+//^FO50,50^GD100,100,5,B,R^FS
 //^XZ
 ```
 
@@ -732,7 +745,6 @@ const zpl = label.generateZpl();
 | Grid Rowspan | Pending implementation |
 | Rotation | Pending implementation |
 | Fonts | Fonts A-F are implemented, G-V not implemeneted |
-| DataMatrix barcode | Sometimes not displayed, properties result in invalid sizing |
 | Multi-line text alignment | Text alignment is not implemented to align text that spans multiple lines |
 | Grid border property | The graphical designer does not display the border property for grid components |
 
@@ -741,4 +753,3 @@ const zpl = label.generateZpl();
 | Feature | Notes |
 | :-- | :-- |
 | Stack | Stack elements based on set size or minimum size. Direction horizontal or vertical. |
-| Barcode auto sizing | Automatically size 2D barcodes based on data lentgh to fit available space. |
