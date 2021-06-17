@@ -4,7 +4,7 @@
   "description": "ZPL II generation from JavaScript",
   "main": "./src/jszpl.js",
   "scripts": {
-    "test": "node test.js",
+    "test": "jest",
     "font-packer": "node ./font-packer/font-packer.js"
   },
   "repository": {
@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/DanieLeeuwner/JSZPL#readme",
   "devDependencies": {
+    "jest": "^27.0.4",
+    "pngjs": "^6.0.0",
     "webpack": "^5.38.1"
   }
 }

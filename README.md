@@ -40,8 +40,11 @@ const zpl = label.generateZPL();
   - [Circle](#circle)
   - [Barcode](#barcode)
   - [Graphic](#graphic)
+  - [Raw](#Raw)
 - [Known Issues](#known-issues)
 - [Roadmap](#roadmap)
+
+**WARNING**: This is not a complete implementation of  the ZPL standard. For all elements not implemented or elements with implementations that do not fit your needs, please make use of the [Raw](#Raw) component. If you believe there is a problem with a specific component, feel free to create an issue describing the problem.
 
 ## Installation
 
@@ -727,7 +730,7 @@ const zpl = label.generateZpl();
 | Invert | Not implemented correctly by all controls |
 | Grid Columnspan | Pending implementation |
 | Grid Rowspan | Pending implementation |
-| Rotation | Pending implemented |
+| Rotation | Pending implementation |
 | Fonts | Fonts A-F are implemented, G-V not implemeneted |
 | DataMatrix barcode | Sometimes not displayed, properties result in invalid sizing |
 | Multi-line text alignment | Text alignment is not implemented to align text that spans multiple lines |

@@ -37,7 +37,7 @@ module.exports = class Line extends BaseVisualComponent {
       orientation = 'L';
     }
 
-    zpl += `^GD${width},${height},${this.thickness},B,${orientation}\n`;
+    zpl += `^GD${width},${height},${this.thickness},B,${orientation}^FS\n`;
 
     zpl += super.generateZPL(position.left, position.top, position.width, position.height)
 

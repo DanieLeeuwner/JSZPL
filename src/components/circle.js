@@ -17,7 +17,7 @@ module.exports = class Circle extends BaseGraphicComponent {
       zpl += '^FR';
     }
 
-    const thickness = this.border;
+    let thickness = this.border;
 
     if (this.fill) {
       thickness = Math.min(position.width, position.height);

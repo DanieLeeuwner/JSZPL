@@ -38,7 +38,7 @@ module.exports = class Barcode extends BaseVisualComponent {
       zpl += "^FR";
     }
 
-    console.log('rendering barcode: ' + this.type.value);
+    let rows = undefined;
 
     let dataPrepend = '';
 
@@ -61,7 +61,7 @@ module.exports = class Barcode extends BaseVisualComponent {
 
       case BarcodeTypeName.PDF417:
         var rowHeight = 10;
-        var rows = Math.ceil(position.height / rowHeight);
+        rows = Math.ceil(position.height / rowHeight);
         var bytes = this.maxLength * rows;
         var columns = Math.ceil(bytes / rows);
 
@@ -119,12 +119,7 @@ module.exports = class Barcode extends BaseVisualComponent {
         break;
 
       case BarcodeTypeName.DataMatrix:
-
-        var rows = Math.ceil(Math.sqrt(Math.max(this.data.length, this.maxLength)));
-        rows = Math.ceil(rows / 2) * 2;
-        var rowHeight = Math.ceil(position.height / rows);
-
-        zpl += '^BXN,' + rowHeight + ',200,' + rows + ',' + rows, ',6,~';
+        zpl += '^BXN,10,200,,,~,1';
         break;
 
       case BarcodeTypeName.PostNet:

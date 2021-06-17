@@ -1,5 +1,8 @@
+const ImageProcessor = require('./image-processor.js');
+const ImageResizer = require('./image-resizer.js');
+
 module.exports = {
-  ImageProcessor: undefined,
-  ImageResizer: undefined,
+  ImageProcessor: new ImageProcessor(),
+  ImageResizer: new ImageResizer(),
   Logger: function(msg) { console.log(msg); },
 }

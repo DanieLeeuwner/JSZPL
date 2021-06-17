@@ -2,6 +2,7 @@ const BaseContainerComponent = require('./base-container-component.js');
 const Box = require('./box.js');
 const Size = require('../properties/size.js');
 const Spacing = require('../properties/spacing.js');
+const SizeType = require('../enums/size-type.js');
 
 module.exports = class Grid extends BaseContainerComponent {
   constructor() {

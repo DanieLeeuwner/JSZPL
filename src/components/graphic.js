@@ -1,5 +1,9 @@
 const BaseVisualComponent = require('./base-visual-component.js');
 const GraphicData = require('../properties/graphic-data.js');
+const { ImageProcessor } = require('../helpers/label-tools.js');
+const Box = require('./box.js');
+const LabelTools = require('../helpers/label-tools.js');
+const ZPLImageTools = require('../helpers/zpl-image-tools.js');
 
 module.exports = class Graphic extends BaseVisualComponent {
   constructor() {
@@ -45,7 +49,7 @@ module.exports = class Graphic extends BaseVisualComponent {
     var hexData = ZPLImageTools.generateHexAscii(position.width, position.height, imageData);
     hexData = ZPLImageTools.encodeHexAscii(hexData);
 
-    zpl += '^GFA,' + byteCount + ',' + byteCount + ',' + widthBytes + ',' + hexData + '^FS';
+    zpl += '^GFA,' + byteCount + ',' + byteCount + ',' + widthBytes + ',' + hexData + '^FS\n';
 
     return zpl;
   }
