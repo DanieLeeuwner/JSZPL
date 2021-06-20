@@ -1,5 +1,8 @@
 # JSZPL
-Generate ZPL II from JavaScript classes.
+
+![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dt/jszpl) ![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/jszpl) ![BADGE_NPM_VERSION](https://img.shields.io/npm/v/jszpl) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/jszpl) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
+
+Generate ZPL II from JavaScript
 `^FX No more Printer Commands!`
 
 ```js
@@ -45,7 +48,7 @@ const zpl = label.generateZPL();
 - [Known Issues](#known-issues)
 - [Roadmap](#roadmap)
 
-**WARNING**: This is not a complete implementation of  the ZPL standard. For all elements not implemented or elements with implementations that do not fit your needs, please make use of the [Raw](#Raw) component. If you believe there is a problem with a specific component, feel free to create an issue describing the problem.
+**WARNING**: This is not a complete implementation of  the ZPL II standard. For all elements not implemented or elements with implementations that do not fit your needs, please make use of the [Raw](#Raw) component. If you believe there is a problem with a specific component, feel free to create an issue describing the problem.
 
 ## Installation
 
@@ -681,6 +684,7 @@ Displays a barcode.
 | type | [BarcodeType](#barcodetype) | Sets the barcode type to use |
 | data | String | Text to encode into barcode |
 | maxLength | Number | Additional parameter to use for sizing of 2D barcodes. Populate with expected maximum data length. |
+| subset | String | Additional parameter to indicate barcode subset information. Populate with 'A', 'B', or 'C' for Code128 barcodes. |
 
 #### Graphic
 

@@ -13,6 +13,8 @@ module.exports = class Barcode extends BaseVisualComponent {
     this.maxLength = 32;
     this.type = new BarcodeType(BarcodeTypeName.CODE_11);
 
+    this.subset = '';
+
     this.notImplemented = ['typeName', 'invert']
   }
 
@@ -82,6 +84,19 @@ module.exports = class Barcode extends BaseVisualComponent {
 
       case BarcodeTypeName.Code128:
         zpl += '^BCN,' + position.height + ',Y,N,N,N';
+        switch (this.subset) {
+          case 'A':
+            dataPrepend += '>9';
+            break;
+
+          case 'B':
+            dataPrepend += '>:';
+            break;
+
+          case 'C':
+            dataPrepend += '>;';
+            break;
+        }
         break;
 
       case BarcodeTypeName.EAN13:
