@@ -10,6 +10,7 @@ module.exports = class Barcode extends BaseVisualComponent {
     this.typeName = 'Barcode';
 
     this.data = '';
+    this.dataPrepend = '';
     this.maxLength = 32;
     this.type = new BarcodeType(BarcodeTypeName.CODE_11);
 
@@ -41,8 +42,6 @@ module.exports = class Barcode extends BaseVisualComponent {
     }
 
     let rows = undefined;
-
-    let dataPrepend = '';
 
     switch (this.type.value) {
       case BarcodeTypeName.Code11:
@@ -84,18 +83,21 @@ module.exports = class Barcode extends BaseVisualComponent {
 
       case BarcodeTypeName.Code128:
         zpl += '^BCN,' + position.height + ',Y,N,N,N';
-        switch (this.subset) {
-          case 'A':
-            dataPrepend += '>9';
-            break;
+        
+        if(this.dataPrepend === '') {
+          switch (this.subset) {
+            case 'A':
+              this.dataPrepend += '>9';
+              break;
 
-          case 'B':
-            dataPrepend += '>:';
-            break;
+            case 'B':
+              this.dataPrepend += '>:';
+              break;
 
-          case 'C':
-            dataPrepend += '>;';
-            break;
+            case 'C':
+              this.dataPrepend += '>;';
+              break;
+          }
         }
         break;
 
@@ -130,7 +132,10 @@ module.exports = class Barcode extends BaseVisualComponent {
       case BarcodeTypeName.QRCode:
         var magnification = Math.min(Math.floor(position.height / 25), 10);
         zpl += '^BQ,2,' + magnification + ',Q,7';
-        dataPrepend = 'QA,';
+        
+        if(this.dataPrepend === '') {
+          this.dataPrepend = 'QA,';
+        }
         break;
 
       case BarcodeTypeName.DataMatrix:
@@ -142,7 +147,7 @@ module.exports = class Barcode extends BaseVisualComponent {
         break;
     }
 
-    zpl += '^FD' + dataPrepend + this.data;
+    zpl += '^FD' + this.dataPrepend + this.data;
     zpl += '^FS\n';
 
     return zpl;
