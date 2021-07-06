@@ -469,6 +469,8 @@ Text displays characters on the label.
 | top | [Size](#size) / Number | Sets the top offset of the element |
 | lineSpacing | Number | Sets the vertical space between lines |
 | text | String | Sets the text of the element |
+| characterWidth | Number | Overrides the default character width, uses font family default if omitted |
+| characterHeight | Number | Overrides the default character height, uses font family default if omitted |
 
 Usage example:
 
@@ -748,9 +750,10 @@ const zpl = label.generateZpl();
 | Grid Columnspan | Pending implementation |
 | Grid Rowspan | Pending implementation |
 | Rotation | Pending implementation |
-| Fonts | Fonts A-F are implemented, G-V not implemeneted |
+| Fonts | Fonts A-F are implemented, G-V not implemented |
 | Multi-line text alignment | Text alignment is not implemented to align text that spans multiple lines |
 | Grid border property | The graphical designer does not display the border property for grid components |
+| Text size override | The graphical designer does not support text size overriding |
 
 ## Roadmap
 

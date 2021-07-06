@@ -17,6 +17,9 @@ module.exports = class Text extends BaseVisualComponent {
     // this.rotation = Rotation.Normal;
     this.verticalAlignment = new Alignment(AlignmentValue.Start);
     this.horizontalAlignment = new Alignment(AlignmentValue.Start);
+
+    this.characterWidth = 0;
+    this.characterHeight = 0;
   }
 
   getTextLines() {
@@ -105,7 +108,7 @@ module.exports = class Text extends BaseVisualComponent {
 
     for (let line of lines) {
       zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top + textOffsetTop);
-      zpl += '^A' + this.fontFamily.value + ',,,' + '\n';
+      zpl += '^A' + this.fontFamily.value + ',' + (this.characterHeight || '') + ',' + (this.characterWidth || '') + ',' + '\n';
       zpl += '^FB' + Math.round(position.width) + ',1,0,' + horizontalAlignment + ',0\n';
       zpl += '^FD' + line + '^FS\n';
 
@@ -120,11 +123,11 @@ module.exports = class Text extends BaseVisualComponent {
   }
 
   generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var characters = this.characterMap();
+    const characters = this.characterMap();
 
-    var size = this.calculateSize();
+    const size = this.calculateSize();
 
     if (this.horizontalAlignment == AlignmentValue.End) {
       position.left = position.left + position.width - (size.width);
@@ -147,7 +150,9 @@ module.exports = class Text extends BaseVisualComponent {
         var top = position.top + textOffsetTop;
         var left = position.left + textOffsetLeft;
 
-        textOffsetLeft += character[0].length + this.fontFamily.definition.spacing.left + this.fontFamily.definition.spacing.right;
+        textOffsetLeft += character[0].length
+          + this.fontFamily.definition.spacing.left
+          + this.fontFamily.definition.spacing.right;
 
         for (var y = 0; y < character.length; y++) {
           for (var x = 0; x < character[0].length; x++) {

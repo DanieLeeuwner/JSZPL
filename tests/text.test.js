@@ -151,3 +151,23 @@ test('add text with alignment to a label', () => {
 ^FDBottom Right^FS
 ^XZ`);
 });
+
+test('add scaled text to a label', () => {
+  const label = testHelpers.createLabel();
+
+  const text = new Text();
+  label.content.push(text);
+  text.fontFamily = new FontFamily(FontFamilyName.D);
+
+  text.text = 'Hello World!';
+  text.characterHeight = 5;
+  text.characterWidth = 30;
+
+  const zpl = label.generateZPL();
+
+  expect(zpl).toBe(`^XA
+^FO10,10^AD,5,30,
+^FB780,1,0,L,0
+^FDHello World!^FS
+^XZ`);
+});
