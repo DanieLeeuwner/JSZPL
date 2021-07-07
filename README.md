@@ -50,6 +50,8 @@ const zpl = label.generateZPL();
 
 **WARNING**: This is not a complete implementation of  the ZPL II standard. For all elements not implemented or elements with implementations that do not fit your needs, please make use of the [Raw](#Raw) component. If you believe there is a problem with a specific component, feel free to create an issue describing the problem.
 
+[Link to ZPL II manual](https://www.zebra.com/content/dam/zebra/manuals/printers/common/programming/zpl-zbi2-pm-en.pdf)
+
 ## Installation
 
 In a browser:
@@ -687,6 +689,7 @@ Displays a barcode.
 | data | String | Text to encode into barcode |
 | maxLength | Number | Additional parameter to use for sizing of 2D barcodes. Populate with expected maximum data length. |
 | subset | String | Additional parameter to indicate barcode subset information. Populate with 'A', 'B', or 'C' for Code128 barcodes. |
+| interpretationLine | Boolean | Indicates whether the output barcode should include an interpretation line, defaults to 'true' |
 
 #### Graphic
 
