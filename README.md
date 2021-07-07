@@ -756,7 +756,7 @@ const zpl = label.generateZpl();
 | Fonts | Fonts A-F are implemented, G-V not implemented |
 | Multi-line text alignment | Text alignment is not implemented to align text that spans multiple lines |
 | Grid border property | The graphical designer does not display the border property for grid components |
-| Text size override | The graphical designer does not support text size overriding |
+| Text size override | The graphical designer does not support text size overriding. Text layout does not take size override into account when positioning the text. |
 
 ## Roadmap
 

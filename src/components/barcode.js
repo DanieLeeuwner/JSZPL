@@ -15,10 +15,9 @@ module.exports = class Barcode extends BaseVisualComponent {
     this.type = new BarcodeType(BarcodeTypeName.CODE_11);
 
     this.subset = '';
+    this.interpretationLine = true;
 
     this.notImplemented = ['typeName', 'invert'];
-
-    this.interpretationLine = true;
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
