@@ -1,6 +1,4 @@
-const alignmentValue = require('../src/enums/alignment-value.js');
-const { Grid, Text, Size, Spacing, FontFamily, FontFamilyName, SizeType } = require('../src/jszpl.js');
-const Alignment = require('../src/properties/alignment.js');
+const { Grid, Text, Size, Spacing, FontFamily, FontFamilyName, SizeType, Alignment, AlignmentValue  } = require('../src/jszpl.js');
 const testHelpers = require('./test-helpers.js');
 
 test('add grid to a label', () => {
@@ -82,32 +80,32 @@ test('align text in grid', () => {
   grid.content.push(text00);
   text00.text = '(0, 0)';
   text00.fontFamily = new FontFamily(FontFamilyName.D);
-  text00.verticalAlignment = new Alignment(alignmentValue.Start)
-  text00.horizontalAlignment = new Alignment(alignmentValue.Start)
+  text00.verticalAlignment = new Alignment(AlignmentValue.Start)
+  text00.horizontalAlignment = new Alignment(AlignmentValue.Start)
 
 
   const text10 = new Text();
   grid.content.push(text10);
   text10.text = '(1, 0)';
   text10.fontFamily = new FontFamily(FontFamilyName.D);
-  text10.verticalAlignment = new Alignment(alignmentValue.Start)
-  text10.horizontalAlignment = new Alignment(alignmentValue.End)
+  text10.verticalAlignment = new Alignment(AlignmentValue.Start)
+  text10.horizontalAlignment = new Alignment(AlignmentValue.End)
   text10.grid.column = 1;
 
   const text01 = new Text();
   grid.content.push(text01);
   text01.text = '(0, 1)';
   text01.fontFamily = new FontFamily(FontFamilyName.D);
-  text01.verticalAlignment = new Alignment(alignmentValue.End)
-  text01.horizontalAlignment = new Alignment(alignmentValue.Start)
+  text01.verticalAlignment = new Alignment(AlignmentValue.End)
+  text01.horizontalAlignment = new Alignment(AlignmentValue.Start)
   text01.grid.row = 1;
 
   const text11 = new Text();
   grid.content.push(text11);
   text11.text = '(1, 1)';
   text11.fontFamily = new FontFamily(FontFamilyName.D);
-  text11.verticalAlignment = new Alignment(alignmentValue.End)
-  text11.horizontalAlignment = new Alignment(alignmentValue.End)
+  text11.verticalAlignment = new Alignment(AlignmentValue.End)
+  text11.horizontalAlignment = new Alignment(AlignmentValue.End)
 
   text11.grid.column = 1;
   text11.grid.row = 1;
