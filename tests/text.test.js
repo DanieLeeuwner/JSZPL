@@ -131,22 +131,22 @@ test('add text with alignment to a label', () => {
 ^FO10,10^AD,,,
 ^FB780,1,0,R,0
 ^FDTop Right^FS
-^FO10,85^AD,,,
+^FO10,190^AD,,,
 ^FB780,1,0,L,0
 ^FDCenter Left^FS
-^FO10,64^AD,,,
+^FO10,190^AD,,,
 ^FB780,1,0,C,0
 ^FDCenter Center^FS
-^FO10,74^AD,,,
+^FO10,190^AD,,,
 ^FB780,1,0,R,0
 ^FDCenter Right^FS
-^FO10,159^AD,,,
+^FO10,369^AD,,,
 ^FB780,1,0,L,0
 ^FDBottom Left^FS
-^FO10,117^AD,,,
+^FO10,369^AD,,,
 ^FB780,1,0,C,0
 ^FDBottom Center^FS
-^FO10,138^AD,,,
+^FO10,369^AD,,,
 ^FB780,1,0,R,0
 ^FDBottom Right^FS
 ^XZ`);
