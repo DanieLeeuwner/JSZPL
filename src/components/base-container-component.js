@@ -11,19 +11,19 @@ module.exports = class BaseContainerComponent extends BaseVisualComponent {
   }
 
   calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits) {
-    var units = this.calculateUnits();
+    const units = this.calculateUnits();
 
-    var spacingLeft = this.margin.left + this.padding.left;
-    var spacingTop = this.margin.top + this.padding.top;
+    const spacingLeft = this.margin.left + this.padding.left;
+    const spacingTop = this.margin.top + this.padding.top;
 
-    var spacingHorizontal = spacingLeft + this.margin.right + this.padding.right;
-    var spacingVertical = spacingTop + this.margin.bottom + this.padding.right;
+    const spacingHorizontal = spacingLeft + this.margin.right + this.padding.right;
+    const spacingVertical = spacingTop + this.margin.bottom + this.padding.right;
 
-    var width = availableWidth - spacingHorizontal - (this.border || 0) * 2;
-    var height = availableHeight - spacingVertical - (this.border || 0) * 2;
+    const width = availableWidth - spacingHorizontal - (this.border || 0) * 2;
+    const height = availableHeight - spacingVertical - (this.border || 0) * 2;
 
-    var widthUnits = (width - units.absolute.width) / (units.relative.width || 1);
-    var heightUnits = (height - units.absolute.height) / (units.relative.height || 1);
+    widthUnits = (width - units.absolute.width) / (units.relative.width || 1);
+    heightUnits = (height - units.absolute.height) / (units.relative.height || 1);
 
     return {
       spacingTop: spacingTop,
@@ -36,15 +36,15 @@ module.exports = class BaseContainerComponent extends BaseVisualComponent {
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
+    const sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var zpl = '';
+    let zpl = '';
 
-    for (var c_id in this.content) {
-      var element = this.content[c_id];
+    for (let c_id in this.content) {
+      const element = this.content[c_id];
 
-      var left = offsetLeft + sizing.spacingLeft + (this.border || 0);
-      var top = offsetTop + sizing.spacingTop + (this.border || 0);
+      const left = offsetLeft + sizing.spacingLeft + (this.border || 0);
+      const top = offsetTop + sizing.spacingTop + (this.border || 0);
 
       if (element.fixed) {
         left = this.getSize(element.left);
@@ -58,13 +58,13 @@ module.exports = class BaseContainerComponent extends BaseVisualComponent {
   }
 
   generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
+    const sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
 
-    for (var c_id in this.content) {
-      var element = this.content[c_id];
+    for (let c_id in this.content) {
+      const element = this.content[c_id];
 
-      var left = offsetLeft + sizing.spacingLeft + (this.border || 0);
-      var top = offsetTop + sizing.spacingTop + (this.border || 0);
+      const left = offsetLeft + sizing.spacingLeft + (this.border || 0);
+      const top = offsetTop + sizing.spacingTop + (this.border || 0);
 
       if (element.fixed) {
         left = this.getSize(element.left);

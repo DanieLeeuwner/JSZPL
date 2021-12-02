@@ -100,15 +100,15 @@ test('add image to a label', () => {
   let index = 0;
   const imageBits = [];
 
-  for (var y = 0; y < imageData.height; y++) {
-    for (var x = 0; x < imageData.width; x++) {
+  for (let y = 0; y < imageData.height; y++) {
+    for (let x = 0; x < imageData.width; x++) {
 
-      var red = imageData.data[index++];
-      var green = imageData.data[index++];
-      var blue = imageData.data[index++];
-      var opacity = imageData.data[index++];
+      const red = imageData.data[index++];
+      const green = imageData.data[index++];
+      const blue = imageData.data[index++];
+      const opacity = imageData.data[index++];
 
-      var value = 0;
+      let value = 0;
 
       if (opacity != 0) {
         value = (((red + green + blue) / 3) < 180) ? 1 : 0;

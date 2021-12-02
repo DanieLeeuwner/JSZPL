@@ -3,17 +3,17 @@ module.exports = class ImageResizer {
   }
 
   resize(targetWidth, targetHeight, width, height, data) {
-    var result = [];
+    const result = [];
 
-    var dx = width / targetWidth;
-    var dy = height / targetHeight;
+    const dx = width / targetWidth;
+    const dy = height / targetHeight;
 
-    for (var y = 0; y < targetHeight; y++) {
-      for (var x = 0; x < targetWidth; x++) {
-        var iy = Math.floor(dy * y);
-        var ix = Math.floor(dx * x);
+    for (let y = 0; y < targetHeight; y++) {
+      for (let x = 0; x < targetWidth; x++) {
+        const iy = Math.floor(dy * y);
+        const ix = Math.floor(dx * x);
 
-        var value = data[(iy * width) + ix];
+        const value = data[(iy * width) + ix];
 
         result.push(value ? 1 : 0);
       }

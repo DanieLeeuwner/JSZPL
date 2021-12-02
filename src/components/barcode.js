@@ -22,9 +22,9 @@ module.exports = class Barcode extends BaseVisualComponent {
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
 
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var zpl = '';
+    let zpl = '';
 
     switch (this.type.value) {
       case BarcodeTypeName.Code49:
@@ -62,10 +62,10 @@ module.exports = class Barcode extends BaseVisualComponent {
         break;
 
       case BarcodeTypeName.PDF417:
-        var rowHeight = 10;
+        const rowHeight = 10;
         rows = Math.ceil(position.height / rowHeight);
-        var bytes = this.maxLength * rows;
-        var columns = Math.ceil(bytes / rows);
+        const bytes = this.maxLength * rows;
+        const columns = Math.ceil(bytes / rows);
 
         zpl += '^B7N,' + rowHeight + ',0,' + columns + ',' + rows + ',N';
         break;
@@ -131,7 +131,7 @@ module.exports = class Barcode extends BaseVisualComponent {
         break;
 
       case BarcodeTypeName.QRCode:
-        var magnification = Math.min(Math.floor(position.height / 25), 10);
+        const magnification = Math.min(Math.floor(position.height / 25), 10);
         zpl += '^BQ,2,' + magnification + ',Q,7';
 
         if(this.dataPrepend === '') {
@@ -155,14 +155,14 @@ module.exports = class Barcode extends BaseVisualComponent {
   }
 
   generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var barcodeData = LabelTools.BarcodeRenderer.render(position.width, position.height, this.type, this.data);
+    const barcodeData = LabelTools.BarcodeRenderer.render(position.width, position.height, this.type, this.data);
 
-    for (var y = 0; y < position.height; y++) {
-      for (var x = 0; x < position.width; x++) {
-        var yIndex = y + position.top;
-        var xIndex = x + position.left;
+    for (let y = 0; y < position.height; y++) {
+      for (let x = 0; x < position.width; x++) {
+        const yIndex = y + position.top;
+        const xIndex = x + position.left;
 
         binaryBase[yIndex][xIndex] = barcodeData[y][x];
       }

@@ -14,12 +14,12 @@ module.exports = class Label extends BaseContainerComponent {
   }
 
   generateZPL() {
-    var zpl = '^XA';
+    let zpl = '^XA';
 
     zpl += '\n';
 
-    var width = this.getSize(this.width) * this.printDensity.value;
-    var height = this.getSize(this.height) * this.printDensity.value;
+    const width = this.getSize(this.width) * this.printDensity.value;
+    const height = this.getSize(this.height) * this.printDensity.value;
 
     zpl += super.generateZPL(0, 0, width, height);
 
@@ -29,12 +29,12 @@ module.exports = class Label extends BaseContainerComponent {
   }
 
   generateBinaryImage(binaryBase) {
-    var width = this.getSize(this.width) * this.printDensity.value;
-    var height = this.getSize(this.height) * this.printDensity.value;
+    const width = this.getSize(this.width) * this.printDensity.value;
+    const height = this.getSize(this.height) * this.printDensity.value;
 
-    for (var y = 0; y < height; y++) {
+    for (let y = 0; y < height; y++) {
       binaryBase.push([]);
-      for (var x = 0; x < width; x++) {
+      for (let x = 0; x < width; x++) {
         binaryBase[y].push(false);
       }
     }

@@ -24,11 +24,11 @@ module.exports = class BaseVisualComponent extends BaseComponent {
 
   getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
     // gets start position and size of content
-    var left = this.getSize(this.left, widthUnits) + this.margin.left;
-    var top = this.getSize(this.top, heightUnits) + this.margin.top;
+    let left = this.getSize(this.left, widthUnits) + this.margin.left;
+    let top = this.getSize(this.top, heightUnits) + this.margin.top;
 
-    var width = this.getSize(this.width, widthUnits) || (availableWidth - this.margin.horizontal);
-    var height = this.getSize(this.height, heightUnits) || (availableHeight - this.margin.vertical);
+    const width = this.getSize(this.width, widthUnits) || (availableWidth - this.margin.horizontal);
+    const height = this.getSize(this.height, heightUnits) || (availableHeight - this.margin.vertical);
 
     if (typeof(this.top) == 'object' && this.top.sizeType == SizeType.Fraction) {
       top = (availableHeight * this.top.value);
@@ -54,7 +54,7 @@ module.exports = class BaseVisualComponent extends BaseComponent {
   }
 
   calculateUnits() {
-    var units = {
+    const units = {
       absolute: {
         width: 0,
         height: 0
@@ -65,7 +65,7 @@ module.exports = class BaseVisualComponent extends BaseComponent {
       }
     }
 
-    var elements = this.content || [];
+    const elements = this.content || [];
 
     for (let element of elements) {
       if (!element.margin || !element.border || !element.width || !element.height) continue;

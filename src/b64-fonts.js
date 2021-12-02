@@ -1,8 +1,8 @@
 const base64 = require('./base64.js');
 
 function initialize() {
-  for (var f_id in self) {
-    var character = self[f_id];
+  for (let f_id in self) {
+    const character = self[f_id];
     if (character.spacing == undefined)
     {
       continue;

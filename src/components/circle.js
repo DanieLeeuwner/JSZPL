@@ -41,25 +41,25 @@ module.exports = class Circle extends BaseGraphicComponent {
   }
 
   generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var yCenter = position.height / 2;
-    var xCenter = position.width / 2;
+    const yCenter = position.height / 2;
+    const xCenter = position.width / 2;
 
-    var widthHalf = position.width / 2;
-    var heightHalf = position.height / 2;
+    const widthHalf = position.width / 2;
+    const heightHalf = position.height / 2;
 
-    var widthHalfBorder = widthHalf - this.border;
-    var heightHalfBorder = heightHalf - this.border;
+    const widthHalfBorder = widthHalf - this.border;
+    const heightHalfBorder = heightHalf - this.border;
 
     if (this.fill || this.border > 0) {
-      for (var y = 0; y < position.height; y++) {
-        for (var x = 0; x < position.width; x++) {
+      for (let y = 0; y < position.height; y++) {
+        for (let x = 0; x < position.width; x++) {
 
-          var yIndex = Math.round(y + position.top);
-          var xIndex = Math.round(x + position.left);
+          const yIndex = Math.round(y + position.top);
+          const xIndex = Math.round(x + position.left);
 
-          var value = false;
+          let value = false;
 
           value = (Math.pow(x - xCenter, 2) / Math.pow(widthHalf, 2)) + (Math.pow(y - yCenter, 2) / Math.pow(heightHalf, 2)) <= 1;
           if (this.fill == false) {

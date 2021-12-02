@@ -73,9 +73,9 @@ module.exports = class Text extends BaseVisualComponent {
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var size = this.calculateSize();
+    const size = this.calculateSize();
 
     if (this.verticalAlignment.value == AlignmentValue.End) {
       position.top = position.top + position.height - size.height;
@@ -83,13 +83,13 @@ module.exports = class Text extends BaseVisualComponent {
       position.top = position.top + (position.height / 2) - (size.height / 2);
     }
 
-    var zpl = '';
+    let zpl = '';
 
     if (this.invert) {
       zpl += '^LRY\n';
     }
 
-    var horizontalAlignment;
+    let horizontalAlignment;
     switch (this.horizontalAlignment.value) {
       case AlignmentValue.Start:
         horizontalAlignment = 'L'
@@ -147,19 +147,19 @@ module.exports = class Text extends BaseVisualComponent {
       let textOffsetLeft = 0;
 
       for (let character of line) {
-        var top = position.top + textOffsetTop;
-        var left = position.left + textOffsetLeft;
+        const top = position.top + textOffsetTop;
+        const left = position.left + textOffsetLeft;
 
         textOffsetLeft += character[0].length
           + this.fontFamily.definition.spacing.left
           + this.fontFamily.definition.spacing.right;
 
-        for (var y = 0; y < character.length; y++) {
-          for (var x = 0; x < character[0].length; x++) {
-            var value = character[y][x] == 1;
+        for (let y = 0; y < character.length; y++) {
+          for (let x = 0; x < character[0].length; x++) {
+            const value = character[y][x] == 1;
 
-            var yIndex = Math.round(y + top);
-            var xIndex = Math.round(x + left);
+            const yIndex = Math.round(y + top);
+            const xIndex = Math.round(x + left);
 
             if ((yIndex > 0 && yIndex < binaryBase.length && xIndex > 0 && xIndex < binaryBase[yIndex].length) == false) continue;
 

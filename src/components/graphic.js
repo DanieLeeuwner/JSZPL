@@ -16,7 +16,7 @@ module.exports = class Graphic extends BaseVisualComponent {
   }
 
   generateContainer() {
-    var container = new Box();
+    const container = new Box();
     container.border = this.border;
     container.margin = this.margin;
     container.top = this.top;
@@ -25,17 +25,17 @@ module.exports = class Graphic extends BaseVisualComponent {
   }
 
   extractImageData(cb) {
-    var processor = LabelTools.ImageProcessor || new ImageProcessor();
-    var imageData = processor.processImage(this.data);
+    const processor = LabelTools.ImageProcessor || new ImageProcessor();
+    const imageData = processor.processImage(this.data);
     cb(imageData);
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var container = this.generateContainer();
-    var zpl = container.generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const container = this.generateContainer();
+    let zpl = container.generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
-    var imageData = LabelTools.ImageResizer.resize(position.width, position.height, this.data.width, this.data.height, this.data.data);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const imageData = LabelTools.ImageResizer.resize(position.width, position.height, this.data.width, this.data.height, this.data.data);
 
     zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
 
@@ -44,9 +44,9 @@ module.exports = class Graphic extends BaseVisualComponent {
       zpl += "^FR";
     }
 
-    var widthBytes = Math.ceil(position.width / 8);
-    var byteCount = widthBytes * position.height;
-    var hexData = ZPLImageTools.generateHexAscii(position.width, position.height, imageData);
+    const widthBytes = Math.ceil(position.width / 8);
+    const byteCount = widthBytes * position.height;
+    let hexData = ZPLImageTools.generateHexAscii(position.width, position.height, imageData);
     hexData = ZPLImageTools.encodeHexAscii(hexData);
 
     zpl += '^GFA,' + byteCount + ',' + byteCount + ',' + widthBytes + ',' + hexData + '^FS\n';
@@ -55,22 +55,21 @@ module.exports = class Graphic extends BaseVisualComponent {
   }
 
   generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var container = this.generateContainer();
+    const container = this.generateContainer();
     container.generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
-    var imageData = LabelTools.ImageResizer.resize(position.width, position.height, this.data.width, this.data.height, this.data.data);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const imageData = LabelTools.ImageResizer.resize(position.width, position.height, this.data.width, this.data.height, this.data.data);
 
+    for (let y = 0; y < position.height; y++) {
+      for (let x = 0; x < position.width; x++) {
 
-    for (var y = 0; y < position.height; y++) {
-      for (var x = 0; x < position.width; x++) {
+        const yIndex = y + position.top;
+        const xIndex = x + position.left;
 
-        var yIndex = y + position.top;
-        var xIndex = x + position.left;
+        const index = y * position.width + x;
 
-        var index = y * position.width + x;
-
-        var value = imageData[index];
+        let value = imageData[index];
 
         if (value) {
           if (this.invert) {

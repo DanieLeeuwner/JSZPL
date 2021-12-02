@@ -11,12 +11,12 @@ module.exports = class BarcodeRenderer {
   }
 
   render(width, height, type, data) {
-    var box = new Box();
+    const box = new Box();
     box.width = width;
     box.height = height;
     box.border = 2;
 
-    var text = new Text();
+    const text = new Text();
     box.content.push(text);
     text.fontFamily = new FontFamily(FontFamilyName.B);
     text.text = 'BARCODE';
@@ -24,10 +24,10 @@ module.exports = class BarcodeRenderer {
     text.verticalAlignment = new Alignment(AlignmentValue.Center);
     text.horizontalAlignment = new Alignment(AlignmentValue.Center);
 
-    var data = [];
-    for (var y = 0; y < height; y++) {
+    data = [];
+    for (let y = 0; y < height; y++) {
       data.push([]);
-      for (var x = 0; x < width; x++) {
+      for (let x = 0; x < width; x++) {
         data[y].push(0);
       }
     }

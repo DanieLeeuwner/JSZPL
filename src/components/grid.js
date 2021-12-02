@@ -18,19 +18,19 @@ module.exports = class Grid extends BaseContainerComponent {
   }
 
   calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits) {
-    var units = this.calculateUnits();
+    const units = this.calculateUnits();
 
-    var spacingLeft = this.margin.left;
-    var spacingTop = this.margin.top;
+    const spacingLeft = this.margin.left;
+    const spacingTop = this.margin.top;
 
-    var spacingHorizontal = spacingLeft + this.margin.right;
-    var spacingVertical = spacingTop + this.margin.bottom;
+    const spacingHorizontal = spacingLeft + this.margin.right;
+    const spacingVertical = spacingTop + this.margin.bottom;
 
-    var width = availableWidth - spacingHorizontal;
-    var height = availableHeight - spacingVertical;
+    const width = availableWidth - spacingHorizontal;
+    const height = availableHeight - spacingVertical;
 
-    var widthUnits = (width - units.absolute.width) / (units.relative.width || 1);
-    var heightUnits = (height - units.absolute.height) / (units.relative.height || 1);
+    widthUnits = (width - units.absolute.width) / (units.relative.width || 1);
+    heightUnits = (height - units.absolute.height) / (units.relative.height || 1);
 
     return {
       spacingTop: spacingTop,
@@ -43,11 +43,12 @@ module.exports = class Grid extends BaseContainerComponent {
   }
 
   generateChildren(availableWidth, availableHeight) {
-
     const columnDefinitions = this.columns;
+
     if (columnDefinitions.length == 0) {
       columnDefinitions.push(new Size(1, SizeType.Relative));
     }
+
     const rowDefinitions = this.rows;
     if (rowDefinitions.length == 0) {
       rowDefinitions.push(new Size(1, SizeType.Relative));
@@ -169,17 +170,17 @@ module.exports = class Grid extends BaseContainerComponent {
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
-    var contentBox = this.generateChildren(position.width, position.height);
-    var sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const contentBox = this.generateChildren(position.width, position.height);
+    const sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
 
     return contentBox.generateZPL(position.left, position.top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits);
   }
 
   generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
-    var contentBox = this.generateChildren(position.width, position.height);
-    var sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const contentBox = this.generateChildren(position.width, position.height);
+    const sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
 
     contentBox.generateBinaryImage(binaryBase, position.left, position.top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits);
   }

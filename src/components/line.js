@@ -16,13 +16,13 @@ module.exports = class Line extends BaseVisualComponent {
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
 
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
     if (this.thickness <= 0) {
       return '';
     }
 
-    var zpl = '^FO' + Math.round(position.left + Math.min(this.x1, this.x2)) + ',' + Math.round(position.top + Math.min(this.y1, this.y2));
+    let zpl = '^FO' + Math.round(position.left + Math.min(this.x1, this.x2)) + ',' + Math.round(position.top + Math.min(this.y1, this.y2));
 
     if (this.invert) {
       zpl += '^FR';
@@ -46,7 +46,7 @@ module.exports = class Line extends BaseVisualComponent {
 
 
   generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {
-    var position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
     if (this.thickness > 0) {
       const yDiff = this.y1 < this.y2 ? 1 : -1;
@@ -57,8 +57,8 @@ module.exports = class Line extends BaseVisualComponent {
       for (let y = this.y1; y != this.y2; y += yDiff) {
         for (let x = this.x1; x != this.x2; x += xDiff) {
 
-          var xIndex = x + position.left;
-          var yIndex = y + position.top;
+          const xIndex = x + position.left;
+          const yIndex = y + position.top;
 
           if (yIndex < 0 || xIndex < 0 || yIndex >= binaryBase.length || xIndex >= binaryBase[yIndex].length) {
             continue;
