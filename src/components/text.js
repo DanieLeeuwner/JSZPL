@@ -51,7 +51,7 @@ module.exports = class Text extends BaseVisualComponent {
 
   calculateSize() {
     const characters = this.characterMap();
-    const height = (characters[0][0].length + this.fontFamily.definition.spacing.top + this.fontFamily.definition.spacing.bottom) * characters[0].length;
+    const height = this.fontFamily.definition.spacing.top + this.fontFamily.definition.size.height + this.fontFamily.definition.spacing.bottom;
     let width = 0;
 
     for (let line of characters) {
