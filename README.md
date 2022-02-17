@@ -44,6 +44,7 @@ const zpl = label.generateZPL();
   - [Circle](#circle)
   - [Barcode](#barcode)
   - [Graphic](#graphic)
+  - [SerialNumber](#serialnumber)
   - [Raw](#Raw)
 - [Known Issues](#known-issues)
 - [Roadmap](#roadmap)
@@ -713,6 +714,40 @@ Displays an image on the label.
 Example of image:
 
 ![Graphic Image](./Images/example_image.png)
+
+#### Serial Number
+
+Serial Number displays incremental numbers on the label.
+
+##### Properties
+
+| Property | Type | Description |
+| :-- | :-- | :-- |
+| fontFamily | [FontFamily](#fontfamily) | Font family matrix to use |
+| horizontalAlignment | [Alignment](#alignment) | Horizontal alignment, default AlignmentValue.Start |
+| grid | [GridPosition](#gridposition) | Configure element placement within grid |
+| prependText | String | Sets the text that displays before the number |
+| startValue | String | Include any leading zeroes, default "1" |
+| increment | Number | The number to increment for each label, use negative to decrease, default 1 |
+| leadingZeroes | Boolean | If leading zeroes should be used, default false |
+| characterWidth | Number | Overrides the default character width, uses font family default if omitted |
+| characterHeight | Number | Overrides the default character height, uses font family default if omitted |
+
+Usage example:
+
+```js
+const serialNum = new SerialNumber();
+label.content.push(serialNum);
+serialNum.fontFamily = new FontFamily(FontFamilyName.D);
+serialNum.prependText = 'Label ';
+
+const zpl = label.generateZPL();
+// ^XA
+// ^FO10,10^AD,,,
+// ^FB780,1,0,L,0
+// ^SNLabel 1,1,N^FS
+// ^XZ
+```
 
 #### Raw
 

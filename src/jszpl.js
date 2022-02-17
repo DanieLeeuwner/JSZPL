@@ -12,6 +12,7 @@ const elements = {
   Grid: require('./components/grid.js'),
   Barcode: require('./components/barcode.js'),
   Raw: require('./components/raw.js'),
+  SerialNumber: require('./components/serial-number.js'),
 }
 
 module.exports = {
@@ -47,6 +48,7 @@ module.exports = {
   Graphic: elements.Graphic,
   Barcode: elements.Barcode,
   Raw: elements.Raw,
+  SerialNumber: elements.SerialNumber,
 
   elements: elements,
 }
