@@ -127,7 +127,7 @@ test('add text with alignment to a label', () => {
 ^FDTop Left^FS
 ^FO10,10^AD,,,
 ^FB780,1,0,C,0
-^FDTop Center^FS
+^FDTop Center\\&^FS
 ^FO10,10^AD,,,
 ^FB780,1,0,R,0
 ^FDTop Right^FS
@@ -136,7 +136,7 @@ test('add text with alignment to a label', () => {
 ^FDCenter Left^FS
 ^FO10,190^AD,,,
 ^FB780,1,0,C,0
-^FDCenter Center^FS
+^FDCenter Center\\&^FS
 ^FO10,190^AD,,,
 ^FB780,1,0,R,0
 ^FDCenter Right^FS
@@ -145,7 +145,7 @@ test('add text with alignment to a label', () => {
 ^FDBottom Left^FS
 ^FO10,369^AD,,,
 ^FB780,1,0,C,0
-^FDBottom Center^FS
+^FDBottom Center\\&^FS
 ^FO10,369^AD,,,
 ^FB780,1,0,R,0
 ^FDBottom Right^FS

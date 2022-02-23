@@ -93,14 +93,14 @@ module.exports = class Text extends BaseVisualComponent {
     let lineSeparator = '';
     switch (this.horizontalAlignment.value) {
       case AlignmentValue.Start:
-        horizontalAlignment = 'L'
+        horizontalAlignment = 'L';
         break;
       case AlignmentValue.Center:
-        horizontalAlignment = 'C'
-        lineSeparator = '\\&'
+        horizontalAlignment = 'C';
+        lineSeparator = '\\&';
         break;
       case AlignmentValue.End:
-        horizontalAlignment = 'R'
+        horizontalAlignment = 'R';
         break;
     }
 
