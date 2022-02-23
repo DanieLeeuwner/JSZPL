@@ -1,4 +1,4 @@
-const { Text, FontFamilyName, FontFamily, Alignment, AlignmentValue } = require('../src/jszpl.js');
+const { Text, SerialNumber, FontFamilyName, FontFamily, Alignment, AlignmentValue } = require('../src/jszpl.js');
 const testHelpers = require('./test-helpers.js');
 
 test('add text to a label', () => {
@@ -169,5 +169,46 @@ test('add scaled text to a label', () => {
 ^FO10,10^AD,5,30,
 ^FB780,1,0,L,0
 ^FDHello World!^FS
+^XZ`);
+});
+
+test('add serial number field with leading zeros to a label', () => {
+  const label = testHelpers.createLabel();
+
+  const serialNumber = new SerialNumber();
+  label.content.push(serialNumber);
+
+  serialNumber.fontFamily = new FontFamily(FontFamilyName.D);  
+  serialNumber.format = 'A0001';
+  serialNumber.increment = 2;
+  serialNumber.printLeadingZeroes = true;
+
+  const zpl = label.generateZPL();
+
+  expect(zpl).toBe(`^XA
+^FO10,10^AD,,,
+^FB780,1,0,L,0
+^SNA0001,2,Y^FS
+^XZ`);
+});
+
+
+test('add serial number field without leading zeros to a label', () => {
+  const label = testHelpers.createLabel();
+
+  const serialNumber = new SerialNumber();
+  label.content.push(serialNumber);
+
+  serialNumber.fontFamily = new FontFamily(FontFamilyName.D);  
+  serialNumber.format = '0001';
+  serialNumber.increment = 1;
+  serialNumber.printLeadingZeroes = false;
+
+  const zpl = label.generateZPL();
+
+  expect(zpl).toBe(`^XA
+^FO10,10^AD,,,
+^FB780,1,0,L,0
+^SN0001,1,N^FS
 ^XZ`);
 });

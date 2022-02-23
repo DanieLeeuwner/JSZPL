@@ -14,10 +14,9 @@ module.exports = class Text extends BaseVisualComponent {
     this.characterHeight = 0;
     this.horizontalAlignment = new Alignment(AlignmentValue.Start);
 
-    this.prependText = '';
-    this.startValue = '1';
+    this.format = '0001';
     this.increment = 1;
-    this.leadingZeroes = false;
+    this.printLeadingZeroes = true;
   }
 
   getTextLines() {
@@ -48,8 +47,8 @@ module.exports = class Text extends BaseVisualComponent {
     zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
     zpl += '^A' + this.fontFamily.value + ',' + (this.characterHeight || '') + ',' + (this.characterWidth || '') + ',' + '\n';
     zpl += '^FB' + Math.round(position.width) + ',1,0,' + horizontalAlignment + ',0\n';
-
-    zpl += '^SN' + this.prependText + this.startValue + lineSeparator + ',' + this.increment + ',' + (( this.leadingZeroes )? 'Y': 'N' ) + '^FS\n';
+    zpl += '^SN' + this.format + lineSeparator + ',' + this.increment + ',' + (this.printLeadingZeroes ? 'Y': 'N') + '^FS\n';
+    
     return zpl;
   }
 }
