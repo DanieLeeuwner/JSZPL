@@ -90,15 +90,17 @@ module.exports = class Text extends BaseVisualComponent {
     }
 
     let horizontalAlignment;
+    let lineSeparator = '';
     switch (this.horizontalAlignment.value) {
       case AlignmentValue.Start:
-        horizontalAlignment = 'L'
+        horizontalAlignment = 'L';
         break;
       case AlignmentValue.Center:
-        horizontalAlignment = 'C'
+        horizontalAlignment = 'C';
+        lineSeparator = '\\&';
         break;
       case AlignmentValue.End:
-        horizontalAlignment = 'R'
+        horizontalAlignment = 'R';
         break;
     }
 
@@ -110,7 +112,7 @@ module.exports = class Text extends BaseVisualComponent {
       zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top + textOffsetTop);
       zpl += '^A' + this.fontFamily.value + ',' + (this.characterHeight || '') + ',' + (this.characterWidth || '') + ',' + '\n';
       zpl += '^FB' + Math.round(position.width) + ',1,0,' + horizontalAlignment + ',0\n';
-      zpl += '^FD' + line + '^FS\n';
+      zpl += '^FD' + line + lineSeparator + '^FS\n';
 
       textOffsetTop += this.fontFamily.definition.size.height + this.lineSpacing;
     }
