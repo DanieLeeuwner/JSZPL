@@ -13,7 +13,7 @@ test('add text to a label', () => {
 
   expect(zpl).toBe(`^XA
 ^FO10,10^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDHello World!^FS
 ^XZ`);
 });
@@ -30,25 +30,25 @@ test('add multiline text to a label', () => {
 
   expect(zpl).toBe(`^XA
 ^FO10,10^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDHello^FS
 ^FO10,31^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FD World!^FS
 ^FO10,52^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDThis^FS
 ^FO10,73^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDIs^FS
 ^FO10,94^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDA^FS
 ^FO10,115^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDNew^FS
 ^FO10,136^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDLine^FS
 ^XZ`);
 });
@@ -123,31 +123,31 @@ test('add text with alignment to a label', () => {
 
   expect(zpl).toBe(`^XA
 ^FO10,10^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDTop Left^FS
 ^FO10,10^AD,,,
-^FB780,1,0,C,0
+^FB780,1000,0,C,0
 ^FDTop Center^FS
 ^FO10,10^AD,,,
-^FB780,1,0,R,0
+^FB780,1000,0,R,0
 ^FDTop Right^FS
 ^FO10,190^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDCenter Left^FS
 ^FO10,190^AD,,,
-^FB780,1,0,C,0
+^FB780,1000,0,C,0
 ^FDCenter Center^FS
 ^FO10,190^AD,,,
-^FB780,1,0,R,0
+^FB780,1000,0,R,0
 ^FDCenter Right^FS
 ^FO10,369^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDBottom Left^FS
 ^FO10,369^AD,,,
-^FB780,1,0,C,0
+^FB780,1000,0,C,0
 ^FDBottom Center^FS
 ^FO10,369^AD,,,
-^FB780,1,0,R,0
+^FB780,1000,0,R,0
 ^FDBottom Right^FS
 ^XZ`);
 });
@@ -167,7 +167,7 @@ test('add scaled text to a label', () => {
 
   expect(zpl).toBe(`^XA
 ^FO10,10^AD,5,30,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^FDHello World!^FS
 ^XZ`);
 });
