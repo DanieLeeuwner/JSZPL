@@ -18,7 +18,7 @@ module.exports = class Spacing {
   }
 
   get horizontalDifference() {
-    return Math.abs(this.left - this.top);
+    return Math.abs(this.left - this.right);
   }
 
   get verticalDifference() {

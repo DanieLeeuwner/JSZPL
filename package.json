@@ -1,6 +1,6 @@
 {
   "name": "jszpl",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "ZPL II generation from JavaScript",
   "main": "./src/jszpl.js",
   "scripts": {
