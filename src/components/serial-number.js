@@ -46,7 +46,7 @@ module.exports = class Text extends BaseVisualComponent {
     
     zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top);
     zpl += '^A' + this.fontFamily.value + ',' + (this.characterHeight || '') + ',' + (this.characterWidth || '') + ',' + '\n';
-    zpl += '^FB' + Math.round(position.width) + ',1,0,' + horizontalAlignment + ',0\n';
+    zpl += '^FB' + Math.round(position.width) + ',1000,0,' + horizontalAlignment + ',0\n';
     zpl += '^SN' + this.format + lineSeparator + ',' + this.increment + ',' + (this.printLeadingZeroes ? 'Y': 'N') + '^FS\n';
     
     return zpl;

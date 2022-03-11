@@ -112,7 +112,7 @@ module.exports = class Text extends BaseVisualComponent {
       zpl += '^FO' + Math.round(position.left) + ',' + Math.round(position.top + textOffsetTop);
       zpl += '^A' + this.fontFamily.value + ',' + (this.characterHeight || '') + ',' + (this.characterWidth || '') + ',' + '\n';
       zpl += '^FB' + Math.round(position.width) + ',1000,0,' + horizontalAlignment + ',0\n';
-      zpl += '^FD' + line + '^FS\n';
+      zpl += '^FD' + line + lineSeparator + '^FS\n';
 
       textOffsetTop += this.fontFamily.definition.size.height + this.lineSpacing;
     }

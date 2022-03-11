@@ -127,7 +127,7 @@ test('add text with alignment to a label', () => {
 ^FDTop Left^FS
 ^FO10,10^AD,,,
 ^FB780,1000,0,C,0
-^FDTop Cente\\&r^FS
+^FDTop Center\\&^FS
 ^FO10,10^AD,,,
 ^FB780,1000,0,R,0
 ^FDTop Right^FS
@@ -187,7 +187,7 @@ test('add serial number field with leading zeros to a label', () => {
 
   expect(zpl).toBe(`^XA
 ^FO10,10^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^SNA0001,2,Y^FS
 ^XZ`);
 });
@@ -208,7 +208,7 @@ test('add serial number field without leading zeros to a label', () => {
 
   expect(zpl).toBe(`^XA
 ^FO10,10^AD,,,
-^FB780,1,0,L,0
+^FB780,1000,0,L,0
 ^SN0001,1,N^FS
 ^XZ`);
 });
