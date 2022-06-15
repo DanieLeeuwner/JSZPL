@@ -1,18 +1,11 @@
-const BaseVisualComponent = require('./base-visual-component.js');
-const FontFamily = require('../properties/font-family.js');
-const Alignment = require('../properties/alignment.js');
-const FontFamilyName = require('../enums/font-family-name.js');
+const Text = require('./text.js');
 const AlignmentValue = require('../enums/alignment-value.js');
 
-module.exports = class Text extends BaseVisualComponent {
+module.exports = class SerialNumber extends Text {
   constructor() {
     super();
 
     this.typeName = 'SerialNumber';
-    this.fontFamily = new FontFamily(FontFamilyName.A);
-    this.characterWidth = 0;
-    this.characterHeight = 0;
-    this.horizontalAlignment = new Alignment(AlignmentValue.Start);
 
     this.format = '0001';
     this.increment = 1;
@@ -21,7 +14,7 @@ module.exports = class Text extends BaseVisualComponent {
 
   getTextLines() {
     const expression = new RegExp('\\\\r\\\\n|\\\\n', 'g');
-    return this.prependText.replace(expression, '\n').split('\n');
+    return this.format.replace(expression, '\n').split('\n');
   }
 
   generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits) {

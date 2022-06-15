@@ -1,5 +1,6 @@
 const { Text, SerialNumber, FontFamilyName, FontFamily, Alignment, AlignmentValue } = require('../src/jszpl.js');
 const testHelpers = require('./test-helpers.js');
+const _ = require('lodash');
 
 test('add text to a label', () => {
   const label = testHelpers.createLabel();
@@ -16,6 +17,14 @@ test('add text to a label', () => {
 ^FB780,1000,0,L,0
 ^FDHello World!^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(749);
 });
 
 test('add multiline text to a label', () => {
@@ -51,6 +60,14 @@ test('add multiline text to a label', () => {
 ^FB780,1000,0,L,0
 ^FDLine^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(1741);
 });
 
 test('add text with alignment to a label', () => {
@@ -150,6 +167,14 @@ test('add text with alignment to a label', () => {
 ^FB780,1000,0,R,0
 ^FDBottom Right^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(6225);
 });
 
 test('add scaled text to a label', () => {
@@ -170,6 +195,14 @@ test('add scaled text to a label', () => {
 ^FB780,1000,0,L,0
 ^FDHello World!^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(749);
 });
 
 test('add serial number field with leading zeros to a label', () => {
@@ -190,6 +223,14 @@ test('add serial number field with leading zeros to a label', () => {
 ^FB780,1000,0,L,0
 ^SNA0001,2,Y^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(462);
 });
 
 
@@ -211,4 +252,12 @@ test('add serial number field without leading zeros to a label', () => {
 ^FB780,1000,0,L,0
 ^SN0001,1,N^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(376);
 });

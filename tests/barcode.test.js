@@ -1,5 +1,6 @@
 const { Barcode, BarcodeType, BarcodeTypeName, Spacing } = require('../src/jszpl.js');
 const testHelpers = require('./test-helpers.js');
+const _ = require('lodash');
 
 test('add QR barcode to a label', () => {
   const label = testHelpers.createLabel();

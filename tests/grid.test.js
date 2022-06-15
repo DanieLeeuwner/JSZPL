@@ -1,5 +1,6 @@
 const { Grid, Text, Size, Spacing, FontFamily, FontFamilyName, SizeType, Alignment, AlignmentValue  } = require('../src/jszpl.js');
 const testHelpers = require('./test-helpers.js');
+const _ = require('lodash');
 
 test('add grid to a label', () => {
   const label = testHelpers.createLabel();
@@ -60,6 +61,14 @@ test('add grid to a label', () => {
 ^FB365,1000,0,L,0
 ^FD(1, 1)^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(14832);
 });
 
 test('align text in grid', () => {
@@ -82,7 +91,6 @@ test('align text in grid', () => {
   text00.fontFamily = new FontFamily(FontFamilyName.D);
   text00.verticalAlignment = new Alignment(AlignmentValue.Start)
   text00.horizontalAlignment = new Alignment(AlignmentValue.Start)
-
 
   const text10 = new Text();
   grid.content.push(text10);
@@ -131,4 +139,12 @@ test('align text in grid', () => {
 ^FB365,1000,0,R,0
 ^FD(1, 1)^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(14832);
 });

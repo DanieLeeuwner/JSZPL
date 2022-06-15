@@ -58,7 +58,7 @@ module.exports = class Box extends BaseGraphicComponent {
 
           if (yIndex < 0 || xIndex < 0 || yIndex >= binaryBase.length || xIndex >= binaryBase[yIndex].length) continue;
 
-          const center = undefined;
+          let center = undefined;
           if (this.cornerRadius > 0) {
             if (y < yTop) {
               if (x < xLeft) {

@@ -1,5 +1,6 @@
 const { Raw } = require('../src/jszpl.js');
 const testHelpers = require('./test-helpers.js');
+const _ = require('lodash');
 
 test('add raw data to a label', () => {
   const label = testHelpers.createLabel();

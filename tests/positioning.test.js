@@ -1,5 +1,6 @@
 const { Text, FontFamilyName, FontFamily, Circle } = require('../src/jszpl.js');
 const testHelpers = require('./test-helpers.js');
+const _ = require('lodash');
 
 test('add fixed positioning text to a label', () => {
   const label = testHelpers.createLabel();
@@ -20,6 +21,14 @@ test('add fixed positioning text to a label', () => {
 ^FB780,1000,0,L,0
 ^FDHello World!^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(749);
 });
 
 test('add fixed position circle to a label', () => {
@@ -39,4 +48,12 @@ test('add fixed position circle to a label', () => {
   expect(zpl).toBe(`^XA
 ^FO100,50^GC150,150,B^FS
 ^XZ`);
+
+  const binaryData = [];
+  label.generateBinaryImage(binaryData);
+
+  expect(binaryData.length).toBe(400);
+
+  const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
+  expect(blackPixels.length).toBe(17663);
 });
