@@ -43,8 +43,8 @@ module.exports = class BaseContainerComponent extends BaseVisualComponent {
     for (let c_id in this.content) {
       const element = this.content[c_id];
 
-      const left = offsetLeft + sizing.spacingLeft + (this.border || 0);
-      const top = offsetTop + sizing.spacingTop + (this.border || 0);
+      let left = offsetLeft + sizing.spacingLeft + (this.border || 0);
+      let top = offsetTop + sizing.spacingTop + (this.border || 0);
 
       if (element.fixed) {
         left = this.getSize(element.left);
@@ -63,8 +63,8 @@ module.exports = class BaseContainerComponent extends BaseVisualComponent {
     for (let c_id in this.content) {
       const element = this.content[c_id];
 
-      const left = offsetLeft + sizing.spacingLeft + (this.border || 0);
-      const top = offsetTop + sizing.spacingTop + (this.border || 0);
+      let left = offsetLeft + sizing.spacingLeft + (this.border || 0);
+      let top = offsetTop + sizing.spacingTop + (this.border || 0);
 
       if (element.fixed) {
         left = this.getSize(element.left);

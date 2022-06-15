@@ -31,7 +31,7 @@ function decode(base64) {
 
   for (let i = 0; i < base64.length; i++) {
     const index = base64chars.indexOf(base64[i]);
-    const binaryString = '000000' + index.toString(2);
+    let binaryString = '000000' + index.toString(2);
     binaryString = binaryString.substring(binaryString.length - 6);
     for (let c_id = 0; c_id < binaryString.length; c_id++) {
       blocks.push(binaryString[c_id] == '0' ? 0 : 1);
