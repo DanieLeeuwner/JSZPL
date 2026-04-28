@@ -5,7 +5,7 @@
 Generate ZPL II from JavaScript
 `^FX No more Printer Commands!`
 
-```js
+```ts
 const text = new Text();
 label.content.push(text);
 text.text = 'Hello World!';
@@ -89,8 +89,8 @@ $ npm i jszpl
 
 In Node.js:
 
-```js
-const { Label, PrintDensity, PrintDensityName, Spacing, Text, FontFamily, FontFamilyName } = require('jszpl');
+```ts
+import { Label, PrintDensity, PrintDensityName, Spacing, Text, FontFamily, FontFamilyName } from 'jszpl';
 
 const label = new Label();
 label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
@@ -119,19 +119,12 @@ Most of the properties are defined in their own object types, which provides the
 
 Size is used by width, height, column definition, and row definition properties. Size takes a number and SizeType as constructor parameters.
 
-SizeType has the following definition:
-```js
-const SizeType = {
-  Absolute : 0, // exact size
-  Fraction : 1, // size as fraction of parent
-  Relative : 2, // size together with siblings as part of parent
-}
-```
+SizeType has three values: `Absolute` (exact size), `Fraction` (size as fraction of parent), and `Relative` (size together with siblings as part of parent).
 
 Usage examples:
-```js
-grid.width = new SizeType(250, SizeType.Absolute);
-grid.columns.push(new SizeType(1, SizeType.Relative));
+```ts
+grid.width = new Size(250, SizeType.Absolute);
+grid.columns.push(new Size(1, SizeType.Relative));
 ```
 
 Alternatively, if only a number is applied to the width or height properties,
@@ -139,7 +132,7 @@ or a single value supplied to the constructor, the value is interpreted as being
 
 The lines in the example below have the same effect:
 
-```js
+```ts
 grid.width = 250;
 grid.width = new Size(250);
 grid.width = new Size(250, SizeType.Absolute);
@@ -151,20 +144,11 @@ Using SizeType.Fraction requires input number to be smaller than 1.
 
 PrintDensity is only used by the Label element. It denotes the dot density of the output label. The Label element is also the only element whose width and height properties are measured in millimeters rather than dots.
 
-PrintDensityName has the following definition:
-
-```js
-const PrintDensityName = {
-  '6dpmm' : 6,
-  '8dpmm' : 8,
-  '12dpmm' : 12,
-  '24dpmm' : 24,
-}
-```
+PrintDensityName supports `'6dpmm'`, `'8dpmm'`, `'12dpmm'`, and `'24dpmm'`.
 
 Usage example:
 
-```js
+```ts
 const label = new Label();
 label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
 ```
@@ -173,29 +157,11 @@ label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
 
 FontFamily is only used by the Text element. It denotes the font matrix to use for the element text. Only fonts A-F are implemented.
 
-FontFamilyName has the following definition:
-
-```js
-const FontFamilyName = {
-  A : 'A',
-  B : 'B',
-  D : 'D',
-  E : 'E',
-  F : 'F',
-  //G : 'G',
-  //H : 'H',
-  //P : 'P',
-  //Q : 'Q',
-  //U : 'U',
-  //V : 'V',
-}
-```
-
-Font names G to V are not implemented. Usage will result in an error.
+FontFamilyName supports `A`, `B`, `D`, `E`, and `F`. Fonts G–V are not implemented.
 
 Usage example:
 
-```js
+```ts
 const text = new Text();
 text.fontFamily = new FontFamily(FontFamilyName.D);
 ```
@@ -204,19 +170,11 @@ text.fontFamily = new FontFamily(FontFamilyName.D);
 
 Alignment is only used by the the Text element. It is applied to the horizontalAlignment and verticalAlignment properties to align the text within its parent container.
 
-AlignmentValue has the following definition:
-
-```js
-const AlignmentValue = {
-  Start: 'Start',
-  Center: 'Center',
-  End: 'End',
-}
-```
+AlignmentValue has three values: `Start`, `Center`, and `End`.
 
 Usage example:
 
-```js
+```ts
 const text = new Text();
 text.verticalAlignment = new Alignment(AlignmentValue.Center);
 text.horizontalAlignment = new Alignment(AlignmentValue.Center);
@@ -230,7 +188,7 @@ Spacing constructor supports 0, 1, 2, and 4 parameters.
 
 Usage examples:
 
-```js
+```ts
 // 0 parameters
 // default values of 0 for all sides
 label.padding = new Spacing();
@@ -254,7 +212,7 @@ GridPosition is used by all elements except for the Label. GridPosition has a co
 
 Usage example:
 
-```js
+```ts
 const grid = new Grid();
 label.content.push(grid);
 grid.columns.push(new Size(1, SizeType.Relative));
@@ -297,35 +255,11 @@ text11.grid.row = 1;
 
 BarcodeType is only used by the Barcode element. It denotes the barcode type to use.
 
-BarcodeTypeName has the following definition:
-
-```js
-const BarcodeTypeName = {
-  Code11: 'Code11',
-  Interleaved25: 'Interleaved25',
-  Code39: 'Code39',
-  PlanetCode: 'PlanetCode',
-  PDF417: 'PDF417',
-  EAN8: 'EAN8',
-  UPCE: 'UPCE',
-  Code93: 'Code93',
-  Code128: 'Code128',
-  EAN13: 'EAN13',
-  Industrial25: 'Industrial25',
-  Standard25: 'Standard25',
-  ANSICodabar: 'ANSICodabar',
-  Logmars: 'Logmars',
-  MSI: 'MSI',
-  Plessey: 'Plessey',
-  QRCode: 'QRCode',
-  DataMatrix: 'DataMatrix',
-  PostNet: 'PostNet'
-}
-```
+BarcodeTypeName supports: `Code11`, `Interleaved25`, `Code39`, `PlanetCode`, `PDF417`, `EAN8`, `UPCE`, `Code93`, `Code128`, `EAN13`, `Industrial25`, `Standard25`, `ANSICodabar`, `Logmars`, `MSI`, `Plessey`, `QRCode`, `DataMatrix`, `PostNet`.
 
 Usage example:
 
-```js
+```ts
 const barcode = new Barcode();
 barcode.type = new BarcodeType(BarcodeTypeName.Code11);
 ```
@@ -342,7 +276,7 @@ Container elements:
 
 Usage example:
 
-```js
+```ts
 const label = new Label();
 const text = new Text();
 label.content.push(text);
@@ -354,7 +288,7 @@ GraphicData is used by Graphic to display image data. GraphicData.data contains 
 
 GraphicData has the following definition:
 
-```js
+```ts
 class GraphicData {
   constructor(width, height, data) {
     this.data = data || [];
@@ -367,7 +301,7 @@ class GraphicData {
 An image processor must be defined for each platform. The purpose of an image processor is to convert an image into a black and white array representation (consisting of 1s and 0s).
 Below is an example of a processor for a web browser:
 
-```js
+```ts
 const graphic = new Graphic();
 
 const image = new Image();
@@ -429,7 +363,7 @@ Usage example:
 The example creates a 100mm x 50mm label with a print density of 8 dpmm.
 The label has a padding of 10 dots and contains a text field.
 
-```js
+```ts
 const label = new Label();
 label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
 label.width = 100;
@@ -477,7 +411,7 @@ Text displays characters on the label.
 
 Usage example:
 
-```js
+```ts
 const text = new Text();
 label.content.push(text);
 text.fontFamily = new FontFamily(FontFamilyName.D);
@@ -517,7 +451,7 @@ Displays a rectangular shape.
 
 Usage example:
 
-```js
+```ts
 const box = new Box();
 label.content.push(box);
 box.fill = true;
@@ -554,7 +488,7 @@ Displays a line.
 
 Usage example:
 
-```js
+```ts
 const line1 = new Line();
 label.content.push(line1);
 
@@ -607,7 +541,7 @@ Using a different width and height values, will result in an ellipse.
 
 Usage example:
 
-```js
+```ts
 const circle = new Circle();
 label.content.push(circle);
 circle.fill = true;
@@ -648,7 +582,7 @@ Displays a grid.
 
 Usage example:
 
-```js
+```ts
 const grid = new Grid();
 label.content.push(grid);
 grid.columns.push(new Size(150, SizeType.Absolute));
@@ -735,7 +669,7 @@ Serial Number displays incremental numbers on the label.
 
 Usage example:
 
-```js
+```ts
 const serialNum = new SerialNumber();
 label.content.push(serialNum);
 serialNum.fontFamily = new FontFamily(FontFamilyName.D);
@@ -761,7 +695,7 @@ Adds raw ZPL data to the output. Note that `Raw` inherits from `BaseComponent`, 
 
 Usage example:
 
-```js
+```ts
 const raw = new Raw();
 label.content.push(raw);
 raw.data = `
@@ -779,6 +713,64 @@ const zpl = label.generateZpl();
 ```
 
 ![Raw Image](./Images/example_raw.png)
+
+## Migration Guide: v1 → v2
+
+v2 rewrites the entire library in TypeScript. Most usage patterns remain the same, but the following changes are required.
+
+### Build step required
+
+v2 ships compiled output in `dist/`. Run `npm run build` after cloning the repo, or install from npm which includes the pre-built `dist/` directory.
+
+### Import style
+
+**v1 (CommonJS):**
+```ts
+const { Label, Text, FontFamily, FontFamilyName } = require('jszpl');
+```
+
+**v2 (ESM):**
+```ts
+import { Label, Text, FontFamily, FontFamilyName } from 'jszpl';
+```
+
+v2 is a pure ESM package (`"type": "module"`). CommonJS `require()` is no longer supported.
+
+### Enum imports
+
+All value sets (`AlignmentValue`, `SizeType`, `FontFamilyName`, `BarcodeTypeName`, `Rotation`) are now TypeScript `enum`s. Import and use them the same way — no usage changes required.
+
+### PrintDensityName
+
+`PrintDensityName` is a `const` object (not an enum) because its keys start with digits. Usage is unchanged:
+
+```ts
+label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+```
+
+### ZPLImageTools now exported
+
+`generateHexAscii` and `encodeHexAscii` are now exported directly from the package:
+
+```ts
+import { generateHexAscii, encodeHexAscii } from 'jszpl';
+```
+
+### LabelTools.BarcodeRenderer
+
+`LabelTools.BarcodeRenderer` is now included in the default `LabelTools` export. Replacing it with a custom renderer works the same as replacing `ImageProcessor` or `ImageResizer`.
+
+### SerialNumber property names
+
+The v1 README listed incorrect property names. The correct v2 property names are:
+
+| v1 (incorrect docs) | v2 (correct) |
+| :-- | :-- |
+| `prependText` | `format` (full format string, e.g. `'Label 1'`) |
+| `startValue` | `increment` |
+| `leadingZeroes` | `printLeadingZeroes` |
+
+---
 
 ## Known Issues
 

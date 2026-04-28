@@ -1,10 +1,19 @@
 {
   "name": "jszpl",
-  "version": "1.1.8",
-  "description": "ZPL II generation from JavaScript",
-  "main": "./src/jszpl.js",
+  "version": "2.0.1",
+  "description": "ZPL II generation from TypeScript",
+  "type": "module",
+  "main": "./dist/jszpl.js",
+  "types": "./dist/jszpl.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/jszpl.js",
+      "types": "./dist/jszpl.d.ts"
+    }
+  },
   "scripts": {
-    "test": "jest",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "font-packer": "node ./font-packer/font-packer.js"
   },
   "repository": {
@@ -22,9 +31,35 @@
     "url": "https://github.com/DanieLeeuwner/JSZPL/issues"
   },
   "homepage": "https://github.com/DanieLeeuwner/JSZPL#readme",
+  "jest": {
+    "preset": "ts-jest/presets/default-esm",
+    "injectGlobals": true,
+    "testEnvironment": "node",
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig.test.json",
+        "useESM": true
+      }
+    },
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ]
+  },
   "devDependencies": {
-    "jest": "^27.0.4",
+    "@types/jest": "^30.0.0",
+    "@types/lodash": "^4.17.24",
+    "@types/node": "^25.6.0",
+    "@types/pngjs": "^6.0.5",
+    "jest": "^30.3.0",
+    "lodash": "^4.18.1",
     "pngjs": "^6.0.0",
-    "webpack": "^5.38.1"
+    "ts-jest": "^29.4.9",
+    "typescript": "^6.0.3"
   }
 }
