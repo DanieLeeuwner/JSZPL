@@ -9,9 +9,9 @@ Generate ZPL II from JavaScript
 const text = new Text();
 label.content.push(text);
 text.text = 'Hello World!';
-text.fontFamily = new FontFamily(FontFamilyName.D);
-text.verticalAlignment = new Alignment(AlignmentValue.Center);
-text.horizontalAlignment = new Alignment(AlignmentValue.Center);
+text.fontFamily = FontFamily.D;
+text.verticalAlignment = Alignment.Center;
+text.horizontalAlignment = Alignment.Center;
 
 const zpl = label.generateZPL();
 //^XA
@@ -146,11 +146,21 @@ PrintDensity is only used by the Label element. It denotes the dot density of th
 
 PrintDensityName supports `'6dpmm'`, `'8dpmm'`, `'12dpmm'`, and `'24dpmm'`.
 
+**Shorthand** — All property classes support static shorthand access:
+
+```ts
+// Longhand
+label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+
+// Shorthand
+label.printDensity = PrintDensity.dpmm8;
+```
+
 Usage example:
 
 ```ts
 const label = new Label();
-label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+label.printDensity = PrintDensity.dpmm8;
 ```
 
 #### FontFamily
@@ -159,11 +169,21 @@ FontFamily is only used by the Text element. It denotes the font matrix to use f
 
 FontFamilyName supports `A`, `B`, `D`, `E`, and `F`. Fonts G–V are not implemented.
 
+**Shorthand** — All property classes support static shorthand access:
+
+```ts
+// Longhand
+text.fontFamily = new FontFamily(FontFamilyName.D);
+
+// Shorthand — FontFamily names stay uppercase
+text.fontFamily = FontFamily.D;
+```
+
 Usage example:
 
 ```ts
 const text = new Text();
-text.fontFamily = new FontFamily(FontFamilyName.D);
+text.fontFamily = FontFamily.D;
 ```
 
 #### Alignment
@@ -172,12 +192,22 @@ Alignment is only used by the the Text element. It is applied to the horizontalA
 
 AlignmentValue has three values: `Start`, `Center`, and `End`.
 
+**Shorthand** — All property classes support static shorthand access:
+
+```ts
+// Longhand
+text.verticalAlignment = new Alignment(AlignmentValue.Center);
+
+// Shorthand
+text.verticalAlignment = Alignment.Center;
+```
+
 Usage example:
 
 ```ts
 const text = new Text();
-text.verticalAlignment = new Alignment(AlignmentValue.Center);
-text.horizontalAlignment = new Alignment(AlignmentValue.Center);
+text.verticalAlignment = Alignment.Center;
+text.horizontalAlignment = Alignment.Center;
 ```
 
 #### Spacing
@@ -257,11 +287,21 @@ BarcodeType is only used by the Barcode element. It denotes the barcode type to 
 
 BarcodeTypeName supports: `Code11`, `Interleaved25`, `Code39`, `PlanetCode`, `PDF417`, `EAN8`, `UPCE`, `Code93`, `Code128`, `EAN13`, `Industrial25`, `Standard25`, `ANSICodabar`, `Logmars`, `MSI`, `Plessey`, `QRCode`, `DataMatrix`, `PostNet`.
 
+**Shorthand** — All property classes support static shorthand access:
+
+```ts
+// Longhand
+barcode.type = new BarcodeType(BarcodeTypeName.Code128);
+
+// Shorthand
+barcode.type = BarcodeType.Code128;
+```
+
 Usage example:
 
 ```ts
 const barcode = new Barcode();
-barcode.type = new BarcodeType(BarcodeTypeName.Code11);
+barcode.type = BarcodeType.Code128;
 ```
 
 #### Content
@@ -660,27 +700,20 @@ Serial Number displays incremental numbers on the label.
 | fontFamily | [FontFamily](#fontfamily) | Font family matrix to use |
 | horizontalAlignment | [Alignment](#alignment) | Horizontal alignment, default AlignmentValue.Start |
 | grid | [GridPosition](#gridposition) | Configure element placement within grid |
-| prependText | String | Sets the text that displays before the number |
-| startValue | String | Include any leading zeroes, default "1" |
+| format | String | Format string with leading zeros, default "0001" |
 | increment | Number | The number to increment for each label, use negative to decrease, default 1 |
-| leadingZeroes | Boolean | If leading zeroes should be used, default false |
+| printLeadingZeroes | Boolean | If leading zeroes should be used, default true |
 | characterWidth | Number | Overrides the default character width, uses font family default if omitted |
 | characterHeight | Number | Overrides the default character height, uses font family default if omitted |
 
 Usage example:
 
 ```ts
-const serialNum = new SerialNumber();
-label.content.push(serialNum);
-serialNum.fontFamily = new FontFamily(FontFamilyName.D);
-serialNum.prependText = 'Label ';
+const serialNumber = new SerialNumber();
+label.content.push(serialNumber);
+serialNumber.format = '0001';
 
 const zpl = label.generateZPL();
-// ^XA
-// ^FO10,10^AD,,,
-// ^FB780,1,0,L,0
-// ^SNLabel 1,1,N^FS
-// ^XZ
 ```
 
 #### Raw
@@ -718,10 +751,6 @@ const zpl = label.generateZpl();
 
 v2 rewrites the entire library in TypeScript. Most usage patterns remain the same, but the following changes are required.
 
-### Build step required
-
-v2 ships compiled output in `dist/`. Run `npm run build` after cloning the repo, or install from npm which includes the pre-built `dist/` directory.
-
 ### Import style
 
 **v1 (CommonJS):**
@@ -740,35 +769,28 @@ v2 is a pure ESM package (`"type": "module"`). CommonJS `require()` is no longer
 
 All value sets (`AlignmentValue`, `SizeType`, `FontFamilyName`, `BarcodeTypeName`, `Rotation`) are now TypeScript `enum`s. Import and use them the same way — no usage changes required.
 
-### PrintDensityName
+### Shorthand static access (v2.1+)
 
-`PrintDensityName` is a `const` object (not an enum) because its keys start with digits. Usage is unchanged:
+All property classes support static shorthand access. The `new ClassName(EnumName.Value)` pattern is still supported, but you can use the shorter `ClassName.Value` syntax:
 
 ```ts
+// Longhand (still supported)
+text.fontFamily = new FontFamily(FontFamilyName.D);
+text.verticalAlignment = new Alignment(AlignmentValue.Center);
+barcode.type = new BarcodeType(BarcodeTypeName.Code128);
 label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
-```
 
-### ZPLImageTools now exported
-
-`generateHexAscii` and `encodeHexAscii` are now exported directly from the package:
-
-```ts
-import { generateHexAscii, encodeHexAscii } from 'jszpl';
+// Shorthand (new in v2.1)
+text.fontFamily = FontFamily.D;
+text.verticalAlignment = Alignment.Center;
+text.horizontalAlignment = Alignment.Center;
+barcode.type = BarcodeType.Code128;
+label.printDensity = PrintDensity.dpmm8;
 ```
 
 ### LabelTools.BarcodeRenderer
 
 `LabelTools.BarcodeRenderer` is now included in the default `LabelTools` export. Replacing it with a custom renderer works the same as replacing `ImageProcessor` or `ImageResizer`.
-
-### SerialNumber property names
-
-The v1 README listed incorrect property names. The correct v2 property names are:
-
-| v1 (incorrect docs) | v2 (correct) |
-| :-- | :-- |
-| `prependText` | `format` (full format string, e.g. `'Label 1'`) |
-| `startValue` | `increment` |
-| `leadingZeroes` | `printLeadingZeroes` |
 
 ---
 
