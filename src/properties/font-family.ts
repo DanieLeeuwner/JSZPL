@@ -9,6 +9,26 @@ export class FontFamily {
     this.value = value;
   }
 
+  static get A(): FontFamily {
+    return new FontFamily(FontFamilyName.A);
+  }
+
+  static get B(): FontFamily {
+    return new FontFamily(FontFamilyName.B);
+  }
+
+  static get D(): FontFamily {
+    return new FontFamily(FontFamilyName.D);
+  }
+
+  static get E(): FontFamily {
+    return new FontFamily(FontFamilyName.E);
+  }
+
+  static get F(): FontFamily {
+    return new FontFamily(FontFamilyName.F);
+  }
+
   get definition(): FontDefinition {
     return fonts[this.value];
   }
