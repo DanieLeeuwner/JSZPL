@@ -1,18 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "types": [
-      "jest",
-      "node"
-    ],
-    "isolatedModules": true,
-    "rewriteRelativeImportExtensions": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true
-  },
-  "include": [
-    "src/**/*",
-    "tests/**/*"
-  ]
+    "isolatedModules": true
+  }
 }
