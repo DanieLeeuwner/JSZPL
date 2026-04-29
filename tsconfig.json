@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2025",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "lib": [
-      "ES2025"
-    ],
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "types": [
       "jest",
       "node"
