@@ -25,9 +25,10 @@ export class Graphic extends BaseVisualComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): string {
     const container = this.generateContainer();
-    let zpl = container.generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    let zpl = container.generateZPL(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits, useLegacyPositioning);
 
     const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
     const imageData = LabelTools.ImageResizer.resize(
@@ -60,9 +61,10 @@ export class Graphic extends BaseVisualComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): void {
     const container = this.generateContainer();
-    container.generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
+    container.generateBinaryImage(binaryBase, offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits, useLegacyPositioning);
 
     const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
     const imageData = LabelTools.ImageResizer.resize(

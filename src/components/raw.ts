@@ -11,6 +11,7 @@ export class Raw extends BaseComponent {
     _availableHeight: number,
     _widthUnits?: number,
     _heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): string {
     if (!this.data || this.data === '') {
       return '';

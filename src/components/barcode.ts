@@ -12,8 +12,6 @@ export class Barcode extends BaseVisualComponent {
   subset: string = '';
   interpretationLine: boolean = true;
 
-  notImplemented = ['typeName', 'invert'];
-
   generateZPL(
     offsetLeft: number,
     offsetTop: number,
@@ -21,6 +19,7 @@ export class Barcode extends BaseVisualComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): string {
     const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
@@ -125,6 +124,7 @@ export class Barcode extends BaseVisualComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): void {
     const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
     const barcodeData = LabelTools.BarcodeRenderer.render(position.width, position.height, this.type, this.data);

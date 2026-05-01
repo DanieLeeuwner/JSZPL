@@ -1,6 +1,4 @@
 export abstract class BaseComponent {
-  notImplemented: string[] = ['typeName'];
-
   generateZPL(
     _offsetLeft: number,
     _offsetTop: number,
@@ -8,6 +6,7 @@ export abstract class BaseComponent {
     _availableHeight: number,
     _widthUnits?: number,
     _heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): string {
     return '';
   }
@@ -24,6 +23,7 @@ export abstract class BaseComponent {
     _availableHeight: number,
     _widthUnits?: number,
     _heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): void {
     // override in subclasses
   }

@@ -15,6 +15,7 @@ export class Line extends BaseVisualComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): string {
     const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 
@@ -49,6 +50,7 @@ export class Line extends BaseVisualComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): void {
     const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 

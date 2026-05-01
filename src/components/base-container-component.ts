@@ -47,6 +47,7 @@ export abstract class BaseContainerComponent extends BaseVisualComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): string {
     const sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
     let zpl = '';
@@ -59,11 +60,16 @@ export abstract class BaseContainerComponent extends BaseVisualComponent {
       let top = offsetTop + sizing.spacingTop + border;
 
       if (el.fixed) {
-        left = this.getSize(el.left);
-        top = this.getSize(el.top);
+        if (useLegacyPositioning) {
+          left = offsetLeft + this.getSize(el.left);
+          top = offsetTop + this.getSize(el.top);
+        } else {
+          left = 0;
+          top = 0;
+        }
       }
 
-      zpl += element.generateZPL(left, top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits);
+      zpl += element.generateZPL(left, top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits, useLegacyPositioning);
     }
 
     return zpl;
@@ -77,6 +83,7 @@ export abstract class BaseContainerComponent extends BaseVisualComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): void {
     const sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
 
@@ -88,11 +95,16 @@ export abstract class BaseContainerComponent extends BaseVisualComponent {
       let top = offsetTop + sizing.spacingTop + border;
 
       if (el.fixed) {
-        left = this.getSize(el.left);
-        top = this.getSize(el.top);
+        if (useLegacyPositioning) {
+          left = offsetLeft + this.getSize(el.left);
+          top = offsetTop + this.getSize(el.top);
+        } else {
+          left = 0;
+          top = 0;
+        }
       }
 
-      element.generateBinaryImage(binaryBase, left, top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits);
+      element.generateBinaryImage(binaryBase, left, top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits, useLegacyPositioning);
     }
   }
 }

@@ -19,6 +19,7 @@ export class SerialNumber extends Text {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): string {
     const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
 

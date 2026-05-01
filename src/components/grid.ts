@@ -138,12 +138,13 @@ export class Grid extends BaseContainerComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): string {
     const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
     const contentBox = this.generateChildren(position.width, position.height);
     const sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
 
-    return contentBox.generateZPL(position.left, position.top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits);
+    return contentBox.generateZPL(position.left, position.top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits, useLegacyPositioning);
   }
 
   generateBinaryImage(
@@ -154,11 +155,12 @@ export class Grid extends BaseContainerComponent {
     availableHeight: number,
     widthUnits?: number,
     heightUnits?: number,
+    useLegacyPositioning?: boolean,
   ): void {
     const position = this.getPosition(offsetLeft, offsetTop, availableWidth, availableHeight, widthUnits, heightUnits);
     const contentBox = this.generateChildren(position.width, position.height);
     const sizing = this.calculateSizing(availableWidth, availableHeight, widthUnits, heightUnits);
 
-    contentBox.generateBinaryImage(binaryBase, position.left, position.top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits);
+    contentBox.generateBinaryImage(binaryBase, position.left, position.top, sizing.width, sizing.height, sizing.widthUnits, sizing.heightUnits, useLegacyPositioning);
   }
 }
