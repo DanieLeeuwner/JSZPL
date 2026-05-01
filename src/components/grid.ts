@@ -121,7 +121,7 @@ export class Grid extends BaseContainerComponent {
 
     const contentBox = new Box();
     contentBox.content = contentCells;
-    contentBox.fixed = this.fixed;
+    contentBox.fixed = false;
     contentBox.width = this.width;
     contentBox.height = this.height;
     contentBox.border = this.border;
