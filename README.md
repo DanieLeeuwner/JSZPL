@@ -438,6 +438,7 @@ Label is the base container element within which other elements can be placed.
 | padding | [Spacing](#spacing) | Sets the padding of the label element, makes child elements consume less space |
 | content | Array | Child elements |
 | useLegacyPositioning | Boolean | Set to `true` to restore legacy fixed positioning behavior |
+| characterSet | Number | Sets the character encoding for the label using `^CI`. Use `28` for UTF-8 to support accented and international characters. |
 
 Usage example:
 

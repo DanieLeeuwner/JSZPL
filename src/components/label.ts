@@ -5,9 +5,14 @@ import { PrintDensityName } from '../enums/print-density-name.ts';
 export class Label extends BaseContainerComponent {
   printDensity: PrintDensity = new PrintDensity(PrintDensityName['8dpmm']);
   useLegacyPositioning: boolean = false;
+  characterSet?: number;
 
   generateZPL(): string {
     let zpl = '^XA\n';
+
+    if (this.characterSet !== undefined) {
+      zpl += `^CI${this.characterSet}\n`;
+    }
 
     const width = this.getSize(this.width) * this.printDensity.value;
     const height = this.getSize(this.height) * this.printDensity.value;
