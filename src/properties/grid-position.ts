@@ -1,5 +1,4 @@
 export class GridPosition {
-  readonly typeName = 'GridPosition';
   column: number;
   row: number;
 

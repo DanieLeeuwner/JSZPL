@@ -1,8 +1,6 @@
 import { BaseGraphicComponent } from './base-graphic-component.ts';
 
 export class Circle extends BaseGraphicComponent {
-  readonly typeName = 'Circle';
-
   generateZPL(
     offsetLeft: number,
     offsetTop: number,

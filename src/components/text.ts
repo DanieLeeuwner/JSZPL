@@ -5,7 +5,6 @@ import { FontFamilyName } from '../enums/font-family-name.ts';
 import { AlignmentValue } from '../enums/alignment-value.ts';
 
 export class Text extends BaseVisualComponent {
-  readonly typeName: string = 'Text';
   text: string = '';
   fontFamily: FontFamily = new FontFamily(FontFamilyName.A);
   lineSpacing: number = 0;

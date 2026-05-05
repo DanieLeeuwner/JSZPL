@@ -20,6 +20,7 @@ export abstract class BaseVisualComponent extends BaseComponent {
   top: Size | number = new Size();
   left: Size | number = new Size();
   margin: Spacing = new Spacing();
+  border?: number;
 
   getPosition(
     offsetLeft: number,
@@ -35,10 +36,10 @@ export abstract class BaseVisualComponent extends BaseComponent {
     const width = this.getSize(this.width, widthUnits) || (availableWidth - this.margin.horizontal);
     const height = this.getSize(this.height, heightUnits) || (availableHeight - this.margin.vertical);
 
-    if (typeof this.top === 'object' && this.top.sizeType === SizeType.Fraction) {
+    if (this.top instanceof Size && this.top.sizeType === SizeType.Fraction) {
       top = availableHeight * this.top.value;
     }
-    if (typeof this.left === 'object' && this.left.sizeType === SizeType.Fraction) {
+    if (this.left instanceof Size && this.left.sizeType === SizeType.Fraction) {
       left = availableWidth * this.left.value;
     }
 
@@ -51,10 +52,7 @@ export abstract class BaseVisualComponent extends BaseComponent {
   }
 
   getSize(prop: Size | number, unitSize?: number): number {
-    if (typeof prop === 'number') {
-      return prop;
-    }
-    return prop.getValue(unitSize);
+    return prop instanceof Size ? prop.getValue(unitSize) : prop;
   }
 
   calculateUnits(): { absolute: { width: number; height: number }; relative: { width: number; height: number } } {
@@ -63,39 +61,30 @@ export abstract class BaseVisualComponent extends BaseComponent {
       relative: { width: 0, height: 0 },
     };
 
-    const elements = (this as unknown as { content?: BaseVisualComponent[] }).content ?? [];
+    const elements = (this as unknown as { content?: BaseComponent[] }).content ?? [];
 
     for (const element of elements) {
-      const el = element as unknown as {
-        margin?: Spacing;
-        border?: number;
-        width?: Size | number;
-        height?: Size | number;
-      };
+      const el = element as unknown as BaseVisualComponent;
       if (!el.margin || el.border === undefined || !el.width || !el.height) continue;
 
-      units.absolute.width += el.margin.horizontal + (('border' in this && typeof (this as unknown as { border: number }).border === 'number') ? (this as unknown as { border: number }).border : 0);
-      units.absolute.height += el.margin.vertical + (('border' in this && typeof (this as unknown as { border: number }).border === 'number') ? (this as unknown as { border: number }).border : 0);
+      units.absolute.width += el.margin.horizontal + (this.border ?? 0);
+      units.absolute.height += el.margin.vertical + (this.border ?? 0);
 
-      if (typeof el.border === 'number') {
-        units.absolute.width += el.border * 2;
-        units.absolute.height += el.border * 2;
-      }
+      units.absolute.width += el.border * 2;
+      units.absolute.height += el.border * 2;
 
-      if (typeof el.width === 'number') {
+      if (el.width instanceof Size) {
+        if (el.width.sizeType === SizeType.Absolute) units.absolute.width += el.width.value;
+        else units.relative.width += el.width.value;
+      } else {
         units.absolute.width += el.width;
-      } else if (el.width.sizeType === SizeType.Absolute) {
-        units.absolute.width += el.width.value;
-      } else {
-        units.relative.width += el.width.value;
       }
 
-      if (typeof el.height === 'number') {
-        units.absolute.height += el.height;
-      } else if (el.height.sizeType === SizeType.Absolute) {
-        units.absolute.height += el.height.value;
+      if (el.height instanceof Size) {
+        if (el.height.sizeType === SizeType.Absolute) units.absolute.height += el.height.value;
+        else units.relative.height += el.height.value;
       } else {
-        units.relative.height += el.height.value;
+        units.absolute.height += el.height;
       }
     }
 

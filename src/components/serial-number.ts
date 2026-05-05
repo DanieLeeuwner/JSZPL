@@ -2,7 +2,6 @@ import { Text } from './text.ts';
 import { AlignmentValue } from '../enums/alignment-value.ts';
 
 export class SerialNumber extends Text {
-  readonly typeName = 'SerialNumber';
   format: string = '0001';
   increment: number = 1;
   printLeadingZeroes: boolean = true;

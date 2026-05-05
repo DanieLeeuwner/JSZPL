@@ -4,7 +4,6 @@ import { BarcodeTypeName } from '../enums/barcode-type-name.ts';
 import { LabelTools } from '../helpers/label-tools.ts';
 
 export class Barcode extends BaseVisualComponent {
-  readonly typeName = 'Barcode';
   data: string = '';
   dataPrepend: string = '';
   maxLength: number = 32;

@@ -1,5 +1,4 @@
 export class GraphicData {
-  readonly typeName = 'GraphicData';
   data: number[];
   width: number;
   height: number;

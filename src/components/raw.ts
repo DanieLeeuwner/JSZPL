@@ -1,7 +1,6 @@
 import { BaseComponent } from './base-component.ts';
 
 export class Raw extends BaseComponent {
-  readonly typeName = 'Raw';
   data: string = '';
 
   generateZPL(

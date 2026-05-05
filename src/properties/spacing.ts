@@ -1,5 +1,4 @@
 export class Spacing {
-  readonly typeName = 'Spacing';
   left: number;
   top: number;
   right: number;

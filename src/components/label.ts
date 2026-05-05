@@ -3,7 +3,6 @@ import { PrintDensity } from '../properties/print-density.ts';
 import { PrintDensityName } from '../enums/print-density-name.ts';
 
 export class Label extends BaseContainerComponent {
-  readonly typeName = 'Label';
   printDensity: PrintDensity = new PrintDensity(PrintDensityName['8dpmm']);
   useLegacyPositioning: boolean = false;
 

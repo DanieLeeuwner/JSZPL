@@ -1,7 +1,6 @@
 import { BaseGraphicComponent } from './base-graphic-component.ts';
 
 export class Box extends BaseGraphicComponent {
-  readonly typeName = 'Box';
   cornerRadius: number = 0;
 
   generateZPL(

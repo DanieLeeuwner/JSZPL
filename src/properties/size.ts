@@ -1,7 +1,6 @@
 import { SizeType } from '../enums/size-type.ts';
 
 export class Size {
-  readonly typeName = 'Size';
   value: number;
   sizeType: SizeType;
 
@@ -11,7 +10,7 @@ export class Size {
   }
 
   getValue(unitSize?: number): number {
-    if (typeof unitSize === 'number' && this.sizeType === SizeType.Relative) {
+    if (unitSize !== undefined && this.sizeType === SizeType.Relative) {
       return this.value * unitSize;
     }
     return this.value;

@@ -5,7 +5,6 @@ import { LabelTools } from '../helpers/label-tools.ts';
 import { generateHexAscii, encodeHexAscii } from '../helpers/zpl-image-tools.ts';
 
 export class Graphic extends BaseVisualComponent {
-  readonly typeName = 'Graphic';
   data: GraphicData = new GraphicData();
   border: number = 0;
 

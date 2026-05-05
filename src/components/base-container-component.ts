@@ -29,7 +29,7 @@ export abstract class BaseContainerComponent extends BaseVisualComponent {
     const spacingHorizontal = spacingLeft + this.margin.right + this.padding.right;
     const spacingVertical = spacingTop + this.margin.bottom + this.padding.right;
 
-    const border = ('border' in this ? (this as unknown as { border: number }).border : 0) || 0;
+    const border = this.border ?? 0;
 
     const width = availableWidth - spacingHorizontal - border * 2;
     const height = availableHeight - spacingVertical - border * 2;
@@ -54,7 +54,7 @@ export abstract class BaseContainerComponent extends BaseVisualComponent {
 
     for (const element of this.content) {
       const el = element as unknown as BaseVisualComponent;
-      const border = ('border' in this ? (this as unknown as { border: number }).border : 0) || 0;
+      const border = this.border ?? 0;
 
       let left = offsetLeft + sizing.spacingLeft + border;
       let top = offsetTop + sizing.spacingTop + border;
@@ -89,7 +89,7 @@ export abstract class BaseContainerComponent extends BaseVisualComponent {
 
     for (const element of this.content) {
       const el = element as unknown as BaseVisualComponent;
-      const border = ('border' in this ? (this as unknown as { border: number }).border : 0) || 0;
+      const border = this.border ?? 0;
 
       let left = offsetLeft + sizing.spacingLeft + border;
       let top = offsetTop + sizing.spacingTop + border;

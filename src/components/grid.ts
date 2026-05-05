@@ -7,7 +7,6 @@ import { BaseComponent } from './base-component.ts';
 import { BaseVisualComponent } from './base-visual-component.ts';
 
 export class Grid extends BaseContainerComponent {
-  readonly typeName = 'Grid';
   columns: (Size | number)[] = [];
   rows: (Size | number)[] = [];
   columnSpacing: number = 0;
@@ -43,7 +42,7 @@ export class Grid extends BaseContainerComponent {
     const units = { absolute: { width: 0, height: 0 }, relative: { width: 0, height: 0 } };
 
     for (const cell of columnDefinitions) {
-      if (typeof cell === 'object') {
+      if (cell instanceof Size) {
         if (cell.sizeType === SizeType.Absolute) units.absolute.width += cell.value;
         else units.relative.width += cell.value;
       } else {
@@ -52,7 +51,7 @@ export class Grid extends BaseContainerComponent {
     }
 
     for (const cell of rowDefinitions) {
-      if (typeof cell === 'object') {
+      if (cell instanceof Size) {
         if (cell.sizeType === SizeType.Absolute) units.absolute.height += cell.value;
         else units.relative.height += cell.value;
       } else {

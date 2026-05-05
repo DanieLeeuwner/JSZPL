@@ -2,7 +2,6 @@ import fonts, { FontDefinition } from '../b64-fonts.ts';
 import { FontFamilyName } from '../enums/font-family-name.ts';
 
 export class FontFamily {
-  readonly typeName = 'FontFamily';
   value: FontFamilyName;
 
   constructor(value: FontFamilyName) {

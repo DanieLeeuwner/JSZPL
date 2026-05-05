@@ -1,7 +1,6 @@
 import { AlignmentValue } from '../enums/alignment-value.ts';
 
 export class Alignment {
-  readonly typeName = 'Alignment';
   value: AlignmentValue;
 
   constructor(value: AlignmentValue) {
