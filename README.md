@@ -806,3 +806,6 @@ const zpl = label.generateZPL();
 | Feature | Notes |
 | :-- | :-- |
 | Stack | Stack elements based on set size or minimum size. Direction horizontal or vertical. |
+| JSON Serialization | Serialize a label to JSON and deserialize it back into a fully typed object graph. |
+| Element IDs | Assign a string `id` to any element so it can be retrieved by ID or type after deserialization, without walking the content tree manually. |
+| Barcode Binary Rendering | Render barcodes into the binary image output, enabling accurate label previews that include barcodes. |
