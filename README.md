@@ -23,7 +23,57 @@ const zpl = label.generateZPL();
 
 ![Label Preview](./Images/simple_label.png)
 
+> [!WARNING]
+>## Migration Guide: v1 → v2
+>
+>v2 rewrites the entire library in TypeScript. Most usage patterns remain the same, but the following changes are required.
+>
+>### Fixed Positioning
+>
+>Fixed positioning values (`left`, `top`) for elements were incorrectly doubled in v1. Setting `element.left = 150` with `fixed = true` now correctly outputs `^FO150`. If you relied on the old behavior, set `useLegacyPositioning = true` on the `Label` object:
+>
+>```ts
+>const label = new Label();
+>label.useLegacyPositioning = true;
+>```
+>
+>To migrate without the flag, double your fixed `left` and `top` values to match the old output positions.
+>
+>### Import style
+>
+>```ts
+>import { Label, Text, FontFamily, FontFamilyName } from 'jszpl';
+>```
+>
+>CommonJS `require()` is no longer supported.
+>
+>### Enum imports
+>
+>All value sets (`AlignmentValue`, `SizeType`, `FontFamilyName`, `BarcodeTypeName`, `Rotation`) are TypeScript `enum`s. Import and use them the same way as before.
+>
+>### Shorthand static access
+>
+>All property classes support static shorthand access:
+>
+>```ts
+>// Longhand (still supported)
+>text.fontFamily = new FontFamily(FontFamilyName.D);
+>text.verticalAlignment = new Alignment(AlignmentValue.Center);
+>barcode.type = new BarcodeType(BarcodeTypeName.Code128);
+>label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+>
+>// Shorthand
+>text.fontFamily = FontFamily.D;
+>text.verticalAlignment = Alignment.Center;
+>text.horizontalAlignment = Alignment.Center;
+>barcode.type = BarcodeType.Code128;
+>label.printDensity = PrintDensity.dpmm8;
+>```
+
+---
+
 ## Table of Contents
+- [Migration Guide](#migration-guide-v1--v2)
 - [Installation](#installation)
 - Property Types
   - [Size](#size)
@@ -49,18 +99,20 @@ const zpl = label.generateZPL();
 - [Known Issues](#known-issues)
 - [Roadmap](#roadmap)
 
-**WARNING**: This is not a complete implementation of  the ZPL II standard. For all elements not implemented or elements with implementations that do not fit your needs, please make use of the [Raw](#Raw) component. If you believe there is a problem with a specific component, feel free to create an issue describing the problem.
+**WARNING**: This is not a complete implementation of the ZPL II standard. For all elements not implemented or elements with implementations that do not fit your needs, please make use of the [Raw](#Raw) component. If you believe there is a problem with a specific component, feel free to create an issue describing the problem.
 
-[Link to ZPL II manual](https://www.zebra.com/content/dam/zebra/manuals/printers/common/programming/zpl-zbi2-pm-en.pdf)
+[View the ZPL II manual](https://www.zebra.com/content/dam/zebra/manuals/printers/common/programming/zpl-zbi2-pm-en.pdf)
 
 ## Installation
 
 In a browser:
 
 ```html
-<script src="dist/jszpl.bundle.js"></script>
+<script src="dist/jszpl.iife.js"></script>
 
 <script type="text/javascript">
+  const { Label, PrintDensity, PrintDensityName, Spacing, Text, FontFamily, FontFamilyName } = JSZPL;
+
   const label = new Label();
   label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
   label.width = 100;
@@ -127,8 +179,7 @@ grid.width = new Size(250, SizeType.Absolute);
 grid.columns.push(new Size(1, SizeType.Relative));
 ```
 
-Alternatively, if only a number is applied to the width or height properties,
-or a single value supplied to the constructor, the value is interpreted as being an absolute value.
+Alternatively, if only a number is applied to the width or height properties, or a single value supplied to the constructor, the value is interpreted as being an absolute value.
 
 The lines in the example below have the same effect:
 
@@ -147,7 +198,6 @@ PrintDensity is only used by the Label element. It denotes the dot density of th
 PrintDensityName supports `'6dpmm'`, `'8dpmm'`, `'12dpmm'`, and `'24dpmm'`.
 
 **Shorthand** — All property classes support static shorthand access:
-
 ```ts
 // Longhand
 label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
@@ -170,7 +220,6 @@ FontFamily is only used by the Text element. It denotes the font matrix to use f
 FontFamilyName supports `A`, `B`, `D`, `E`, and `F`. Fonts G–V are not implemented.
 
 **Shorthand** — All property classes support static shorthand access:
-
 ```ts
 // Longhand
 text.fontFamily = new FontFamily(FontFamilyName.D);
@@ -193,7 +242,6 @@ Alignment is only used by the the Text element. It is applied to the horizontalA
 AlignmentValue has three values: `Start`, `Center`, and `End`.
 
 **Shorthand** — All property classes support static shorthand access:
-
 ```ts
 // Longhand
 text.verticalAlignment = new Alignment(AlignmentValue.Center);
@@ -212,7 +260,7 @@ text.horizontalAlignment = Alignment.Center;
 
 #### Spacing
 
-Spacing is used by margin and padding properites. It contains sub-properties for left, top, right, and bottom numeric values.
+Spacing is used by margin and padding properties. It contains sub-properties for left, top, right, and bottom numeric values.
 
 Spacing constructor supports 0, 1, 2, and 4 parameters.
 
@@ -288,7 +336,6 @@ BarcodeType is only used by the Barcode element. It denotes the barcode type to 
 BarcodeTypeName supports: `Code11`, `Interleaved25`, `Code39`, `PlanetCode`, `PDF417`, `EAN8`, `UPCE`, `Code93`, `Code128`, `EAN13`, `Industrial25`, `Standard25`, `ANSICodabar`, `Logmars`, `MSI`, `Plessey`, `QRCode`, `DataMatrix`, `PostNet`.
 
 **Shorthand** — All property classes support static shorthand access:
-
 ```ts
 // Longhand
 barcode.type = new BarcodeType(BarcodeTypeName.Code128);
@@ -339,6 +386,7 @@ class GraphicData {
 ```
 
 An image processor must be defined for each platform. The purpose of an image processor is to convert an image into a black and white array representation (consisting of 1s and 0s).
+
 Below is an example of a processor for a web browser:
 
 ```ts
@@ -397,6 +445,7 @@ Label is the base container element within which other elements can be placed.
 | height | Number | Sets the height of the label based on printDensity.value |
 | padding | [Spacing](#spacing) | Sets the padding of the label element, makes child elements consume less space |
 | content | Array | Child elements |
+| useLegacyPositioning | Boolean | Set to `true` to restore legacy fixed positioning behavior |
 
 Usage example:
 
@@ -465,7 +514,6 @@ const zpl = label.generateZPL();
 ```
 
 ![Label Usage Example](./Images/example_label.png)
-
 
 #### Box
 
@@ -746,53 +794,6 @@ const zpl = label.generateZpl();
 ```
 
 ![Raw Image](./Images/example_raw.png)
-
-## Migration Guide: v1 → v2
-
-v2 rewrites the entire library in TypeScript. Most usage patterns remain the same, but the following changes are required.
-
-### Import style
-
-**v1 (CommonJS):**
-```ts
-const { Label, Text, FontFamily, FontFamilyName } = require('jszpl');
-```
-
-**v2 (ESM):**
-```ts
-import { Label, Text, FontFamily, FontFamilyName } from 'jszpl';
-```
-
-v2 is a pure ESM package (`"type": "module"`). CommonJS `require()` is no longer supported.
-
-### Enum imports
-
-All value sets (`AlignmentValue`, `SizeType`, `FontFamilyName`, `BarcodeTypeName`, `Rotation`) are now TypeScript `enum`s. Import and use them the same way — no usage changes required.
-
-### Shorthand static access (v2.1+)
-
-All property classes support static shorthand access. The `new ClassName(EnumName.Value)` pattern is still supported, but you can use the shorter `ClassName.Value` syntax:
-
-```ts
-// Longhand (still supported)
-text.fontFamily = new FontFamily(FontFamilyName.D);
-text.verticalAlignment = new Alignment(AlignmentValue.Center);
-barcode.type = new BarcodeType(BarcodeTypeName.Code128);
-label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
-
-// Shorthand (new in v2.1)
-text.fontFamily = FontFamily.D;
-text.verticalAlignment = Alignment.Center;
-text.horizontalAlignment = Alignment.Center;
-barcode.type = BarcodeType.Code128;
-label.printDensity = PrintDensity.dpmm8;
-```
-
-### LabelTools.BarcodeRenderer
-
-`LabelTools.BarcodeRenderer` is now included in the default `LabelTools` export. Replacing it with a custom renderer works the same as replacing `ImageProcessor` or `ImageResizer`.
-
----
 
 ## Known Issues
 
