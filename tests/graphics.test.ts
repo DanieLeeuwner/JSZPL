@@ -2,7 +2,7 @@ import { Box, Circle, Line, Graphic, GraphicData } from '../src/jszpl.ts';
 import { createLabel } from './test-helpers.ts';
 import { PNG } from 'pngjs';
 import _ from 'lodash';
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -149,4 +149,20 @@ test('add image to a label', () => {
 
   const blackPixels = _.filter(_.flatten(binaryData), (e) => e);
   expect(blackPixels.length).toBe(7780);
+
+  // Save binary image as PNG to test outputs
+  const height = binaryData.length;
+  const width = binaryData[0].length;
+  const png = new PNG({ width, height });
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const idx = (y * width + x) * 4;
+      const value = binaryData[y][x] ? 0 : 255;
+      png.data[idx] = value;
+      png.data[idx + 1] = value;
+      png.data[idx + 2] = value;
+      png.data[idx + 3] = 255;
+    }
+  }
+  writeFileSync(join(__dirname, 'outputs/add-image-to-label.png'), PNG.sync.write(png));
 });

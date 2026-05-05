@@ -15,9 +15,9 @@ text.horizontalAlignment = Alignment.Center;
 
 const zpl = label.generateZPL();
 //^XA
-//^FO10,205^AD,N,,
-//^FB780,1,0,C,0
-//^FDHello World!^FS
+//^FO10,190^AD,,,
+//^FB780,1000,0,C,0
+//^FDHello World!\&^FS
 //^XZ
 ```
 
@@ -95,8 +95,8 @@ In a browser:
 
   const zpl = label.generateZPL();
   //^XA
-  //^FO10,10^AD,N,,
-  //^FB780,1,0,L,0
+  //^FO10,10^AD,,,
+  //^FB780,1000,0,L,0
   //^FDHello World!^FS
   //^XZ
 </script>
@@ -126,8 +126,8 @@ text.text = 'Hello World!';
 
 const zpl = label.generateZPL();
 //^XA
-//^FO10,10^AD,N,,
-//^FB780,1,0,L,0
+//^FO10,10^AD,,,
+//^FB780,1000,0,L,0
 //^FDHello World!^FS
 //^XZ
 ```
@@ -458,8 +458,8 @@ text.text = 'Hello World!';
 
 const zpl = label.generateZPL();
 //^XA
-//^FO10,10^AD,N,,
-//^FB780,1,0,L,0
+//^FO0,0^AD,,,
+//^FB800,1000,0,L,0
 //^FDHello World!^FS
 //^XZ
 ```
@@ -500,7 +500,8 @@ text.text = 'Hello World!';
 
 const zpl = label.generateZPL();
 //^XA
-//^FB780,1,0,L,0
+//^FO10,10^AD,,,
+//^FB780,1000,0,L,0
 //^FDHello World!^FS
 //^XZ
 ```
@@ -630,7 +631,7 @@ circle.height = 150;
 
 const zpl = label.generateZPL();
 //^XA
-//^FO10,10^GC150,150,B^FS
+//^FO0,0^GC150,150,B^FS
 //^XZ
 ```
 
@@ -777,7 +778,7 @@ raw.data = `
 ^FO93,93^GB40,40,40^FS
 `;
 
-const zpl = label.generateZpl();
+const zpl = label.generateZPL();
 //^XA
 //^FO50,50^GB100,100,100^FS
 //^FO75,75^FR^GB100,100,100^FS

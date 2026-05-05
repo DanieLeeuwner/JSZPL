@@ -39,6 +39,9 @@ jspm_packages/
 # Build outputs
 dist/
 
+# Test artifacts
+tests/outputs/
+
 # TypeScript v1 declaration files
 typings/
 
