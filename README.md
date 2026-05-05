@@ -38,37 +38,6 @@ const zpl = label.generateZPL();
 >```
 >
 >To migrate without the flag, double your fixed `left` and `top` values to match the old output positions.
->
->### Import style
->
->```ts
->import { Label, Text, FontFamily, FontFamilyName } from 'jszpl';
->```
->
->CommonJS `require()` is no longer supported.
->
->### Enum imports
->
->All value sets (`AlignmentValue`, `SizeType`, `FontFamilyName`, `BarcodeTypeName`, `Rotation`) are TypeScript `enum`s. Import and use them the same way as before.
->
->### Shorthand static access
->
->All property classes support static shorthand access:
->
->```ts
->// Longhand (still supported)
->text.fontFamily = new FontFamily(FontFamilyName.D);
->text.verticalAlignment = new Alignment(AlignmentValue.Center);
->barcode.type = new BarcodeType(BarcodeTypeName.Code128);
->label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
->
->// Shorthand
->text.fontFamily = FontFamily.D;
->text.verticalAlignment = Alignment.Center;
->text.horizontalAlignment = Alignment.Center;
->barcode.type = BarcodeType.Code128;
->label.printDensity = PrintDensity.dpmm8;
->```
 
 ---
 
@@ -166,6 +135,29 @@ const zpl = label.generateZPL();
 ## Property Types
 
 Most of the properties are defined in their own object types, which provides the ability to view the property constructor name, instead of just `String`, `Number`, or `Object`.
+
+### Enum imports
+
+All value sets (`AlignmentValue`, `SizeType`, `FontFamilyName`, `BarcodeTypeName`, `Rotation`) are TypeScript `enum`s. Import and use them as such.
+
+### Shorthand static access
+
+All property classes support static shorthand access:
+
+```ts
+// Longhand (still supported)
+text.fontFamily = new FontFamily(FontFamilyName.D);
+text.verticalAlignment = new Alignment(AlignmentValue.Center);
+barcode.type = new BarcodeType(BarcodeTypeName.Code128);
+label.printDensity = new PrintDensity(PrintDensityName['8dpmm']);
+
+// Shorthand
+text.fontFamily = FontFamily.D;
+text.verticalAlignment = Alignment.Center;
+text.horizontalAlignment = Alignment.Center;
+barcode.type = BarcodeType.Code128;
+label.printDensity = PrintDensity.dpmm8;
+```
 
 #### Size
 
